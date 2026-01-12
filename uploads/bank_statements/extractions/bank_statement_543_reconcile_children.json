@@ -1,0 +1,26 @@
+{
+  "parent_id": 543,
+  "parent_info": {
+    "file_name": "bank_file_141",
+    "file_hash": "reconcile_bank_1767779301_9773",
+    "upload_timestamp": "2026-01-07 15:18:21",
+    "source": "reconciliation_endpoint"
+  },
+  "child_records": [
+    {
+      "record_id": 1,
+      "transaction_date": null,
+      "description": "Tide Card: **** **** **** 0239500.00 986.10",
+      "amount": 986.1,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 986.1,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 15:18:21"
+  }
+}

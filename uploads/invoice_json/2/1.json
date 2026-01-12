@@ -1,0 +1,62 @@
+{
+  "parent_file_name": "dummy_invoice (1).pdf",
+  "original_filename": "dummy_invoice (1).pdf",
+  "page_no": 1,
+  "section_no": 1,
+  "lines": [
+    "INVOICE",
+    "Invoice No: INV-1001",
+    "Date: 01-Jan-2025",
+    "Client: ABC Pvt Ltd",
+    "Description",
+    "Amount (INR)",
+    "Consulting Services",
+    "10,000",
+    "GST (18%)",
+    "1,800",
+    "Total Amount",
+    "11,800"
+  ],
+  "transactions": [
+    {
+      "source": "invoice",
+      "description": "10,000",
+      "amount": 10000.0,
+      "date": "01-Jan-2025",
+      "vendor_name": "ABC Pvt",
+      "invoice_number": "JAN-2025",
+      "currency": "₹",
+      "file_name": "dummy_invoice (1).pdf#page=1"
+    },
+    {
+      "source": "invoice",
+      "description": "GST (18%)",
+      "amount": 18.0,
+      "date": "01-Jan-2025",
+      "vendor_name": "ABC Pvt",
+      "invoice_number": "JAN-2025",
+      "currency": "₹",
+      "file_name": "dummy_invoice (1).pdf#page=1"
+    },
+    {
+      "source": "invoice",
+      "description": "1,800",
+      "amount": 1800.0,
+      "date": "01-Jan-2025",
+      "vendor_name": "ABC Pvt",
+      "invoice_number": "JAN-2025",
+      "currency": "₹",
+      "file_name": "dummy_invoice (1).pdf#page=1"
+    },
+    {
+      "source": "invoice",
+      "description": "11,800",
+      "amount": 11800.0,
+      "date": "01-Jan-2025",
+      "vendor_name": "ABC Pvt",
+      "invoice_number": "JAN-2025",
+      "currency": "₹",
+      "file_name": "dummy_invoice (1).pdf#page=1"
+    }
+  ]
+}

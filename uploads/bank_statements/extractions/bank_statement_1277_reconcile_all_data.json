@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 1277,
+  "parent_info": {
+    "file_name": "bank_file_190",
+    "file_hash": "reconcile_bank_1767787654_8224",
+    "upload_timestamp": "2026-01-07 17:37:34",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": "1 Apr 2024",
+      "description": "1 Apr 2024 Domestic Transfer MICHAEL BUTTERLY / ref: Reference - Wages 1,875.27 3,858.10",
+      "amount": 1875.27,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 1875.27,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 17:37:34",
+    "source": "reconciliation_endpoint"
+  }
+}

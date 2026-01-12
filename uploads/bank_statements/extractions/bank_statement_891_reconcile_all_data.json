@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 891,
+  "parent_info": {
+    "file_name": "bank_file_105",
+    "file_hash": "reconcile_bank_1767781986_4280",
+    "upload_timestamp": "2026-01-07 16:03:06",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": null,
+      "description": "7080£200.50 £12 963.94",
+      "amount": 963.94,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 963.94,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 16:03:06",
+    "source": "reconciliation_endpoint"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "parent_id": 434,
+  "parent_info": {
+    "file_name": "bank_file_32",
+    "file_hash": "reconcile_bank_1767779299_9937",
+    "upload_timestamp": "2026-01-07 15:18:19",
+    "source": "reconciliation_endpoint"
+  },
+  "child_records": [
+    {
+      "record_id": 1,
+      "transaction_date": null,
+      "description": "£39,914.23",
+      "amount": 39914.23,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 39914.23,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 15:18:19"
+  }
+}

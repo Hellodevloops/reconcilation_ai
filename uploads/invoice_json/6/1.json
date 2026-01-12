@@ -1,0 +1,34 @@
+{
+  "parent_file_name": "invoice_1.pdf",
+  "original_filename": "invoice_1.pdf",
+  "page_no": 1,
+  "section_no": 1,
+  "lines": [
+    "INVOICE",
+    "Invoice Number: INV-2025-001",
+    "Invoice Date: 2025-01-10",
+    "Vendor: ABC Supplies Pvt Ltd",
+    "Address: Mumbai, India",
+    "Description",
+    "Qty",
+    "Unit Price",
+    "Total",
+    "Office Chairs",
+    "5",
+    "1500",
+    "7500",
+    "Total Amount: ■7500"
+  ],
+  "transactions": [
+    {
+      "source": "invoice",
+      "description": "Total Amount: ■7500",
+      "amount": 7500.0,
+      "date": null,
+      "vendor_name": "ABC Supplies Pvt",
+      "invoice_number": "DATE",
+      "currency": "₹",
+      "file_name": "invoice_1.pdf#page=1"
+    }
+  ]
+}

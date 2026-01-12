@@ -1,0 +1,42 @@
+{
+  "parent_file_name": "dummy_invoice.pdf",
+  "original_filename": "dummy_invoice.pdf",
+  "page_no": 1,
+  "section_no": 1,
+  "lines": [
+    "INVOICE",
+    "Invoice Number: INV-2025-001",
+    "Invoice Date: 2025-01-10",
+    "Vendor: ABC Supplies Pvt Ltd",
+    "Address: 22 Corporate Park, Mumbai, India",
+    "Description",
+    "Qty",
+    "Unit Price",
+    "Total",
+    "Office Chairs",
+    "5",
+    "1500",
+    "7500",
+    "Laptop Stand",
+    "3",
+    "1200",
+    "3600",
+    "Monitor Cable",
+    "4",
+    "300",
+    "1200",
+    "Total Amount: ■12,300"
+  ],
+  "transactions": [
+    {
+      "source": "invoice",
+      "description": "Total Amount: ■12,300",
+      "amount": 12300.0,
+      "date": null,
+      "vendor_name": "ABC Supplies Pvt",
+      "invoice_number": "DATE",
+      "currency": "₹",
+      "file_name": "dummy_invoice.pdf#page=1"
+    }
+  ]
+}

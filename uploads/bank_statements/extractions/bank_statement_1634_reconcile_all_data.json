@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 1634,
+  "parent_info": {
+    "file_name": "bank_file_163",
+    "file_hash": "reconcile_bank_1767849402_8776",
+    "upload_timestamp": "2026-01-08 10:46:42",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": "5 Apr 2024",
+      "description": "5 Apr 2024 Domestic Transfer GEORGE H HOOPER / ref: KA TIPS 78.64 558.67",
+      "amount": 78.64,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 78.64,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-08 10:46:42",
+    "source": "reconciliation_endpoint"
+  }
+}

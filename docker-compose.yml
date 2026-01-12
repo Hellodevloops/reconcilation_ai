@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "5001:5001"
+    environment:
+      - FLASK_DEBUG=0
+      - REDIS_URL=redis://redis:6379/0
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/reconcile
+    volumes:
+      - ./uploads:/app/uploads
+      - ./exports:/app/exports
+      - ./logs:/app/logs
+    depends_on:
+      - redis
+      - db
+    restart: unless-stopped
+
+  celery-worker:
+    build: .
+    command: celery -A celery_app worker --loglevel=info
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/reconcile
+    volumes:
+      - ./uploads:/app/uploads
+      - ./exports:/app/exports
+      - ./logs:/app/logs
+    depends_on:
+      - redis
+      - db
+    restart: unless-stopped
+
+  celery-beat:
+    build: .
+    command: celery -A celery_app beat --loglevel=info
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/reconcile
+    depends_on:
+      - redis
+      - db
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=reconcile
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  redis-data:
+  postgres-data:
+

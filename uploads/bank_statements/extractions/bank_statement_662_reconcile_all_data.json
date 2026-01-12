@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 662,
+  "parent_info": {
+    "file_name": "bank_file_68",
+    "file_hash": "reconcile_bank_1767780345_6661",
+    "upload_timestamp": "2026-01-07 15:35:45",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": "20 Apr 2024",
+      "description": "20 Apr 2024 Domestic Transfer PROGROWTH LTD / ref: KA RENT 3,025.83 1,276.86",
+      "amount": 3025.83,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 3025.83,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 15:35:45",
+    "source": "reconciliation_endpoint"
+  }
+}

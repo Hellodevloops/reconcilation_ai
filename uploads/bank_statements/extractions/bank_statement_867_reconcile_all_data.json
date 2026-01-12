@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 867,
+  "parent_info": {
+    "file_name": "bank_file_81",
+    "file_hash": "reconcile_bank_1767781985_2845",
+    "upload_timestamp": "2026-01-07 16:03:05",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": "28 Mar 2024",
+      "description": "28 Mar 2024 MOS To Seth Ayub • MONTH 12 £845.25 £14 229.47",
+      "amount": 845.25,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 845.25,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 16:03:05",
+    "source": "reconciliation_endpoint"
+  }
+}

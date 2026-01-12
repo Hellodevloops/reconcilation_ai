@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 865,
+  "parent_info": {
+    "file_name": "bank_file_79",
+    "file_hash": "reconcile_bank_1767781985_8682",
+    "upload_timestamp": "2026-01-07 16:03:05",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": "28 Mar 2024",
+      "description": "28 Mar 2024 MOS To Florentina Petrescu • Month 12 £336.00 £12 916.97",
+      "amount": 336.0,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 336.0,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 16:03:05",
+    "source": "reconciliation_endpoint"
+  }
+}

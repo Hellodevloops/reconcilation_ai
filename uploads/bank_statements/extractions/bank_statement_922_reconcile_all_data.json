@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 922,
+  "parent_info": {
+    "file_name": "bank_file_136",
+    "file_hash": "reconcile_bank_1767781987_9264",
+    "upload_timestamp": "2026-01-07 16:03:07",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": null,
+      "description": "BCARD£454.88 £57 105.93",
+      "amount": 105.93,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 105.93,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 16:03:07",
+    "source": "reconciliation_endpoint"
+  }
+}

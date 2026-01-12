@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 856,
+  "parent_info": {
+    "file_name": "bank_file_70",
+    "file_hash": "reconcile_bank_1767781985_9316",
+    "upload_timestamp": "2026-01-07 16:03:05",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": null,
+      "description": "+44 20 3322 8352",
+      "amount": 8352.0,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 8352.0,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 16:03:05",
+    "source": "reconciliation_endpoint"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "parent_invoice_id": 357,
+  "parent_info": {
+    "file_name": "dummy_invoice_large.pdf#page=1",
+    "file_hash": "reconcile_invoice_1767934271_3624",
+    "upload_timestamp": "2026-01-09 10:21:11",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "invoice_number": "107",
+      "invoice_date": null,
+      "vendor_name": "ABC Pvt",
+      "total_amount": 11800.0,
+      "description": "11800",
+      "currency": "₹",
+      "file_name": "dummy_invoice_large.pdf#page=1",
+      "extracted_fields": null
+    },
+    {
+      "record_id": 2,
+      "invoice_number": "107",
+      "invoice_date": null,
+      "vendor_name": "ABC Pvt",
+      "total_amount": 5900.0,
+      "description": "5900",
+      "currency": "₹",
+      "file_name": "dummy_invoice_large.pdf#page=1",
+      "extracted_fields": null
+    },
+    {
+      "record_id": 3,
+      "invoice_number": "107",
+      "invoice_date": null,
+      "vendor_name": "ABC Pvt",
+      "total_amount": 23600.0,
+      "description": "23600",
+      "currency": "₹",
+      "file_name": "dummy_invoice_large.pdf#page=1",
+      "extracted_fields": null
+    },
+    {
+      "record_id": 4,
+      "invoice_number": "107",
+      "invoice_date": null,
+      "vendor_name": "ABC Pvt",
+      "total_amount": 17700.0,
+      "description": "17700",
+      "currency": "₹",
+      "file_name": "dummy_invoice_large.pdf#page=1",
+      "extracted_fields": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 4,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-09 10:21:11",
+    "source": "reconciliation_endpoint"
+  }
+}

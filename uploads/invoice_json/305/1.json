@@ -1,0 +1,102 @@
+{
+  "parent_file_name": "Invoice INV-0111.pdf",
+  "original_filename": "Invoice INV-0111.pdf",
+  "page_no": 1,
+  "section_no": 1,
+  "lines": [
+    "CompanyRegistrationNo: 13475764.  RegisteredOffice:TheRedHouse,2ndFloor,74-76HighStreet,Bushey,WD233HE,UnitedKingdom.TAXINVOICE",
+    "HSDCAPITALLIMITED",
+    "143EASTFIELDROAD",
+    "PETERBOROUGH",
+    "PE14AUInvoiceDate",
+    "21Mar2024",
+    "InvoiceNumber",
+    "INV-0111",
+    "Reference",
+    "Cookies",
+    "VATNumber",
+    "400992020FLOOZIELTD",
+    "TheRedHouse,2ndFloor",
+    "74-76HighStreet",
+    "Bushey",
+    "WD233HE",
+    "UNITEDKINGDOM",
+    "Description Quantity UnitPrice VAT AmountGBP",
+    "CinnamonCrunch 12.00 48.60ZeroRated 583.20",
+    "PecanPie 11.00 48.60ZeroRated 534.60",
+    "PeanutButter&Jam 11.00 48.60ZeroRated 534.60",
+    "TripleChocolate 8.00 48.60ZeroRated 388.80",
+    "BlackForest 6.00 48.60ZeroRated 291.60",
+    "ChocolateChunk 30.00 48.60ZeroRated 1,458.00",
+    "Celebration 2.00 48.60ZeroRated 97.20",
+    "Pistachiodrink(litres) 1.00 11.00 20% 11.00",
+    "Subtotal 3,899.00",
+    "TOTAL VAT 20% 2.20",
+    "TOTAL ZERORATED 0.00",
+    "TOTALGBP 3,901.20",
+    "DueDate:21Mar2024",
+    "PaymentDetails:",
+    "RevolutBank",
+    "NameofAccount:FloozieLimited",
+    "Accountnumber:69569797",
+    "Sortcode:04-00-75",
+    "IBAN:GB17REVO00996982144786",
+    "BIC:REVOGB21",
+    "IntermediaryBIC:CHASGB2L",
+    "Beneficiaryaddress:2ndfloor,TheRedHouse,74-76HighStreet,WD233HE,Bushey,UnitedKingdom",
+    "Bank/Paymentinstitution:RevolutLtd",
+    "Bank/Paymentinstitutionaddress:7WestferryCircus,E144HD,London,UnitedKingdom"
+  ],
+  "extracted_fields": {
+    "invoice_date": null,
+    "invoice_number": "INV-0111",
+    "reference": "Cookies\nVATNumber\n400992020FLOOZIELTD\nTheRedHouse",
+    "vat_number": "400992020FLOOZIELTD",
+    "totals": {
+      "subtotal": 3899.0
+    },
+    "currency": "£",
+    "line_items": [
+      {
+        "description": "Pistachiodrink(litres)",
+        "quantity": 1.0,
+        "unit_price": 11.0,
+        "vat": "20%",
+        "amount_gbp": 11.0
+      }
+    ],
+    "source_text_contains_tax_invoice": false
+  },
+  "transactions": [
+    {
+      "source": "invoice",
+      "description": "TOTAL VAT 20% 2.20",
+      "amount": 20.0,
+      "date": null,
+      "vendor_name": null,
+      "invoice_number": "0111",
+      "currency": "£",
+      "file_name": "Invoice INV-0111.pdf#page=1",
+      "extracted_fields": {
+        "invoice_date": null,
+        "invoice_number": "INV-0111",
+        "reference": "Cookies\nVATNumber\n400992020FLOOZIELTD\nTheRedHouse",
+        "vat_number": "400992020FLOOZIELTD",
+        "totals": {
+          "subtotal": 3899.0
+        },
+        "currency": "£",
+        "line_items": [
+          {
+            "description": "Pistachiodrink(litres)",
+            "quantity": 1.0,
+            "unit_price": 11.0,
+            "vat": "20%",
+            "amount_gbp": 11.0
+          }
+        ],
+        "source_text_contains_tax_invoice": false
+      }
+    }
+  ]
+}

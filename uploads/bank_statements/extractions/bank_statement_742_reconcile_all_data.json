@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 742,
+  "parent_info": {
+    "file_name": "bank_file_148",
+    "file_hash": "reconcile_bank_1767780346_7423",
+    "upload_timestamp": "2026-01-07 15:35:46",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": "8 Apr 2024",
+      "description": "8 Apr 2024 Direct Debit DVLA-OW18GCF / ref: 000000000059657102 49.87 2,413.04",
+      "amount": 49.87,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 49.87,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 15:35:46",
+    "source": "reconciliation_endpoint"
+  }
+}

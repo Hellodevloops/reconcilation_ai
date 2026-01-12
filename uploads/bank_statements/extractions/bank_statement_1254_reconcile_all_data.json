@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 1254,
+  "parent_info": {
+    "file_name": "bank_file_167",
+    "file_hash": "reconcile_bank_1767787653_5241",
+    "upload_timestamp": "2026-01-07 17:37:33",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": "5 Apr 2024",
+      "description": "5 Apr 2024 Domestic Transfer ANGLE SALLAI / ref: KA WAGES 325.50 1,173.31",
+      "amount": 325.5,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 325.5,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 17:37:33",
+    "source": "reconciliation_endpoint"
+  }
+}

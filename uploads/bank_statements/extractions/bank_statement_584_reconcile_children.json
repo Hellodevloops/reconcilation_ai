@@ -1,0 +1,26 @@
+{
+  "parent_id": 584,
+  "parent_info": {
+    "file_name": "bank_file_182",
+    "file_hash": "reconcile_bank_1767779302_9030",
+    "upload_timestamp": "2026-01-07 15:18:22",
+    "source": "reconciliation_endpoint"
+  },
+  "child_records": [
+    {
+      "record_id": 1,
+      "transaction_date": "2 Apr 2024",
+      "description": "2 Apr 2024 Domestic Transfer WILLIAM REID / ref: WAGES 88.50 659.00",
+      "amount": 88.5,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 88.5,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 15:18:22"
+  }
+}

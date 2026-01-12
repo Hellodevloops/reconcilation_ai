@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 628,
+  "parent_info": {
+    "file_name": "bank_file_34",
+    "file_hash": "reconcile_bank_1767780344_4427",
+    "upload_timestamp": "2026-01-07 15:35:44",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": null,
+      "description": "Limited is registered in England and Wales under company number 09595646 with registered office: 4th Floor, The Featherstone Building, 66 City Road, London, EC1Y 2AL.",
+      "amount": 2.0,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 2.0,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 15:35:44",
+    "source": "reconciliation_endpoint"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "parent_invoice_id": 238,
+  "parent_info": {
+    "file_name": "001 EXP QE APR24 (1).pdf#page=5",
+    "file_hash": "reconcile_invoice_1767870609_7056",
+    "upload_timestamp": "2026-01-08 16:40:09",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "invoice_number": "INV-0114",
+      "invoice_date": null,
+      "vendor_name": "HSD CAPITAL",
+      "total_amount": 2911.54,
+      "description": "Amount Due 2,911.54",
+      "currency": null,
+      "file_name": "001 EXP QE APR24 (1).pdf#page=5"
+    },
+    {
+      "record_id": 2,
+      "invoice_number": "WD23",
+      "invoice_date": null,
+      "vendor_name": "400992020FLOOZIE",
+      "total_amount": 2911.54,
+      "description": "TOTAL GBP 2,911.54",
+      "currency": "£",
+      "file_name": "001 EXP QE APR24 (1).pdf#page=5"
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 2,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-08 16:40:09",
+    "source": "reconciliation_endpoint"
+  }
+}

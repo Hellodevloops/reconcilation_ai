@@ -1,0 +1,417 @@
+{
+  "parent_invoice_id": 231,
+  "parent_info": {
+    "file_name": "7.pdf#page=2",
+    "file_hash": "reconcile_invoice_1767869903_7453",
+    "upload_timestamp": "2026-01-08 16:28:23",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "invoice_number": "YL60146362",
+      "invoice_date": null,
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 2.0,
+      "description": "Limited is registered in England and Wales under company number 09595646 with registered office: 4th Floor, The Featherstone Building, 66 City Road, London, EC1Y 2AL.",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 2,
+      "invoice_number": "YL60146362",
+      "invoice_date": "26 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 38.0,
+      "description": "26 Apr 2024 Domestic Transfer OJ GAUZA / ref: Reference - TIPS 38.00 2,204.29",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 3,
+      "invoice_number": "YL60146362",
+      "invoice_date": "26 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 51.0,
+      "description": "26 Apr 2024 Domestic Transfer AMELIA SCHOLES / ref: Reference - TIPS 51.00 2,242.29",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 4,
+      "invoice_number": "YL60146362",
+      "invoice_date": "26 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 63.0,
+      "description": "26 Apr 2024 Domestic Transfer GEORGE H HOOPER / ref: Reference - TIPS 63.00 2,293.29",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 5,
+      "invoice_number": "YL60146362",
+      "invoice_date": "26 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 106.0,
+      "description": "26 Apr 2024 Domestic Transfer FRED MITCHELL / ref: Reference - TIPS 106.00 2,356.29",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 6,
+      "invoice_number": "YL60146362",
+      "invoice_date": "26 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 42.0,
+      "description": "26 Apr 2024 Domestic Transfer MICHAEL BUTTERLY / ref: CLEANING 42.00 2,462.29",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 7,
+      "invoice_number": "YL60146362",
+      "invoice_date": "26 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 106.0,
+      "description": "26 Apr 2024 Domestic Transfer MICHAEL BUTTERLY / ref: Reference - TIPS 106.00 2,504.29",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 8,
+      "invoice_number": "YL60146362",
+      "invoice_date": "26 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 2017.8,
+      "description": "26 Apr 2024 Domestic Transfer YouLend Limited / ref: YL60146362OUT YL60 2,017.80 2,610.29",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 9,
+      "invoice_number": "YL60146362",
+      "invoice_date": "25 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 473.32,
+      "description": "25 Apr 2024 Domestic Transfer YouLend Limited / ref: YL60146362OUT YL60 473.32 592.49",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 10,
+      "invoice_number": "YL60146362",
+      "invoice_date": null,
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 119.17,
+      "description": "Tide Card: **** **** **** 0239100.79 119.17",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 11,
+      "invoice_number": "YL60146362",
+      "invoice_date": "25 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 510.52,
+      "description": "25 Apr 2024 Direct Debit NFU MUTUAL INS-BC / ref: 002889980 510.52 219.96",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 12,
+      "invoice_number": "YL60146362",
+      "invoice_date": "24 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 1000.0,
+      "description": "24 Apr 2024 Domestic Transfer T AND J FINE FOODS / ref: K A POLEBROOK 1,000.00 730.48",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 13,
+      "invoice_number": "YL60146362",
+      "invoice_date": "24 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 5.0,
+      "description": "24 Apr 2024 Card TransactionKALE & DAMSON LTD - 5 STIRLING WAY, 01223",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 14,
+      "invoice_number": "YL60146362",
+      "invoice_date": null,
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 632100.0,
+      "description": "632100",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 15,
+      "invoice_number": "YL60146362",
+      "invoice_date": null,
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 1730.48,
+      "description": "Tide Card: **** **** **** 023933.95 1,730.48",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 16,
+      "invoice_number": "YL60146362",
+      "invoice_date": null,
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 1764.43,
+      "description": "KA POLEBROOK1,385.04 1,764.43",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 17,
+      "invoice_number": "YL60146362",
+      "invoice_date": "24 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 448.09,
+      "description": "24 Apr 2024 Direct Debit DOJOUK / ref: PST1FT-GB00890824 448.09 3,149.47",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 18,
+      "invoice_number": "YL60146362",
+      "invoice_date": "23 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 13.0,
+      "description": "23 Apr 2024 Card TransactionRESTAURANT PAGESOS I C - C. PLA DE PALAU 13,",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 19,
+      "invoice_number": "YL60146362",
+      "invoice_date": null,
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 3597.56,
+      "description": "Tide Card: **** **** **** 023922.78 3,597.56",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 20,
+      "invoice_number": "YL60146362",
+      "invoice_date": null,
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 3620.34,
+      "description": "Tide Card: **** **** **** 02394.81 3,620.34",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 21,
+      "invoice_number": "YL60146362",
+      "invoice_date": "23 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 7.0,
+      "description": "23 Apr 2024 Card TransactionAMY - C. VIDRIERIA LOCAL 7, BARCELONA",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 22,
+      "invoice_number": "YL60146362",
+      "invoice_date": null,
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 3625.15,
+      "description": "Tide Card: **** **** **** 023951.42 3,625.15",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 23,
+      "invoice_number": "YL60146362",
+      "invoice_date": "22 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 200.0,
+      "description": "22 Apr 2024 Domestic Transfer GEORGE MICKLEBURGH / ref: Wages 200.00 3,676.57",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 24,
+      "invoice_number": "YL60146362",
+      "invoice_date": "22 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 327.62,
+      "description": "22 Apr 2024 Domestic Transfer P.W.AMPS LTD / ref: KA POLEBROOK 327.62 3,876.57",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 25,
+      "invoice_number": "YL60146362",
+      "invoice_date": null,
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 44.0,
+      "description": "D44, BARCELONA",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 26,
+      "invoice_number": "YL60146362",
+      "invoice_date": null,
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 4204.19,
+      "description": "Tide Card: **** **** **** 023944.68 4,204.19",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 27,
+      "invoice_number": "YL60146362",
+      "invoice_date": "22 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 2555.0,
+      "description": "22 Apr 2024 Domestic Transfer YouLend Limited / ref: YL60146362OUT YL60 2,555.00 4,248.87",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 28,
+      "invoice_number": "YL60146362",
+      "invoice_date": "22 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 51.49,
+      "description": "22 Apr 2024 Direct Debit TESCO MOBILE / ref: 330174659056A-0010 51.49 1,693.87",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 29,
+      "invoice_number": "YL60146362",
+      "invoice_date": "22 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 1000.0,
+      "description": "22 Apr 2024 Direct Debit HMRC NDDS / ref: 108314173976467083 1,000.00 1,745.36",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 30,
+      "invoice_number": "YL60146362",
+      "invoice_date": null,
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 2745.36,
+      "description": "Tide Card: **** **** **** 023942.13 2,745.36",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 31,
+      "invoice_number": "YL60146362",
+      "invoice_date": "21 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 1561.64,
+      "description": "21 Apr 2024 Domestic Transfer YouLend Limited / ref: YL60146362OUT YL60 1,561.64 2,787.49",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 32,
+      "invoice_number": "YL60146362",
+      "invoice_date": "20 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 5.0,
+      "description": "20 Apr 2024 Card TransactionKALE & DAMSON LTD - 5 STIRLING WAY, 01223",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 33,
+      "invoice_number": "YL60146362",
+      "invoice_date": null,
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 632100.0,
+      "description": "632100",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 34,
+      "invoice_number": "YL60146362",
+      "invoice_date": null,
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 1225.85,
+      "description": "Tide Card: **** **** **** 023951.01 1,225.85",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 35,
+      "invoice_number": "YL60146362",
+      "invoice_date": "20 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 3025.83,
+      "description": "20 Apr 2024 Domestic Transfer PROGROWTH LTD / ref: KA RENT 3,025.83 1,276.86",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 36,
+      "invoice_number": "YL60146362",
+      "invoice_date": "20 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 1977.32,
+      "description": "20 Apr 2024 Domestic Transfer YouLend Limited / ref: YL60146362OUT YL60 1,977.32 4,302.69",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 37,
+      "invoice_number": "YL60146362",
+      "invoice_date": "20 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 38538264.0,
+      "description": "20 Apr 2024 Card TransactionBOOKER LTD - 38538264 - EQUITY HOUSE,",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 38,
+      "invoice_number": "YL60146362",
+      "invoice_date": null,
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 2325.37,
+      "description": "Tide Card: **** **** **** 0239369.10 2,325.37",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 39,
+      "invoice_number": "YL60146362",
+      "invoice_date": "19 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 130.0,
+      "description": "19 Apr 2024 Domestic Transfer M BRIGGS / ref: KA POLEBROOK 130.00 2,694.47",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    },
+    {
+      "record_id": 40,
+      "invoice_number": "YL60146362",
+      "invoice_date": "19 Apr 2024",
+      "vendor_name": "20 Apr 2024 Card TransactionBOOKER",
+      "total_amount": 42.0,
+      "description": "19 Apr 2024 Domestic Transfer MICHAEL BUTTERLY / ref: Cleaning 42.00 2,824.47",
+      "currency": "£",
+      "file_name": "7.pdf#page=2"
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 40,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-08 16:28:23",
+    "source": "reconciliation_endpoint"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "parent_invoice_id": 70,
+  "parent_info": {
+    "file_name": "001 EXP QE APR24 (1).pdf#page=1",
+    "file_hash": "reconcile_invoice_1767948019_7213",
+    "upload_timestamp": "2026-01-09 14:10:19",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "invoice_number": "INV-0101",
+      "invoice_date": null,
+      "vendor_name": "HSD CAPITAL",
+      "total_amount": 3708.67,
+      "description": "Amount Due 3,708.67",
+      "currency": null,
+      "file_name": "001 EXP QE APR24 (1).pdf#page=1",
+      "extracted_fields": {
+        "invoice_date": null,
+        "invoice_number": "INV-0101",
+        "reference": null,
+        "vat_number": null,
+        "totals": {
+          "total": 3708.67
+        },
+        "line_items": [],
+        "source_text_contains_tax_invoice": false
+      }
+    },
+    {
+      "record_id": 2,
+      "invoice_number": "0101",
+      "invoice_date": null,
+      "vendor_name": "400992020FLOOZIE",
+      "total_amount": 3708.67,
+      "description": "TOTAL GBP 3,708.67",
+      "currency": "£",
+      "file_name": "001 EXP QE APR24 (1).pdf#page=1",
+      "extracted_fields": {
+        "invoice_date": null,
+        "invoice_number": "INV-0101",
+        "reference": "January 2024 Royalty",
+        "vat_number": "400992020FLOOZIE",
+        "totals": {
+          "subtotal": 3090.56,
+          "total": 3708.67
+        },
+        "currency": "£",
+        "line_items": [
+          {
+            "description": "January 2024 Marketing Fees 2%",
+            "quantity": 1.0,
+            "unit_price": 772.64,
+            "vat": "20%",
+            "amount_gbp": 772.64
+          }
+        ],
+        "source_text_contains_tax_invoice": true
+      }
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 2,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-09 14:10:19",
+    "source": "reconciliation_endpoint"
+  }
+}

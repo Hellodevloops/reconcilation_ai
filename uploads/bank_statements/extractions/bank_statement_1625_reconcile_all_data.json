@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 1625,
+  "parent_info": {
+    "file_name": "bank_file_154",
+    "file_hash": "reconcile_bank_1767849402_2457",
+    "upload_timestamp": "2026-01-08 10:46:42",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": "7 Apr 2024",
+      "description": "7 Apr 2024 Card TransactionSEEDS OF ITALY LTD. - SEEDS OF ITALY LTD, D2",
+      "amount": 2.0,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 2.0,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-08 10:46:42",
+    "source": "reconciliation_endpoint"
+  }
+}

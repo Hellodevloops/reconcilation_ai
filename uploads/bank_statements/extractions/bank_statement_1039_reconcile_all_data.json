@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 1039,
+  "parent_info": {
+    "file_name": "bank_file_253",
+    "file_hash": "reconcile_bank_1767781990_8177",
+    "upload_timestamp": "2026-01-07 16:03:10",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": "4 Feb 2024",
+      "description": "4 Feb 2024 CAR Martin Mccoll £3.50 £29 672.16",
+      "amount": 3.5,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 3.5,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 16:03:10",
+    "source": "reconciliation_endpoint"
+  }
+}

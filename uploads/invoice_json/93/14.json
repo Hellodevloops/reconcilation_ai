@@ -1,0 +1,50 @@
+{
+  "parent_file_name": "001 EXP QE APR24.pdf",
+  "original_filename": "001 EXP QE APR24.pdf",
+  "page_no": 22,
+  "section_no": 1,
+  "lines": [
+    "Value Retail Management (Bicester Village) Limited",
+    "Bicester Village, 50 Pingle Drive, Bicester, Oxon, OX26 6WD",
+    "Tel +44 (0) 1869 323 200,   Email: bvreceivables@valueretail.com",
+    "A Subsidiary of Value Retail PLC",
+    "Directors: D M Bollier  (Chair), C L Cabot, J L Duran, F W Blanchette, R V Gibbs",
+    "Registered in England Number 02884096INVOICE",
+    "Acting as UK Agents for Bicester GP Ltd",
+    "Victoria Place",
+    "HSD Capital 31 Victoria Street",
+    "143 Eastfield Road Hamilton",
+    "Peterborough PE1 4AU HM10, Bermuda",
+    "United Kingdom",
+    "VAT Reg No: 645 463 623",
+    "Inland Revenue Financial Intermediaries & Claims",
+    "Invoice No: UA01INV202400577 Office Registration No: 922/NA27114",
+    "Invoice Date: 01/04/2024",
+    "Lease ID: FLOOB1",
+    "Unit: BV3AO17-Other 17, Bicester Village Bicester GP Ltd is the agent for Bicester",
+    "Customer Tax ID: Nominees Ltd and Bicester II Nominees Ltd",
+    "Due Date Description Amount",
+    "01/04/2024 Licence Fee 01/04/24 - 14/04/24 46.67",
+    "Interest will be charged on overdue amounts",
+    "Net GBP 46.67",
+    "VAT @ 20% 9.33",
+    "Total GBP 56.00",
+    "Payment in full by Direct Debit. This invoice is for information only. The amount will be",
+    "deducted from your nominated bank account on or just after the due date. If there are any",
+    "changes to the amount, date or frequency of your Direct Debit Value Retail Management",
+    "(Bicester Village) Limited will notify you 10 working days in advance of your account being",
+    "debited or as otherwise agreed."
+  ],
+  "transactions": [
+    {
+      "source": "invoice",
+      "description": "Total GBP 56.00",
+      "amount": 56.0,
+      "date": "01/04/2024",
+      "vendor_name": "the amount, date or frequency of your Direct Debit Value Retail Management",
+      "invoice_number": "IS",
+      "currency": "£",
+      "file_name": "001 EXP QE APR24.pdf#page=22"
+    }
+  ]
+}

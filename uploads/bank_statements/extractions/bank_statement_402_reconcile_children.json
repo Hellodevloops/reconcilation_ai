@@ -1,0 +1,26 @@
+{
+  "parent_id": 402,
+  "parent_info": {
+    "file_name": "bank_file_0",
+    "file_hash": "reconcile_bank_1767779299_965",
+    "upload_timestamp": "2026-01-07 15:18:19",
+    "source": "reconciliation_endpoint"
+  },
+  "child_records": [
+    {
+      "record_id": 1,
+      "transaction_date": null,
+      "description": "Road, London, EC1Y 2AL. Should you need assistance or have a complaint please contact Tide securely in-app or email . hello@tide.co",
+      "amount": 2.0,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 2.0,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 15:18:19"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 1330,
+  "parent_info": {
+    "file_name": "bank_file_51",
+    "file_hash": "reconcile_bank_1767849367_7544",
+    "upload_timestamp": "2026-01-08 10:46:07",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": "23 Apr 2024",
+      "description": "23 Apr 2024 Card TransactionRESTAURANT PAGESOS I C - C. PLA DE PALAU 13,",
+      "amount": 13.0,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 13.0,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-08 10:46:07",
+    "source": "reconciliation_endpoint"
+  }
+}

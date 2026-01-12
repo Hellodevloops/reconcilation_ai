@@ -1,0 +1,83 @@
+{
+  "parent_invoice_id": 355,
+  "parent_info": {
+    "file_name": "Invoice INV-0111.pdf#page=2",
+    "file_hash": "reconcile_invoice_1767891209_624",
+    "upload_timestamp": "2026-01-08 22:23:29",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "invoice_number": "INV-0111",
+      "invoice_date": null,
+      "vendor_name": "HSDCAPITALLIMITED",
+      "total_amount": 2.0,
+      "description": "TheRedHouse,2ndFloor",
+      "currency": null,
+      "file_name": "Invoice INV-0111.pdf#page=2",
+      "extracted_fields": null
+    },
+    {
+      "record_id": 2,
+      "invoice_number": "INV-0111",
+      "invoice_date": null,
+      "vendor_name": "HSDCAPITALLIMITED",
+      "total_amount": 74.0,
+      "description": "74-76HighStreet",
+      "currency": null,
+      "file_name": "Invoice INV-0111.pdf#page=2",
+      "extracted_fields": null
+    },
+    {
+      "record_id": 3,
+      "invoice_number": "INV-0111",
+      "invoice_date": null,
+      "vendor_name": "HSDCAPITALLIMITED",
+      "total_amount": 233.0,
+      "description": "WD233HE",
+      "currency": null,
+      "file_name": "Invoice INV-0111.pdf#page=2",
+      "extracted_fields": null
+    },
+    {
+      "record_id": 4,
+      "invoice_number": "INV-0111",
+      "invoice_date": null,
+      "vendor_name": "HSDCAPITALLIMITED",
+      "total_amount": 3901.2,
+      "description": "AmountDue 3,901.20",
+      "currency": null,
+      "file_name": "Invoice INV-0111.pdf#page=2",
+      "extracted_fields": null
+    },
+    {
+      "record_id": 5,
+      "invoice_number": "INV-0111",
+      "invoice_date": null,
+      "vendor_name": "HSDCAPITALLIMITED",
+      "total_amount": 21.0,
+      "description": "DueDate 21Mar2024",
+      "currency": null,
+      "file_name": "Invoice INV-0111.pdf#page=2",
+      "extracted_fields": null
+    },
+    {
+      "record_id": 6,
+      "invoice_number": "INV-0111",
+      "invoice_date": null,
+      "vendor_name": "HSDCAPITALLIMITED",
+      "total_amount": 233.0,
+      "description": "CompanyRegistrationNo: 13475764.  RegisteredOffice:TheRedHouse,2ndFloor,74-76HighStreet,Bushey,WD233HE,UnitedKingdom.",
+      "currency": null,
+      "file_name": "Invoice INV-0111.pdf#page=2",
+      "extracted_fields": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 6,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-08 22:23:29",
+    "source": "reconciliation_endpoint"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 1501,
+  "parent_info": {
+    "file_name": "bank_file_30",
+    "file_hash": "reconcile_bank_1767849398_1407",
+    "upload_timestamp": "2026-01-08 10:46:38",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": "26 Apr 2024",
+      "description": "26 Apr 2024 Domestic Transfer SUMMER MAUGHAN / ref: Reference - TIPS 37.00 2,167.29£3,860.45",
+      "amount": 2167.29,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 2167.29,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-08 10:46:38",
+    "source": "reconciliation_endpoint"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 799,
+  "parent_info": {
+    "file_name": "bank_file_13",
+    "file_hash": "reconcile_bank_1767781984_6720",
+    "upload_timestamp": "2026-01-07 16:03:04",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": "30 Apr 2024",
+      "description": "30 Apr 2024 MOS To Katy Paterson • Month 1 £1 349.47 £17 312.00",
+      "amount": 1.0,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 1.0,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 16:03:04",
+    "source": "reconciliation_endpoint"
+  }
+}

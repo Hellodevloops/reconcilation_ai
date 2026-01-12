@@ -1,0 +1,26 @@
+{
+  "parent_id": 538,
+  "parent_info": {
+    "file_name": "bank_file_136",
+    "file_hash": "reconcile_bank_1767779301_1197",
+    "upload_timestamp": "2026-01-07 15:18:21",
+    "source": "reconciliation_endpoint"
+  },
+  "child_records": [
+    {
+      "record_id": 1,
+      "transaction_date": "9 Apr 2024",
+      "description": "9 Apr 2024 Domestic Transfer MICHAEL BUTTERLY / ref: Cleaning 42.00 612.55",
+      "amount": 42.0,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 42.0,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 15:18:21"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "sequence_no": 1,
+  "page_no": 1,
+  "section_no": null,
+  "original_filename": "real_bank_statement.pdf",
+  "extracted_data": {
+    "transactions": {
+      "1": {
+        "transaction_date": "2015-01-24",
+        "description": null,
+        "amount": 202.0,
+        "type": "debit",
+        "balance": null
+      },
+      "2": {
+        "transaction_date": "2016-01-24",
+        "description": null,
+        "amount": 202.0,
+        "type": "debit",
+        "balance": null
+      },
+      "3": {
+        "transaction_date": "2017-01-24",
+        "description": null,
+        "amount": 202.0,
+        "type": "debit",
+        "balance": null
+      },
+      "4": {
+        "transaction_date": "2018-01-24",
+        "description": null,
+        "amount": 202.0,
+        "type": "debit",
+        "balance": null
+      }
+    },
+    "invoice_data": {},
+    "statement_metadata": {
+      "total_transactions": 4,
+      "total_credits": 0,
+      "total_debits": 808.0,
+      "total_invoices_found": 0
+    }
+  },
+  "created_at": "2026-01-07 12:33:04"
+}

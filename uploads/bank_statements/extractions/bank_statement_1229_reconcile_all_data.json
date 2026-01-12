@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 1229,
+  "parent_info": {
+    "file_name": "bank_file_142",
+    "file_hash": "reconcile_bank_1767787653_5137",
+    "upload_timestamp": "2026-01-07 17:37:33",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": "8 Apr 2024",
+      "description": "8 Apr 2024 Domestic Transfer AMELIA SCHOLES / ref: Reference - Tips 175.00 1,486.10",
+      "amount": 175.0,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 175.0,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 17:37:33",
+    "source": "reconciliation_endpoint"
+  }
+}

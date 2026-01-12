@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 658,
+  "parent_info": {
+    "file_name": "bank_file_64",
+    "file_hash": "reconcile_bank_1767780344_8401",
+    "upload_timestamp": "2026-01-07 15:35:44",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": "21 Apr 2024",
+      "description": "21 Apr 2024 Domestic Transfer YouLend Limited / ref: YL60146362OUT YL60 1,561.64 2,787.49",
+      "amount": 1561.64,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 1561.64,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 15:35:44",
+    "source": "reconciliation_endpoint"
+  }
+}

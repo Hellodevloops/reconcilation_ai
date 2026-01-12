@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 833,
+  "parent_info": {
+    "file_name": "bank_file_47",
+    "file_hash": "reconcile_bank_1767781984_7110",
+    "upload_timestamp": "2026-01-07 16:03:04",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": "8 Apr 2024",
+      "description": "8 Apr 2024 MOS To Propel Finance Plc • PC-94639 £296.40 £26 131.29",
+      "amount": 296.4,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 296.4,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 16:03:04",
+    "source": "reconciliation_endpoint"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "sequence_no": 1,
+  "page_no": 1,
+  "section_no": null,
+  "original_filename": "test_bank.pdf",
+  "extracted_data": {
+    "transactions": {},
+    "invoice_data": {},
+    "statement_metadata": {
+      "total_transactions": 0,
+      "total_credits": 0,
+      "total_debits": 0,
+      "total_invoices_found": 0
+    }
+  },
+  "created_at": "2026-01-07 12:57:09"
+}

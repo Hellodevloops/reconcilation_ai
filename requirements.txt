@@ -1,0 +1,35 @@
+flask==3.0.3
+pytesseract==0.3.13
+Pillow==11.0.0
+PyPDF2==3.0.1
+scikit-learn==1.5.2
+pandas==2.2.3
+joblib==1.4.2
+openpyxl==3.1.5
+flask-limiter==3.8.0
+python-dotenv==1.0.1
+# API Documentation
+flasgger==0.9.7.1
+# Performance & Async
+celery==5.3.4
+redis==5.0.1
+# Testing
+pytest==7.4.4
+pytest-cov==4.1.0
+pytest-asyncio==0.23.3
+# Advanced Export
+reportlab==4.0.7
+# Database
+sqlalchemy==2.0.25
+pymysql==1.1.0
+mysql-connector-python==8.2.0
+alembic==1.13.1
+# Monitoring
+prometheus-client==0.19.0
+sentry-sdk==2.3.1
+# Data Validation
+pydantic==2.12.5
+# Email
+flask-mail==0.10.0
+# Webhooks
+requests==2.31.0

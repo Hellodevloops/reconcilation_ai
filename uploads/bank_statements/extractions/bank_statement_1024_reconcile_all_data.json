@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 1024,
+  "parent_info": {
+    "file_name": "bank_file_238",
+    "file_hash": "reconcile_bank_1767781989_3872",
+    "upload_timestamp": "2026-01-07 16:03:09",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": null,
+      "description": "Scan the QR codeRevolut Ltd (Company No. 08804411) is authorised by the Financial Conduct Authority under the Electronic Money regulations 2011 (Firm Reference 900562). Registered address: 7 Westferry Circus, Canary",
+      "amount": 7.0,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 7.0,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 16:03:09",
+    "source": "reconciliation_endpoint"
+  }
+}

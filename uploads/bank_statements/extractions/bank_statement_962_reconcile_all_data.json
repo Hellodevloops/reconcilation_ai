@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 962,
+  "parent_info": {
+    "file_name": "bank_file_176",
+    "file_hash": "reconcile_bank_1767781988_5366",
+    "upload_timestamp": "2026-01-07 16:03:08",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": "29 Feb 2024",
+      "description": "29 Feb 2024 MOS To NABEEL ALI • MONTH 11 £33.60 £39 450.88",
+      "amount": 33.6,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 33.6,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 16:03:08",
+    "source": "reconciliation_endpoint"
+  }
+}

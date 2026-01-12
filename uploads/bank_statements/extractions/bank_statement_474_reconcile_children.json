@@ -1,0 +1,26 @@
+{
+  "parent_id": 474,
+  "parent_info": {
+    "file_name": "bank_file_72",
+    "file_hash": "reconcile_bank_1767779300_805",
+    "upload_timestamp": "2026-01-07 15:18:20",
+    "source": "reconciliation_endpoint"
+  },
+  "child_records": [
+    {
+      "record_id": 1,
+      "transaction_date": "19 Apr 2024",
+      "description": "19 Apr 2024 Domestic Transfer M BRIGGS / ref: KA POLEBROOK 130.00 2,694.47",
+      "amount": 130.0,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 130.0,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 15:18:20"
+  }
+}

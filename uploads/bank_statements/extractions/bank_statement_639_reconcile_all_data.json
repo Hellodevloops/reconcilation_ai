@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 639,
+  "parent_info": {
+    "file_name": "bank_file_45",
+    "file_hash": "reconcile_bank_1767780344_1479",
+    "upload_timestamp": "2026-01-07 15:35:44",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": "24 Apr 2024",
+      "description": "24 Apr 2024 Domestic Transfer T AND J FINE FOODS / ref: K A POLEBROOK 1,000.00 730.48",
+      "amount": 1000.0,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 1000.0,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 15:35:44",
+    "source": "reconciliation_endpoint"
+  }
+}

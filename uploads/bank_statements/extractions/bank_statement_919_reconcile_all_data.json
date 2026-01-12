@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 919,
+  "parent_info": {
+    "file_name": "bank_file_133",
+    "file_hash": "reconcile_bank_1767781987_1355",
+    "upload_timestamp": "2026-01-07 16:03:07",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": "13 Mar 2024",
+      "description": "13 Mar 2024 CAR M6 Toll £8.90 £57 088.13",
+      "amount": 8.9,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 8.9,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 16:03:07",
+    "source": "reconciliation_endpoint"
+  }
+}

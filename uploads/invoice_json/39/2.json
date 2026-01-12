@@ -1,0 +1,98 @@
+{
+  "parent_file_name": "001 EXP QE APR24.pdf",
+  "original_filename": "001 EXP QE APR24.pdf",
+  "page_no": 1,
+  "section_no": 2,
+  "lines": [
+    "Company Registration No: 13475764.  Registered Office: The Red House, 2nd Floor, 74-76 High Street, Bushey, WD23 3HE, United Kingdom.TAX INVOICE",
+    "HSD CAPITAL LIMITED",
+    "143 EASTFIELD ROAD",
+    "PETERBOROUGH",
+    "PE1 4AUInvoice Date",
+    "31 Jan 2024",
+    "Invoice Number",
+    "INV-0101",
+    "Reference",
+    "January 2024 Royalty &",
+    "Marketing fees",
+    "VAT Number",
+    "400992020FLOOZIE LTD",
+    "The Red House, 2nd Floor",
+    "74-76 High Street",
+    "Bushey",
+    "WD23 3HE",
+    "UNITED KINGDOM",
+    "Description Quantity Unit Price VAT Amount GBP",
+    "January 2024 Royalty Fees 6% 1.00 2,317.92 20% 2,317.92",
+    "January 2024 Marketing Fees 2% 1.00 772.64 20% 772.64",
+    "Subtotal 3,090.56",
+    "TOTAL  VAT  20% 618.11",
+    "TOTAL GBP 3,708.67",
+    "Due Date: 14 Feb 2024",
+    "Payment Details:",
+    "Revolut Bank",
+    "Name of Account: Floozie Limited",
+    "Account number: 69569797",
+    "Sort code: 04-00-75",
+    "IBAN: GB17 REVO 0099 6982 1447 86",
+    "BIC: REVOGB21",
+    "Intermediary BIC: CHASGB2L",
+    "Beneficiary address: 2nd floor, The Red House, 74-76 High Street, WD23 3HE, Bushey, United Kingdom",
+    "Bank / Payment institution: Revolut Ltd",
+    "Bank / Payment institution address: 7 Westferry Circus, E14 4HD, London, United Kingdom"
+  ],
+  "extracted_fields": {
+    "invoice_date": null,
+    "invoice_number": "INV-0101",
+    "reference": "January 2024 Royalty",
+    "vat_number": "400992020FLOOZIE",
+    "totals": {
+      "subtotal": 3090.56,
+      "total": 3708.67
+    },
+    "currency": "£",
+    "line_items": [
+      {
+        "description": "January 2024 Marketing Fees 2%",
+        "quantity": 1.0,
+        "unit_price": 772.64,
+        "vat": "20%",
+        "amount_gbp": 772.64
+      }
+    ],
+    "source_text_contains_tax_invoice": true
+  },
+  "transactions": [
+    {
+      "source": "invoice",
+      "description": "TOTAL GBP 3,708.67",
+      "amount": 3708.67,
+      "date": null,
+      "vendor_name": "400992020FLOOZIE",
+      "invoice_number": "0101",
+      "currency": "£",
+      "file_name": "001 EXP QE APR24.pdf#page=1",
+      "extracted_fields": {
+        "invoice_date": null,
+        "invoice_number": "INV-0101",
+        "reference": "January 2024 Royalty",
+        "vat_number": "400992020FLOOZIE",
+        "totals": {
+          "subtotal": 3090.56,
+          "total": 3708.67
+        },
+        "currency": "£",
+        "line_items": [
+          {
+            "description": "January 2024 Marketing Fees 2%",
+            "quantity": 1.0,
+            "unit_price": 772.64,
+            "vat": "20%",
+            "amount_gbp": 772.64
+          }
+        ],
+        "source_text_contains_tax_invoice": true
+      }
+    }
+  ]
+}

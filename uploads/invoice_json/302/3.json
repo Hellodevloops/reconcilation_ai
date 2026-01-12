@@ -1,0 +1,54 @@
+{
+  "parent_file_name": "001 EXP QE APR24.pdf",
+  "original_filename": "001 EXP QE APR24.pdf",
+  "page_no": 5,
+  "section_no": 1,
+  "lines": [
+    "PAYMENT ADVICE",
+    "To:FLOOZIE LTD",
+    "The Red House, 2nd Floor",
+    "74-76 High Street",
+    "Bushey",
+    "WD23 3HE",
+    "UNITED KINGDOMCustomer HSD CAPITAL LIMITED",
+    "Invoice Number INV-0114",
+    "Amount Due 2,911.54",
+    "Due Date 14 Apr 2024",
+    "Amount Enclosed",
+    "Enter the amount you are paying above"
+  ],
+  "extracted_fields": {
+    "invoice_date": null,
+    "invoice_number": "INV-0114",
+    "reference": null,
+    "vat_number": null,
+    "totals": {
+      "total": 2911.54
+    },
+    "line_items": [],
+    "source_text_contains_tax_invoice": false
+  },
+  "transactions": [
+    {
+      "source": "invoice",
+      "description": "Amount Due 2,911.54",
+      "amount": 2911.54,
+      "date": null,
+      "vendor_name": "HSD CAPITAL",
+      "invoice_number": "INV-0114",
+      "currency": null,
+      "file_name": "001 EXP QE APR24.pdf#page=5",
+      "extracted_fields": {
+        "invoice_date": null,
+        "invoice_number": "INV-0114",
+        "reference": null,
+        "vat_number": null,
+        "totals": {
+          "total": 2911.54
+        },
+        "line_items": [],
+        "source_text_contains_tax_invoice": false
+      }
+    }
+  ]
+}

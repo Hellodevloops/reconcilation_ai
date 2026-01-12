@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 1323,
+  "parent_info": {
+    "file_name": "bank_file_44",
+    "file_hash": "reconcile_bank_1767849367_7083",
+    "upload_timestamp": "2026-01-08 10:46:07",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": "25 Apr 2024",
+      "description": "25 Apr 2024 Direct Debit NFU MUTUAL INS-BC / ref: 002889980 510.52 219.96",
+      "amount": 510.52,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 510.52,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-08 10:46:07",
+    "source": "reconciliation_endpoint"
+  }
+}

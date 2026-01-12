@@ -1,0 +1,367 @@
+{
+  "parent_invoice_id": 234,
+  "parent_info": {
+    "file_name": "7.pdf#page=5",
+    "file_hash": "reconcile_invoice_1767869903_9173",
+    "upload_timestamp": "2026-01-08 16:28:23",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "invoice_number": "YL60146362",
+      "invoice_date": null,
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 2.0,
+      "description": "Limited is registered in England and Wales under company number 09595646 with registered office: 4th Floor, The Featherstone Building, 66 City Road, London, EC1Y 2AL.",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 2,
+      "invoice_number": "YL60146362",
+      "invoice_date": "5 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 73.5,
+      "description": "5 Apr 2024 Domestic Transfer ANGLE SALLAI / ref: Wages 73.50 41.17",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 3,
+      "invoice_number": "YL60146362",
+      "invoice_date": "5 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 30.0,
+      "description": "5 Apr 2024 Domestic Transfer MARK DAVIES / ref: Reference - TIPS 30.00 114.67",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 4,
+      "invoice_number": "YL60146362",
+      "invoice_date": "5 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 60.0,
+      "description": "5 Apr 2024 Domestic Transfer SUMMER MAUGHAN / ref: TIPS KA 60.00 144.67",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 5,
+      "invoice_number": "YL60146362",
+      "invoice_date": "5 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 297.0,
+      "description": "5 Apr 2024 Domestic Transfer MARK DAVIES / ref: KA WAGES 297.00 204.67",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 6,
+      "invoice_number": "YL60146362",
+      "invoice_date": "5 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 57.0,
+      "description": "5 Apr 2024 Domestic Transfer FRED MITCHELL / ref: Reference - TIPS 57.00 501.67",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 7,
+      "invoice_number": "YL60146362",
+      "invoice_date": "5 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 78.64,
+      "description": "5 Apr 2024 Domestic Transfer GEORGE H HOOPER / ref: KA TIPS 78.64 558.67",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 8,
+      "invoice_number": "YL60146362",
+      "invoice_date": "5 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 85.0,
+      "description": "5 Apr 2024 Domestic Transfer OJ GAUZA / ref: KA TIPS 85.00 637.31",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 9,
+      "invoice_number": "YL60146362",
+      "invoice_date": "5 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 95.0,
+      "description": "5 Apr 2024 Domestic Transfer MICHAEL BUTTERLY / ref: Reference - TIPS 95.00 722.31",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 10,
+      "invoice_number": "YL60146362",
+      "invoice_date": "5 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 356.0,
+      "description": "5 Apr 2024 Domestic Transfer SUMMER MAUGHAN / ref: KA WAGES 356.00 817.31",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 11,
+      "invoice_number": "YL60146362",
+      "invoice_date": "5 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 325.5,
+      "description": "5 Apr 2024 Domestic Transfer ANGLE SALLAI / ref: KA WAGES 325.50 1,173.31",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 12,
+      "invoice_number": "YL60146362",
+      "invoice_date": "5 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 1304.93,
+      "description": "5 Apr 2024 Domestic Transfer FRED MITCHELL / ref: Reference - WAGES 1,304.93 1,498.81",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 13,
+      "invoice_number": "YL60146362",
+      "invoice_date": "5 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 138.0,
+      "description": "5 Apr 2024 Domestic Transfer MR WILLIAM FREEMAN / ref: KA wages 138.00 2,803.74",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 14,
+      "invoice_number": "YL60146362",
+      "invoice_date": "5 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 59.99,
+      "description": "5 Apr 2024 Internal Book Transfer TPL Ltd / ref: Tide fees: Cashback plan payment 59.99 2,941.74",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 15,
+      "invoice_number": "YL60146362",
+      "invoice_date": "5 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 2000.0,
+      "description": "5 Apr 2024 Domestic Transfer A Mickleburgh / ref: No Reference 2,000.00 3,001.73",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 16,
+      "invoice_number": "YL60146362",
+      "invoice_date": "5 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 762.76,
+      "description": "5 Apr 2024 Domestic Transfer YouLend Limited / ref: YL60146362OUT YL60 762.76 1,001.73",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 17,
+      "invoice_number": "YL60146362",
+      "invoice_date": "5 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 422.48,
+      "description": "5 Apr 2024 Direct Debit NEST / ref: IT000007260786 422.48 238.97",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 18,
+      "invoice_number": "YL60146362",
+      "invoice_date": "4 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 100.0,
+      "description": "4 Apr 2024 Domestic Transfer GEORGE MICKLEBURGH / ref: Reference - Tips 100.00 661.45",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 19,
+      "invoice_number": "YL60146362",
+      "invoice_date": "4 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 575.2,
+      "description": "4 Apr 2024 Domestic Transfer YouLend Limited / ref: YL60146362OUT YL60 575.20 761.45",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 20,
+      "invoice_number": "YL60146362",
+      "invoice_date": "2 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 65.0,
+      "description": "2 Apr 2024 Domestic Transfer OJ GAUZA / ref: Reference - TIPS 65.00 186.25",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 21,
+      "invoice_number": "YL60146362",
+      "invoice_date": "2 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 57.0,
+      "description": "2 Apr 2024 Domestic Transfer MICHAEL BUTTERLY / ref: Reference - TIPS 57.00 251.25",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 22,
+      "invoice_number": "YL60146362",
+      "invoice_date": "2 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 7.0,
+      "description": "2 Apr 2024 Domestic Transfer GEORGE H HOOPER / ref: Reference - TIPS 7.00 308.25",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 23,
+      "invoice_number": "YL60146362",
+      "invoice_date": "2 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 109.0,
+      "description": "2 Apr 2024 Domestic Transfer AMELIA SCHOLES / ref: Reference - TIPS 109.00 315.25",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 24,
+      "invoice_number": "YL60146362",
+      "invoice_date": "2 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 51.0,
+      "description": "2 Apr 2024 Domestic Transfer IMOGEN PRIOR / ref: Reference - WAGES 51.00 424.25",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 25,
+      "invoice_number": "YL60146362",
+      "invoice_date": "2 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 183.75,
+      "description": "2 Apr 2024 Domestic Transfer FLORENCE PATTERSON / ref: WAGES 183.75 475.25",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 26,
+      "invoice_number": "YL60146362",
+      "invoice_date": "2 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 88.5,
+      "description": "2 Apr 2024 Domestic Transfer WILLIAM REID / ref: WAGES 88.50 659.00",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 27,
+      "invoice_number": "YL60146362",
+      "invoice_date": "2 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 100.32,
+      "description": "2 Apr 2024 Domestic Transfer NED RAYNER / ref: Reference - WAGES 100.32 747.50",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 28,
+      "invoice_number": "YL60146362",
+      "invoice_date": "2 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 84.0,
+      "description": "2 Apr 2024 Domestic Transfer MICHAEL BUTTERLY / ref: CLEANING 84.00 847.82",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 29,
+      "invoice_number": "YL60146362",
+      "invoice_date": "2 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 50.0,
+      "description": "2 Apr 2024 Domestic Transfer SAMUEL FATIREGUN / ref: Wages 50.00 931.82",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 30,
+      "invoice_number": "YL60146362",
+      "invoice_date": "2 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 976.12,
+      "description": "2 Apr 2024 Domestic Transfer YouLend Limited / ref: YL60146362OUT YL60 976.12 981.82",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 31,
+      "invoice_number": "YL60146362",
+      "invoice_date": "1 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 1600.33,
+      "description": "1 Apr 2024 Domestic Transfer OJ GAUZA / ref: Wages 1,600.33 5.70",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 32,
+      "invoice_number": "YL60146362",
+      "invoice_date": "1 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 1123.56,
+      "description": "1 Apr 2024 Domestic Transfer AMELIA SCHOLES / ref: Reference - Wages 1,123.56 1,606.03",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 33,
+      "invoice_number": "YL60146362",
+      "invoice_date": "1 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 1128.51,
+      "description": "1 Apr 2024 Domestic Transfer GEORGE H HOOPER / ref: Reference - Wages 1,128.51 2,729.59",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 34,
+      "invoice_number": "YL60146362",
+      "invoice_date": "1 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 1875.27,
+      "description": "1 Apr 2024 Domestic Transfer MICHAEL BUTTERLY / ref: Reference - Wages 1,875.27 3,858.10",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    },
+    {
+      "record_id": 35,
+      "invoice_number": "YL60146362",
+      "invoice_date": "1 Apr 2024",
+      "vendor_name": "1 Apr 2024 Domestic Transfer YouLend",
+      "total_amount": 1872.92,
+      "description": "1 Apr 2024 Domestic Transfer YouLend Limited / ref: YL60146362OUT YL60 1,872.92 5,733.37",
+      "currency": "£",
+      "file_name": "7.pdf#page=5"
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 35,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-08 16:28:23",
+    "source": "reconciliation_endpoint"
+  }
+}

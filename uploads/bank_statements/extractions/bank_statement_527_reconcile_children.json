@@ -1,0 +1,26 @@
+{
+  "parent_id": 527,
+  "parent_info": {
+    "file_name": "bank_file_125",
+    "file_hash": "reconcile_bank_1767779301_8562",
+    "upload_timestamp": "2026-01-07 15:18:21",
+    "source": "reconciliation_endpoint"
+  },
+  "child_records": [
+    {
+      "record_id": 1,
+      "transaction_date": "11 Apr 2024",
+      "description": "11 Apr 2024 Card TransactionMIPERMIT LTD - UNIT 7 CALLOW PARK, CHIPPENHAM",
+      "amount": 7.0,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 7.0,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 15:18:21"
+  }
+}

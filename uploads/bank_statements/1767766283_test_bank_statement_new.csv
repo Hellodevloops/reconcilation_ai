@@ -1,0 +1,4 @@
+Date,Description,Amount,Type
+2024-01-15,Payment to Vendor A,100.50,debit
+2024-01-16,Payment from Client B,250.00,credit
+2024-01-17,Bank Transfer Fee,5.00,debit

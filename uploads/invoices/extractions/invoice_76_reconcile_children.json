@@ -1,0 +1,26 @@
+{
+  "parent_id": 76,
+  "parent_info": {
+    "file_name": "001 EXP QE APR24.pdf#page=25",
+    "file_hash": "reconcile_invoice_1767779299_6238",
+    "upload_timestamp": "2026-01-07 15:18:19",
+    "source": "reconciliation_endpoint"
+  },
+  "child_records": [
+    {
+      "record_id": 1,
+      "invoice_number": "IS",
+      "invoice_date": "01/02/2024",
+      "vendor_name": "the amount, date or frequency of your Direct Debit Value Retail Management",
+      "total_amount": 120.0,
+      "description": "Total GBP 120.00",
+      "currency": "£",
+      "file_name": "001 EXP QE APR24.pdf#page=25"
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 15:18:19"
+  }
+}

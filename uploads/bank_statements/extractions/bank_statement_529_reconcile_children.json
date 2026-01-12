@@ -1,0 +1,26 @@
+{
+  "parent_id": 529,
+  "parent_info": {
+    "file_name": "bank_file_127",
+    "file_hash": "reconcile_bank_1767779301_30",
+    "upload_timestamp": "2026-01-07 15:18:21",
+    "source": "reconciliation_endpoint"
+  },
+  "child_records": [
+    {
+      "record_id": 1,
+      "transaction_date": null,
+      "description": "KA POLEBROOK1,065.44 81.95",
+      "amount": 81.95,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 81.95,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 15:18:21"
+  }
+}

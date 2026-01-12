@@ -1,0 +1,27 @@
+{
+  "parent_bank_statement_id": 847,
+  "parent_info": {
+    "file_name": "bank_file_61",
+    "file_hash": "reconcile_bank_1767781985_8038",
+    "upload_timestamp": "2026-01-07 16:03:05",
+    "source": "reconciliation_endpoint"
+  },
+  "all_extracted_records": [
+    {
+      "record_id": 1,
+      "transaction_date": "3 Apr 2024",
+      "description": "3 Apr 2024 MOS To Value Retail Bice • BICESTERCHGS747 £336.00 £22 220.30",
+      "amount": 336.0,
+      "currency": "£",
+      "file_name": null
+    }
+  ],
+  "extraction_metadata": {
+    "total_records": 1,
+    "total_credits": 336.0,
+    "total_debits": 0,
+    "extraction_confidence": 0.85,
+    "processed_at": "2026-01-07 16:03:05",
+    "source": "reconciliation_endpoint"
+  }
+}

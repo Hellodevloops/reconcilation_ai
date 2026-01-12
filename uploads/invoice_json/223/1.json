@@ -1,0 +1,77 @@
+{
+  "parent_file_name": "demo_invoice.pdf",
+  "original_filename": "demo_invoice.pdf",
+  "page_no": 1,
+  "section_no": 1,
+  "lines": [
+    "Demo Invoice List",
+    "Customer: POLEBROOK ARMS NORTHANTS LTD",
+    "Invoice No",
+    "Invoice Date",
+    "Supplier",
+    "Amount (£)",
+    "INV-101",
+    "05/02/2024",
+    "BOOKER WHOLESALE",
+    "250.0",
+    "INV-102",
+    "10/02/2024",
+    "BOOKER WHOLESALE",
+    "180.0",
+    "INV-103",
+    "18/02/2024",
+    "BOOKER WHOLESALE",
+    "320.0",
+    "INV-104",
+    "25/02/2024",
+    "BOOKER WHOLESALE",
+    "210.0"
+  ],
+  "extracted_fields": null,
+  "transactions": [
+    {
+      "source": "invoice",
+      "description": "250.0",
+      "amount": 250.0,
+      "date": null,
+      "vendor_name": "POLEBROOK ARMS NORTHANTS",
+      "invoice_number": "104",
+      "currency": "£",
+      "file_name": "demo_invoice.pdf#page=1",
+      "extracted_fields": null
+    },
+    {
+      "source": "invoice",
+      "description": "180.0",
+      "amount": 180.0,
+      "date": null,
+      "vendor_name": "POLEBROOK ARMS NORTHANTS",
+      "invoice_number": "104",
+      "currency": "£",
+      "file_name": "demo_invoice.pdf#page=1",
+      "extracted_fields": null
+    },
+    {
+      "source": "invoice",
+      "description": "320.0",
+      "amount": 320.0,
+      "date": null,
+      "vendor_name": "POLEBROOK ARMS NORTHANTS",
+      "invoice_number": "104",
+      "currency": "£",
+      "file_name": "demo_invoice.pdf#page=1",
+      "extracted_fields": null
+    },
+    {
+      "source": "invoice",
+      "description": "210.0",
+      "amount": 210.0,
+      "date": null,
+      "vendor_name": "POLEBROOK ARMS NORTHANTS",
+      "invoice_number": "104",
+      "currency": "£",
+      "file_name": "demo_invoice.pdf#page=1",
+      "extracted_fields": null
+    }
+  ]
+}
