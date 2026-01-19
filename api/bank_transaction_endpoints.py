@@ -10,6 +10,7 @@ import hashlib
 import json
 import re
 from datetime import datetime
+from typing import Optional, List, Dict
 from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
 import traceback
@@ -38,7 +39,7 @@ BANK_FOLDER = os.path.join(UPLOAD_FOLDER, "bank_statements")
 os.makedirs(BANK_FOLDER, exist_ok=True)
 
 
-def _normalize_date_yyyy_mm_dd(raw: str | None) -> str | None:
+def _normalize_date_yyyy_mm_dd(raw: Optional[str]) -> Optional[str]:
     """Normalize date to YYYY-MM-DD format"""
     if not raw:
         return None

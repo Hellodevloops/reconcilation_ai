@@ -10,6 +10,7 @@ import hashlib
 import json
 import re
 from datetime import datetime
+from typing import Optional, List, Tuple, Dict
 from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
 import traceback
@@ -38,7 +39,7 @@ BANK_FOLDER = os.path.join(UPLOAD_FOLDER, "bank_statements")
 os.makedirs(BANK_FOLDER, exist_ok=True)
 
 
-def _normalize_date_yyyy_mm_dd(raw: str | None) -> str | None:
+def _normalize_date_yyyy_mm_dd(raw: Optional[str]) -> Optional[str]:
     """Normalize date to YYYY-MM-DD format"""
     if not raw:
         return None
@@ -86,7 +87,7 @@ def _to_number(val):
         return None
 
 
-def _normalize_date_dd_mmm_yyyy(raw: str | None) -> str | None:
+def _normalize_date_dd_mmm_yyyy(raw: Optional[str]) -> Optional[str]:
     if not raw:
         return None
     txt = str(raw).strip()
@@ -122,7 +123,7 @@ def _extract_tide_statement_info(text: str) -> dict:
         info["statement_period_start"] = _normalize_date_dd_mmm_yyyy(m.group(1))
         info["statement_period_end"] = _normalize_date_dd_mmm_yyyy(m.group(2))
 
-    def _money(pat: str) -> float | None:
+    def _money(pat: str) -> Optional[float]:
         mm = re.search(pat, t_norm, re.IGNORECASE)
         if not mm:
             return None
@@ -132,7 +133,7 @@ def _extract_tide_statement_info(text: str) -> dict:
     # Balance on 1 Apr 2024  £3,860.45
     # Balance on 1 May 2024  £317.38
     # We extract all of them and map start->opening, end->closing when possible.
-    balance_entries: list[tuple[str | None, float | None]] = []
+    balance_entries: List[Tuple[Optional[str], Optional[float]]] = []
     for m_bal in re.finditer(
         r"Balance\s+on\s+(\d{1,2}\s+[A-Za-z]{3,}\s+\d{4})\s*£?\s*([\d,]+\.\d{2})",
         t_norm,
@@ -179,7 +180,7 @@ def _extract_tide_statement_info(text: str) -> dict:
     return info
 
 
-def _parse_tide_transaction_lines(lines: list[str]) -> dict:
+def _parse_tide_transaction_lines(lines: List[str]) -> Dict:
     transactions: dict = {}
     seq = 0
 
@@ -802,7 +803,7 @@ def register_bank_statement_routes(app: Flask):
                 )
             """
 
-            stored_ids: list[int] = []
+            stored_ids: List[int] = []
             try:
                 transaction_counter = 1
                 for _, transaction in transactions.items():

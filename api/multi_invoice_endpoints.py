@@ -10,6 +10,7 @@ import hashlib
 import json
 import re
 from datetime import datetime
+from typing import Optional, List, Dict
 from flask import Flask, request, jsonify, send_from_directory
 from werkzeug.utils import secure_filename
 import traceback
@@ -27,7 +28,7 @@ from database_manager import db_manager
 
 
 
-def _normalize_date_yyyy_mm_dd(raw: str | None) -> str | None:
+def _normalize_date_yyyy_mm_dd(raw: Optional[str]) -> Optional[str]:
     if not raw:
         return None
     txt = str(raw).strip()
@@ -70,7 +71,7 @@ def _to_number(val):
         return None
 
 
-def _split_invoice_sections(lines: list[str]) -> list[list[str]]:
+def _split_invoice_sections(lines: List[str]) -> List[List[str]]:
     if not lines:
         return []
     joined = "\n".join(lines)
@@ -80,13 +81,13 @@ def _split_invoice_sections(lines: list[str]) -> list[list[str]]:
         r"\bPAYMENT\s+ADVICE\b",
         r"\bINVOICE\b",
     ]
-    hits: list[int] = []
+    hits: List[int] = []
     for m in re.finditer("|".join(markers), joined, flags=re.IGNORECASE):
         hits.append(m.start())
     if len(hits) <= 1:
         return [lines]
 
-    sections: list[list[str]] = []
+    sections: List[List[str]] = []
     hits_sorted = sorted(set(hits))
     for i, start in enumerate(hits_sorted):
         end = hits_sorted[i + 1] if i + 1 < len(hits_sorted) else len(joined)
@@ -99,13 +100,13 @@ def _split_invoice_sections(lines: list[str]) -> list[list[str]]:
     return sections or [lines]
 
 
-def _extract_invoices_structured(file_path: str, file_ext: str, original_filename: str) -> list[dict]:
+def _extract_invoices_structured(file_path: str, file_ext: str, original_filename: str) -> List[Dict]:
     if file_ext != ".pdf":
         return [_extract_invoice_structured(file_path, file_ext)]
 
     from services.multi_invoice_processor import multi_invoice_processor
     from PyPDF2 import PdfReader
-    invoices: list[dict] = []
+    invoices: List[Dict] = []
     try:
         with open(file_path, "rb") as f:
             reader = PdfReader(f)
@@ -156,7 +157,7 @@ def _extract_invoices_structured(file_path: str, file_ext: str, original_filenam
                         desc_parts.append(f"Date: {upload_obj['invoice_date']}")
                     upload_obj["description"] = " | ".join(desc_parts) if desc_parts else None
 
-                    items: dict[str, dict] = {}
+                    items: Dict[str, Dict] = {}
                     seq = 0
                     for li in (getattr(inv, "line_items", None) or []):
                         seq += 1
@@ -209,18 +210,18 @@ def _get_next_upload_index_for_hash(file_hash: str) -> int:
 
 def _extract_invoice_structured(file_path: str, file_ext: str) -> dict:
     """Best-effort extraction into the required JSON schema."""
-    extracted_invoice_date: str | None = None
-    extracted_due_date: str | None = None
-    extracted_total_amount: float | None = None
-    extracted_invoice_number: str | None = None
-    extracted_reference: str | None = None
-    extracted_vendor_name: str | None = None
-    extracted_tax_amount: float | None = None
-    extracted_vat_number: str | None = None
-    extracted_total_vat_rate: float | None = None
-    extracted_total_zero_rated: float | None = None
-    extracted_total_gbp: float | None = None
-    extracted_description: str | None = None
+    extracted_invoice_date: Optional[str] = None
+    extracted_due_date: Optional[str] = None
+    extracted_total_amount: Optional[float] = None
+    extracted_invoice_number: Optional[str] = None
+    extracted_reference: Optional[str] = None
+    extracted_vendor_name: Optional[str] = None
+    extracted_tax_amount: Optional[float] = None
+    extracted_vat_number: Optional[str] = None
+    extracted_total_vat_rate: Optional[float] = None
+    extracted_total_zero_rated: Optional[float] = None
+    extracted_total_gbp: Optional[float] = None
+    extracted_description: Optional[str] = None
     items: dict[str, dict] = {}
 
     # Use existing heuristic extractor from multi_invoice_processor for text parsing.
@@ -457,8 +458,8 @@ def register_multi_invoice_routes(app: Flask):
             # Get next index for this file (same file re-upload → new index)
             next_index = _get_next_index_for_file_hash(file_hash)
             
-            invoice_ids: list[int] = []
-            extracted_invoices_for_metadata: list[dict] = []
+            invoice_ids: List[int] = []
+            extracted_invoices_for_metadata: List[Dict] = []
 
             insert_query = """
                 INSERT INTO invoices (
