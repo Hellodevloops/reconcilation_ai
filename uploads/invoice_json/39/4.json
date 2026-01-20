@@ -43,6 +43,7 @@
   ],
   "extracted_fields": {
     "invoice_date": null,
+    "due_date": "14 Apr 2024",
     "invoice_number": "INV-0114",
     "reference": "March 2024 Royalty",
     "vat_number": "400992020FLOOZIE",
@@ -74,6 +75,7 @@
       "file_name": "001 EXP QE APR24.pdf#page=5",
       "extracted_fields": {
         "invoice_date": null,
+        "due_date": "14 Apr 2024",
         "invoice_number": "INV-0114",
         "reference": "March 2024 Royalty",
         "vat_number": "400992020FLOOZIE",

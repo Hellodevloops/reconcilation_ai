@@ -57,6 +57,34 @@ def api_manual_match(reconciliation_id: int):
             
         invoice_item = only_in_invoices[invoice_index]
         bank_item = only_in_bank[bank_index]
+
+        # STRICT MATCH VALIDATION
+        # Ensure we have database IDs to link back to authoritative source
+        inv_id = invoice_item.get("id") or invoice_item.get("invoice_id")
+        bank_id = bank_item.get("id") or bank_item.get("transaction_id")
+        
+        if not inv_id or not bank_id:
+             return jsonify({
+                 "error": "Strict Match Failed: Selected items are not linked to database records.", 
+                 "details": "Please re-run reconciliation to ensure all items are strictly validated."
+             }), 400
+             
+        # Verify IDs exist in DB
+        if db_manager.db_type == "mysql":
+             try:
+                 # Check Invoice
+                 inv_check = db_manager.execute_query("SELECT id FROM invoices WHERE id = %s", (inv_id,))
+                 if not inv_check:
+                      return jsonify({"error": "Invalid Invoice ID: referenced invoice not found in database"}), 400
+                      
+                 # Check Bank Transaction
+                 bank_check = db_manager.execute_query("SELECT id FROM bank_transactions WHERE id = %s", (bank_id,))
+                 if not bank_check:
+                      return jsonify({"error": "Invalid Bank Transaction ID: referenced transaction not found in database"}), 400
+             except Exception as e:
+                 logger.error(f"Database validation error: {e}")
+                 # Fallback to loose validation if DB check fails due to connectivity
+                 pass
         
         # 3. Create match object
         match_obj = {

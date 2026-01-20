@@ -1,27 +1,39 @@
 {
   "parent_invoice_id": 260,
   "parent_info": {
-    "file_name": "001 EXP QE APR24.pdf#page=19",
-    "file_hash": "reconcile_invoice_1767871129_9469",
-    "upload_timestamp": "2026-01-08 16:48:49",
+    "file_name": "001 EXP QE APR24 (1).pdf#page=20",
+    "file_hash": "reconcile_invoice_1768201411_2651",
+    "upload_timestamp": "2026-01-12 12:33:31",
     "source": "reconciliation_endpoint"
   },
   "all_extracted_records": [
     {
       "record_id": 1,
-      "invoice_number": "IS",
+      "invoice_number": "OICE",
       "invoice_date": "01/03/2024",
       "vendor_name": "the amount, date or frequency of your Direct Debit Value Retail Management",
-      "total_amount": 120.0,
-      "description": "Total GBP 120.00",
+      "total_amount": 720.0,
+      "description": "Total GBP 720.00",
       "currency": "£",
-      "file_name": "001 EXP QE APR24.pdf#page=19"
+      "file_name": "001 EXP QE APR24 (1).pdf#page=20",
+      "extracted_fields": {
+        "invoice_date": "01/03/2024",
+        "invoice_number": "UA01INV202400345",
+        "reference": null,
+        "vat_number": null,
+        "totals": {
+          "total": 720.0
+        },
+        "currency": "£",
+        "line_items": [],
+        "source_text_contains_tax_invoice": false
+      }
     }
   ],
   "extraction_metadata": {
     "total_records": 1,
     "extraction_confidence": 0.85,
-    "processed_at": "2026-01-08 16:48:49",
+    "processed_at": "2026-01-12 12:33:31",
     "source": "reconciliation_endpoint"
   }
 }

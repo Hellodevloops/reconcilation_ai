@@ -898,6 +898,12 @@ class ReconciliationEngine:
             if invoice.vendor_name.lower() in transaction.description.lower():
                 return True
         
+        # Check bank details match (High confidence exact match)
+        if hasattr(invoice, 'account_number') and invoice.account_number and transaction.account_number:
+            if invoice.account_number == transaction.account_number:
+                # If account number matches, and amount matches, we are very confident
+                return True
+        
         return False
     
     def _calculate_match_score(self, invoice: ExtractedInvoice, transaction: BankTransaction) -> float:
@@ -932,7 +938,19 @@ class ReconciliationEngine:
             elif any(word in desc_lower for word in vendor_lower.split() if len(word) > 2):
                 score += 0.15
         
-        return score
+        # Bank detail similarity (New: 30% bonus weight)
+        if hasattr(invoice, 'account_number') and invoice.account_number and transaction.account_number:
+            if invoice.account_number == transaction.account_number:
+                score += 0.3
+            elif invoice.account_number[-4:] == transaction.account_number[-4:]:
+                score += 0.1 # Partial account match
+                
+        if hasattr(invoice, 'sort_code') and invoice.sort_code and transaction.description:
+            # Often sort code appears in description
+            if invoice.sort_code in transaction.description:
+                score += 0.15
+        
+        return min(1.0, score)
 
 # Global processor instance
 financial_processor = FinancialDataProcessor()

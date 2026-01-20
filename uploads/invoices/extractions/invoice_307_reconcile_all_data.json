@@ -1,77 +1,39 @@
 {
   "parent_invoice_id": 307,
   "parent_info": {
-    "file_name": "Invoice INV-0111.pdf#page=2",
-    "file_hash": "reconcile_invoice_1767889053_3906",
-    "upload_timestamp": "2026-01-08 21:47:33",
+    "file_name": "001 EXP QE APR24.pdf#page=22",
+    "file_hash": "reconcile_invoice_1768288803_7711",
+    "upload_timestamp": "2026-01-13 12:50:03",
     "source": "reconciliation_endpoint"
   },
   "all_extracted_records": [
     {
       "record_id": 1,
-      "invoice_number": "INV-0111",
-      "invoice_date": null,
-      "vendor_name": "HSDCAPITALLIMITED",
-      "total_amount": 2.0,
-      "description": "TheRedHouse,2ndFloor",
-      "currency": null,
-      "file_name": "Invoice INV-0111.pdf#page=2"
-    },
-    {
-      "record_id": 2,
-      "invoice_number": "INV-0111",
-      "invoice_date": null,
-      "vendor_name": "HSDCAPITALLIMITED",
-      "total_amount": 74.0,
-      "description": "74-76HighStreet",
-      "currency": null,
-      "file_name": "Invoice INV-0111.pdf#page=2"
-    },
-    {
-      "record_id": 3,
-      "invoice_number": "INV-0111",
-      "invoice_date": null,
-      "vendor_name": "HSDCAPITALLIMITED",
-      "total_amount": 233.0,
-      "description": "WD233HE",
-      "currency": null,
-      "file_name": "Invoice INV-0111.pdf#page=2"
-    },
-    {
-      "record_id": 4,
-      "invoice_number": "INV-0111",
-      "invoice_date": null,
-      "vendor_name": "HSDCAPITALLIMITED",
-      "total_amount": 3901.2,
-      "description": "AmountDue 3,901.20",
-      "currency": null,
-      "file_name": "Invoice INV-0111.pdf#page=2"
-    },
-    {
-      "record_id": 5,
-      "invoice_number": "INV-0111",
-      "invoice_date": null,
-      "vendor_name": "HSDCAPITALLIMITED",
-      "total_amount": 21.0,
-      "description": "DueDate 21Mar2024",
-      "currency": null,
-      "file_name": "Invoice INV-0111.pdf#page=2"
-    },
-    {
-      "record_id": 6,
-      "invoice_number": "INV-0111",
-      "invoice_date": null,
-      "vendor_name": "HSDCAPITALLIMITED",
-      "total_amount": 233.0,
-      "description": "CompanyRegistrationNo: 13475764.  RegisteredOffice:TheRedHouse,2ndFloor,74-76HighStreet,Bushey,WD233HE,UnitedKingdom.",
-      "currency": null,
-      "file_name": "Invoice INV-0111.pdf#page=2"
+      "invoice_number": "OICE",
+      "invoice_date": "01/04/2024",
+      "vendor_name": "the amount, date or frequency of your Direct Debit Value Retail Management",
+      "total_amount": 56.0,
+      "description": "Total GBP 56.00",
+      "currency": "£",
+      "file_name": "001 EXP QE APR24.pdf#page=22",
+      "extracted_fields": {
+        "invoice_date": "01/04/2024",
+        "invoice_number": "UA01INV202400577",
+        "reference": null,
+        "vat_number": null,
+        "totals": {
+          "total": 56.0
+        },
+        "currency": "£",
+        "line_items": [],
+        "source_text_contains_tax_invoice": false
+      }
     }
   ],
   "extraction_metadata": {
-    "total_records": 6,
+    "total_records": 1,
     "extraction_confidence": 0.85,
-    "processed_at": "2026-01-08 21:47:33",
+    "processed_at": "2026-01-13 12:50:03",
     "source": "reconciliation_endpoint"
   }
 }

@@ -9,7 +9,7 @@ import time
 import hashlib
 import json
 import re
-from datetime import datetime
+from datetime import datetime, timedelta
 from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
 import traceback
@@ -42,11 +42,39 @@ def _normalize_date_yyyy_mm_dd(raw: str | None) -> str | None:
     """Normalize date to YYYY-MM-DD format"""
     if not raw:
         return None
+ 
+    # Handle datetime/date-like objects (e.g. pandas Timestamp)
+    try:
+        if hasattr(raw, "date") and callable(getattr(raw, "date")):
+            d = raw.date()
+            if hasattr(d, "isoformat"):
+                return d.isoformat()
+    except Exception:
+        pass
+
     txt = str(raw).strip()
     if not txt:
         return None
 
     txt = re.sub(r"\s+", " ", txt)
+
+    # Handle Excel serial dates (e.g. 45234 or 45234.0)
+    # Excel's day 0 is 1899-12-30 in most common conversions.
+    try:
+        if re.fullmatch(r"\d+(?:\.0+)?", txt):
+            serial = int(float(txt))
+            if serial > 0:
+                return (datetime(1899, 12, 30) + timedelta(days=serial)).date().isoformat()
+    except Exception:
+        pass
+
+    # Handle ISO-like datetime strings with time component
+    try:
+        dt = datetime.fromisoformat(txt.replace("Z", "+00:00"))
+        return dt.date().isoformat()
+    except Exception:
+        pass
+
     candidates = [
         "%Y-%m-%d",
         "%d/%m/%Y",

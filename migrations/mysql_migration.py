@@ -261,6 +261,23 @@ TABLES = {
     
 }
 
+def add_column_if_not_exists(table, column, definition):
+    """Adds a column to a table if it doesn't already exist"""
+    try:
+        # Check if column exists
+        query = f"SHOW COLUMNS FROM `{table}` LIKE '{column}'"
+        result = db_manager.execute_query(query)
+        
+        if not result:
+            logger.info(f"Adding column '{column}' to table '{table}'")
+            db_manager.execute_update(f"ALTER TABLE `{table}` ADD COLUMN {column} {definition}")
+            logger.info(f"✅ Column '{column}' added successfully")
+        else:
+            logger.debug(f"Column '{column}' already exists in table '{table}'")
+    except Exception as e:
+        logger.error(f"Error adding column '{column}' to '{table}': {e}")
+
+
 def create_tables():
     """Create all tables in the database"""
     logger.info("Starting MySQL database migration...")
@@ -275,79 +292,57 @@ def create_tables():
             db_manager.execute_update(table_sql)
             logger.info(f"✅ Table '{table_name}' created successfully")
 
-        # Ensure invoices schema supports invoice-as-business-record (no mandatory file_uploads parent)
-        try:
-            db_manager.execute_update("ALTER TABLE invoices MODIFY COLUMN file_upload_id INT NULL")
-        except Exception:
-            pass
+        # Ensure invoices schema supports invoice-as-business-record
+        db_manager.execute_update("ALTER TABLE invoices MODIFY COLUMN file_upload_id INT NULL")
 
-        for stmt in [
-            "ALTER TABLE invoices ADD COLUMN status ENUM('pending','processing','completed','failed') DEFAULT 'pending'",
-            "ALTER TABLE invoices ADD COLUMN invoice_file_path VARCHAR(1000)",
-            "ALTER TABLE invoices ADD COLUMN invoice_file_hash VARCHAR(64)",
-        ]:
-            try:
-                db_manager.execute_update(stmt)
-            except Exception:
-                pass
+        add_column_if_not_exists("invoices", "status", "ENUM('pending','processing','completed','failed') DEFAULT 'pending'")
+        add_column_if_not_exists("invoices", "invoice_file_path", "VARCHAR(1000)")
+        add_column_if_not_exists("invoices", "invoice_file_hash", "VARCHAR(64)")
+        add_column_if_not_exists("invoices", "reference", "VARCHAR(255) NULL")
+        add_column_if_not_exists("invoices", "vat_number", "VARCHAR(100) NULL")
+        add_column_if_not_exists("invoices", "total_vat_rate", "DECIMAL(6,3) NULL")
+        add_column_if_not_exists("invoices", "total_zero_rated", "DECIMAL(15,2) NULL")
+        add_column_if_not_exists("invoices", "total_gbp", "DECIMAL(15,2) NULL")
 
-        # Ensure invoices has required red-marked fields
-        invoice_adds = [
-            "ALTER TABLE invoices ADD COLUMN reference VARCHAR(255) NULL",
-            "ALTER TABLE invoices ADD COLUMN vat_number VARCHAR(100) NULL",
-            "ALTER TABLE invoices ADD COLUMN total_vat_rate DECIMAL(6,3) NULL",
-            "ALTER TABLE invoices ADD COLUMN total_zero_rated DECIMAL(15,2) NULL",
-            "ALTER TABLE invoices ADD COLUMN total_gbp DECIMAL(15,2) NULL",
+        # Ensure reconciliations has required bank-statement fields
+        reconciliation_cols = [
+            ("date_started_utc", "TIMESTAMP NULL DEFAULT NULL"),
+            ("date_ended_utc", "TIMESTAMP NULL DEFAULT NULL"),
+            ("date_utc", "DATETIME NULL DEFAULT NULL"),
+            ("external_id", "VARCHAR(255) NULL"),
+            ("type", "VARCHAR(100) NULL"),
+            ("bank_description", "TEXT NULL"),
+            ("reference", "VARCHAR(255) NULL"),
+            ("reference_2", "VARCHAR(255) NULL"),
+            ("reference_name", "VARCHAR(255) NULL"),
+            ("payer", "VARCHAR(255) NULL"),
+            ("card_number", "VARCHAR(64) NULL"),
+            ("orig_currency", "VARCHAR(10) NULL"),
+            ("orig_amount", "DECIMAL(15,2) NULL"),
+            ("amount", "DECIMAL(15,2) NULL"),
+            ("fee", "DECIMAL(15,2) NULL"),
+            ("balance", "DECIMAL(15,2) NULL"),
+            ("paid_in", "DECIMAL(15,2) NULL"),
+            ("paid_out", "DECIMAL(15,2) NULL"),
+            ("account", "VARCHAR(255) NULL"),
+            ("beneficiary", "VARCHAR(255) NULL"),
+            ("bic", "VARCHAR(32) NULL"),
+            ("raw_json", "LONGTEXT NULL"),
+            ("source_file_name", "VARCHAR(500) NULL"),
+            ("source_file_hash", "VARCHAR(128) NULL"),
+            ("bank_account_number", "VARCHAR(64) NULL"),
+            ("bank_sort_code", "VARCHAR(32) NULL"),
+            ("statement_period_start", "DATE NULL"),
+            ("statement_period_end", "DATE NULL"),
+            ("opening_balance", "DECIMAL(15,2) NULL"),
+            ("closing_balance", "DECIMAL(15,2) NULL"),
+            ("statement_total_paid_in", "DECIMAL(15,2) NULL"),
+            ("statement_total_paid_out", "DECIMAL(15,2) NULL"),
+            ("business_owner", "VARCHAR(255) NULL"),
+            ("business_address", "TEXT NULL"),
         ]
-        for stmt in invoice_adds:
-            try:
-                db_manager.execute_update(stmt)
-            except Exception:
-                pass
-
-        # Best-effort schema evolution: ensure reconciliations has required bank-statement fields.
-        # (We ignore failures for compatibility across existing DB states.)
-        reconciliation_adds = [
-            "ALTER TABLE reconciliations ADD COLUMN date_started_utc TIMESTAMP NULL DEFAULT NULL",
-            "ALTER TABLE reconciliations ADD COLUMN date_ended_utc TIMESTAMP NULL DEFAULT NULL",
-            "ALTER TABLE reconciliations ADD COLUMN date_utc DATETIME NULL DEFAULT NULL",
-            "ALTER TABLE reconciliations ADD COLUMN external_id VARCHAR(255) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN type VARCHAR(100) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN bank_description TEXT NULL",
-            "ALTER TABLE reconciliations ADD COLUMN reference VARCHAR(255) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN reference_2 VARCHAR(255) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN reference_name VARCHAR(255) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN payer VARCHAR(255) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN card_number VARCHAR(64) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN orig_currency VARCHAR(10) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN orig_amount DECIMAL(15,2) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN amount DECIMAL(15,2) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN fee DECIMAL(15,2) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN balance DECIMAL(15,2) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN paid_in DECIMAL(15,2) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN paid_out DECIMAL(15,2) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN account VARCHAR(255) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN beneficiary VARCHAR(255) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN bic VARCHAR(32) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN raw_json LONGTEXT NULL",
-            "ALTER TABLE reconciliations ADD COLUMN source_file_name VARCHAR(500) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN source_file_hash VARCHAR(128) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN bank_account_number VARCHAR(64) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN bank_sort_code VARCHAR(32) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN statement_period_start DATE NULL",
-            "ALTER TABLE reconciliations ADD COLUMN statement_period_end DATE NULL",
-            "ALTER TABLE reconciliations ADD COLUMN opening_balance DECIMAL(15,2) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN closing_balance DECIMAL(15,2) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN statement_total_paid_in DECIMAL(15,2) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN statement_total_paid_out DECIMAL(15,2) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN business_owner VARCHAR(255) NULL",
-            "ALTER TABLE reconciliations ADD COLUMN business_address TEXT NULL",
-        ]
-        for stmt in reconciliation_adds:
-            try:
-                db_manager.execute_update(stmt)
-            except Exception:
-                pass
+        for col, defn in reconciliation_cols:
+            add_column_if_not_exists("reconciliations", col, defn)
 
         # Best-effort cleanup: drop legacy bank_statements tables if present.
         for stmt in [

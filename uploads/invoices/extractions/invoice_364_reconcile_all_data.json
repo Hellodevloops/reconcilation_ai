@@ -1,47 +1,105 @@
 {
   "parent_invoice_id": 364,
   "parent_info": {
-    "file_name": "Invoice INV-0111.pdf#page=1",
-    "file_hash": "reconcile_invoice_1767935413_7580",
-    "upload_timestamp": "2026-01-09 10:40:13",
+    "file_name": "POLEBROOK.pdf#page=1",
+    "file_hash": "reconcile_invoice_1768296954_9173",
+    "upload_timestamp": "2026-01-13 15:05:54",
     "source": "reconciliation_endpoint"
   },
   "all_extracted_records": [
     {
       "record_id": 1,
-      "invoice_number": "0111",
+      "invoice_number": "FROM",
       "invoice_date": null,
-      "vendor_name": null,
-      "total_amount": 20.0,
-      "description": "TOTAL VAT 20% 2.20",
-      "currency": "£",
-      "file_name": "Invoice INV-0111.pdf#page=1",
-      "extracted_fields": {
-        "invoice_date": null,
-        "invoice_number": "INV-0111",
-        "reference": "Cookies\nVATNumber\n400992020FLOOZIELTD\nTheRedHouse",
-        "vat_number": "400992020FLOOZIELTD",
-        "totals": {
-          "subtotal": 3899.0
-        },
-        "currency": "£",
-        "line_items": [
-          {
-            "description": "Pistachiodrink(litres)",
-            "quantity": 1.0,
-            "unit_price": 11.0,
-            "vat": "20%",
-            "amount_gbp": 11.0
-          }
-        ],
-        "source_text_contains_tax_invoice": false
-      }
+      "vendor_name": "as",
+      "total_amount": 1.0,
+      "description": "1From: Shirley, Anica <Anica.Shirley@carlsbergmarstons.co.uk>",
+      "currency": null,
+      "file_name": "POLEBROOK.pdf#page=1",
+      "extracted_fields": null
+    },
+    {
+      "record_id": 2,
+      "invoice_number": "FROM",
+      "invoice_date": null,
+      "vendor_name": "as",
+      "total_amount": 19.0,
+      "description": "Sent: 13 March 2024 21:19",
+      "currency": null,
+      "file_name": "POLEBROOK.pdf#page=1",
+      "extracted_fields": null
+    },
+    {
+      "record_id": 3,
+      "invoice_number": "FROM",
+      "invoice_date": null,
+      "vendor_name": "as",
+      "total_amount": 2125168.0,
+      "description": "Subject: Polebrook Arms Northants Ltd -  2125168",
+      "currency": null,
+      "file_name": "POLEBROOK.pdf#page=1",
+      "extracted_fields": null
+    },
+    {
+      "record_id": 4,
+      "invoice_number": "INVOICE",
+      "invoice_date": null,
+      "vendor_name": "as",
+      "total_amount": 8.03,
+      "description": "Can you conﬁrm that payment of the below overdue invoice from the 08.03.2024 has been paid please?",
+      "currency": null,
+      "file_name": "POLEBROOK.pdf#page=1",
+      "extracted_fields": null
+    },
+    {
+      "record_id": 5,
+      "invoice_number": "FROM",
+      "invoice_date": null,
+      "vendor_name": "as",
+      "total_amount": 711922.0,
+      "description": "Telephone: 08448 711922",
+      "currency": null,
+      "file_name": "POLEBROOK.pdf#page=1",
+      "extracted_fields": null
+    },
+    {
+      "record_id": 6,
+      "invoice_number": "FROM",
+      "invoice_date": null,
+      "vendor_name": "as",
+      "total_amount": 1.0,
+      "description": "Brookfield Court, Selby Rd, Garforth, Leeds LS25 1NB",
+      "currency": null,
+      "file_name": "POLEBROOK.pdf#page=1",
+      "extracted_fields": null
+    },
+    {
+      "record_id": 7,
+      "invoice_number": "FROM",
+      "invoice_date": null,
+      "vendor_name": "as",
+      "total_amount": 8626420.0,
+      "description": "Marston's Brewing Company Limited (reg. no. 00078439), CMBC Supply Limited (reg. no. 08626420) and Carlsberg",
+      "currency": null,
+      "file_name": "POLEBROOK.pdf#page=1",
+      "extracted_fields": null
+    },
+    {
+      "record_id": 8,
+      "invoice_number": "FROM",
+      "invoice_date": null,
+      "vendor_name": "as",
+      "total_amount": 4.0,
+      "description": "Marston’s Limited (reg. no. 12577732) each of Marston's House, Brewery Road, Wolverhampton, England, WV1 4JT",
+      "currency": null,
+      "file_name": "POLEBROOK.pdf#page=1",
+      "extracted_fields": null
     }
   ],
   "extraction_metadata": {
-    "total_records": 1,
+    "total_records": 8,
     "extraction_confidence": 0.85,
-    "processed_at": "2026-01-09 10:40:13",
+    "processed_at": "2026-01-13 15:05:54",
     "source": "reconciliation_endpoint"
   }
 }

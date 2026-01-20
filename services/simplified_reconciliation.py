@@ -414,6 +414,11 @@ class SimplifiedMatchingEngine:
             if invoice.vendor_name.lower() in transaction.description.lower():
                 return True
         
+        # Bank details match
+        if hasattr(invoice, 'account_number') and invoice.account_number and hasattr(transaction, 'account_number') and transaction.account_number:
+            if invoice.account_number == transaction.account_number:
+                return True
+        
         return False
     
     def _calculate_match_score(self, invoice, transaction) -> float:
@@ -448,7 +453,18 @@ class SimplifiedMatchingEngine:
             elif any(word in desc_lower for word in vendor_lower.split() if len(word) > 2):
                 score += 0.15
         
-        return score
+        # Bank detail similarity (30% weight)
+        if hasattr(invoice, 'account_number') and invoice.account_number and hasattr(transaction, 'account_number') and transaction.account_number:
+            if invoice.account_number == transaction.account_number:
+                score += 0.3
+            elif invoice.account_number[-4:] == transaction.account_number[-4:]:
+                score += 0.1
+                
+        if hasattr(invoice, 'sort_code') and invoice.sort_code and transaction.description:
+            if invoice.sort_code in transaction.description:
+                score += 0.15
+        
+        return min(1.0, score)
 
 # Global service instance
 simplified_reconciliation_service = SimplifiedReconciliationService()

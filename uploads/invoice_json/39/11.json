@@ -37,6 +37,7 @@
   ],
   "extracted_fields": {
     "invoice_date": "01/03/2024",
+    "due_date": null,
     "invoice_number": "UA01INV202400343",
     "reference": null,
     "vat_number": null,
@@ -59,6 +60,7 @@
       "file_name": "001 EXP QE APR24.pdf#page=19",
       "extracted_fields": {
         "invoice_date": "01/03/2024",
+        "due_date": null,
         "invoice_number": "UA01INV202400343",
         "reference": null,
         "vat_number": null,

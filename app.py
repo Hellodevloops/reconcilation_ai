@@ -732,37 +732,141 @@ class Transaction:
     document_subtype: str | None = None
     file_name: str | None = None
     balance: float | None = None  # Account balance (for bank transactions)
+    account_number: str | None = None
+    sort_code: str | None = None
+    iban: str | None = None
+    bic: str | None = None
+    extracted_fields: Dict[str, Any] | None = None
 
 
-def _extract_bank_owner_name(lines: List[str]) -> str | None:
-    """Best-effort extraction of owner/company name from bank statement header."""
+def _extract_bank_metadata(lines: List[str]) -> Dict[str, Any]:
+    """Extends extraction to include bank name, account number, sort code, and owner."""
+    metadata = {
+        "owner_name": None,
+        "bank_name": "Bank Statement", # Default
+        "account_number": None,
+        "sort_code": None,
+        "iban": None,
+        "bic": None,
+        "currency": None,
+        "address": None,
+        "statement_period": None
+    }
+    
     if not lines:
-        return None
+        return metadata
 
-    header = "\n".join(lines[:60])
+    header_lines = lines[:60]
+    header = "\n".join(header_lines)
     header_norm = re.sub(r"\s+", " ", header)
 
-    patterns = [
+    # Detect Bank Name
+    if re.search(r"revolut", header_norm, re.IGNORECASE):
+        metadata["bank_name"] = "Revolut Business"
+    elif re.search(r"tide", header_norm, re.IGNORECASE):
+        metadata["bank_name"] = "Tide Business"
+    elif re.search(r"barclays", header_norm, re.IGNORECASE):
+        metadata["bank_name"] = "Barclays"
+    elif re.search(r"hsbc", header_norm, re.IGNORECASE):
+        metadata["bank_name"] = "HSBC"
+    elif re.search(r"natwest", header_norm, re.IGNORECASE):
+        metadata["bank_name"] = "NatWest"
+    elif re.search(r"lloyds", header_norm, re.IGNORECASE):
+        metadata["bank_name"] = "Lloyds Bank"
+    elif re.search(r"santander", header_norm, re.IGNORECASE):
+        metadata["bank_name"] = "Santander"
+    elif re.search(r"starling", header_norm, re.IGNORECASE):
+        metadata["bank_name"] = "Starling Bank"
+    elif re.search(r"monzo", header_norm, re.IGNORECASE):
+        metadata["bank_name"] = "Monzo Business"
+
+    # Extract Owner Name
+    owner_patterns = [
         r"Business\s+Owner\s*[:\-]?\s*([A-Za-z0-9 &'\-\.]+)",
         r"Account\s+Name\s*[:\-]?\s*([A-Za-z0-9 &'\-\.]+)",
         r"Company\s*[:\-]?\s*([A-Za-z0-9 &'\-\.]+)",
     ]
-    for pat in patterns:
+    for pat in owner_patterns:
         m = re.search(pat, header_norm, re.IGNORECASE)
         if m:
-            val = m.group(1).strip()
-            return val[:255] if val else None
+            metadata["owner_name"] = m.group(1).strip()[:255]
+            break
 
-    # Fallback heuristic: first long ALL-CAPS-ish line (often company name)
-    for raw in lines[:30]:
-        s = re.sub(r"\s+", " ", (raw or "")).strip()
-        if len(s) < 6:
-            continue
-        if re.search(r"\d", s):
-            continue
-        if s.isupper() and len(s) <= 60:
-            return s[:255]
-    return None
+    # If still no owner, look for the Revolut address pattern
+    if not metadata["owner_name"] and metadata["bank_name"] == "Revolut Business":
+        for i, line in enumerate(header_lines):
+            if "revolut business" in line.lower():
+                # Usually name is a few lines below
+                for j in range(i+1, min(i+10, len(header_lines))):
+                    s = header_lines[j].strip()
+                    if s and len(s) > 3 and not any(k in s.lower() for k in ["statement", "account", "revolut"]):
+                        metadata["owner_name"] = s
+                        # Look for address in next few lines
+                        addr = []
+                        for k in range(j+1, min(j+6, len(header_lines))):
+                            ls = header_lines[k].strip()
+                            if ls and not any(kw in ls.lower() for kw in ["account name", "currency", "type", "account number", "sort code"]):
+                                addr.append(ls)
+                            else:
+                                break
+                        metadata["address"] = ", ".join(addr)
+                        break
+                break
+
+    # Extract Account details
+    acc_patterns = [
+        (r"Account\s+number\s*[:\-]?\s*(\d{8,})", "account_number"),
+        (r"Sort\s+code\s*[:\-]?\s*(\d{2}[-\s]?\d{2}[-\s]?\d{2})", "sort_code"),
+        (r"IBAN\s*[:\-]?\s*([A-Z]{2}\d{2}[A-Z0-9\s]{10,25})", "iban"),
+        (r"BIC\s*[:\-]?\s*([A-Z0-9]{8,11})", "bic"),
+    ]
+    for pat, key in acc_patterns:
+        m = re.search(pat, header_norm, re.IGNORECASE)
+        if m:
+            metadata[key] = m.group(1).strip()
+            if key == "sort_code":
+                metadata[key] = metadata[key].replace("-", "").replace(" ", "")
+
+    return metadata
+
+
+def _extract_bank_details(text: str) -> Dict[str, str | None]:
+    """Extract banking details (Account No, Sort Code) from invoice text."""
+    details = {
+        "account_number": None,
+        "sort_code": None,
+        "iban": None,
+        "bic": None
+    }
+    
+    # Sort Code patterns
+    sc_match = re.search(r"sort\s*code\s*[:\-]?\s*(\d{2}[-\s]?\d{2}[-\s]?\d{2})", text, re.IGNORECASE)
+    if sc_match:
+        details["sort_code"] = sc_match.group(1).replace("-", "").replace(" ", "")
+        
+    # Account Number patterns
+    an_match = re.search(r"account\s*(?:number|no|#)\s*[:\-]?\s*(\d{8,})", text, re.IGNORECASE)
+    if an_match:
+        details["account_number"] = an_match.group(1).strip()
+    elif not details["account_number"]:
+        # Fallback: look for 8-digit number near "account"
+        an_match = re.search(r"account\s+.*?\b(\d{8})\b", text, re.IGNORECASE | re.DOTALL)
+        if an_match:
+            details["account_number"] = an_match.group(1)
+            
+    # IBAN
+    iban_match = re.search(r"\b([A-Z]{2}\d{2}[A-Z0-9\s]{10,25})\b", text)
+    if iban_match:
+        details["iban"] = iban_match.group(1).replace(" ", "")
+        
+    # BIC/SWIFT
+    bic_match = re.search(r"\b([A-Z0-9]{8,11})\b", text)
+    if bic_match:
+        # Check if it's near BIC/SWIFT keyword
+        if re.search(r"(?:bic|swift)", text, re.IGNORECASE):
+            details["bic"] = bic_match.group(1)
+            
+    return details
 
 
 @dataclass
@@ -1314,6 +1418,98 @@ def api_get_invoice_upload(upload_id: int):
         )
 
 
+
+def _enrich_items_with_ids(items: List[Dict[str, Any]], item_type: str) -> List[Dict[str, Any]]:
+    """
+    Enrich a list of bank or invoice items with their corresponding database IDs.
+    
+    Args:
+        items: List of dictionaries (unmatched items).
+        item_type: "bank" or "invoice".
+        
+    Returns:
+        List of dictionaries with 'id' or 'transaction_id'/'invoice_id' populated if found.
+    """
+    if not items:
+        return []
+        
+    enriched_items = []
+    for item in items:
+        enriched_item = item.copy()
+        
+        # If ID is already present, keep it (and normalize keys)
+        if item.get("id"):
+            if item_type == "bank" and not item.get("transaction_id"):
+                 enriched_item["transaction_id"] = item.get("id")
+            elif item_type == "invoice" and not item.get("invoice_id"):
+                 enriched_item["invoice_id"] = item.get("id")
+            enriched_items.append(enriched_item)
+            continue
+            
+        try:
+            resolved_id = None
+            
+            if item_type == "bank":
+                # Lookup in bank_transactions
+                date_val = item.get("date")
+                amount_val = item.get("amount")
+                desc_val = item.get("description")
+                
+                if date_val and amount_val is not None:
+                    # Match by Date AND Amount (Absolute)
+                    # We add description check if it's distinctive enough, but date+amount is usually good for strictness
+                    query = """
+                        SELECT id FROM bank_transactions 
+                        WHERE transaction_date = %s 
+                          AND ABS(amount) = %s 
+                    """
+                    params = [date_val, abs(float(amount_val))]
+                    
+                    if desc_val:
+                         query += " AND description = %s"
+                         params.append(desc_val)
+                         
+                    query += " ORDER BY id DESC LIMIT 1"
+                    
+                    row = db_manager.execute_query(query, tuple(params))
+                    if row and row[0].get("id"):
+                         resolved_id = int(row[0]["id"])
+                         enriched_item["transaction_id"] = resolved_id
+                         enriched_item["id"] = resolved_id
+                         
+            elif item_type == "invoice":
+                # Lookup in invoices
+                amount_val = item.get("amount") or item.get("total_amount")
+                inv_no = item.get("invoice_number")
+                
+                if inv_no:
+                     # Primary match: Invoice Number
+                     query = "SELECT id FROM invoices WHERE invoice_number = %s ORDER BY id DESC LIMIT 1"
+                     row = db_manager.execute_query(query, (str(inv_no),))
+                     if row and row[0].get("id"):
+                         resolved_id = int(row[0]["id"])
+                
+                if not resolved_id and amount_val is not None:
+                     # Fallback match: Amount (risky if duplicates, but better than nothing for manual match candidates)
+                     query = "SELECT id FROM invoices WHERE ABS(total_amount) = %s ORDER BY id DESC LIMIT 1"
+                     row = db_manager.execute_query(query, (abs(float(amount_val)),))
+                     if row and row[0].get("id"):
+                         resolved_id = int(row[0]["id"])
+                         
+                if resolved_id:
+                    enriched_item["invoice_id"] = resolved_id
+                    enriched_item["id"] = resolved_id
+        
+        except Exception as e:
+            # Log but don't crash the reconciliation flow
+            # print(f"Error enriching {item_type} item: {e}")
+            pass
+            
+        enriched_items.append(enriched_item)
+        
+    return enriched_items
+
+
 def store_reconciliation_summary(
     invoice_file_names: List[str],
     bank_file_name: str,
@@ -1408,15 +1604,18 @@ def store_reconciliation_summary(
         reference_name = None
         reference = None
 
-    # Insert reconciliation summary
+    # Insert reconciliation summary with bank metadata
     insert_query = """
         INSERT INTO reconciliations (
             name, description, reconciliation_date, status,
             total_invoices, total_transactions, total_matches,
-            total_amount_matched, reference, reference_name, created_by
+            total_amount_matched, reference, reference_name, created_by,
+            business_owner, business_address, account, bank_account_number, bank_sort_code, bic
         )
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     """
+    
+    bank_meta = getattr(result, "bank_metadata", {})
     
     reconciliation_id = db_manager.execute_insert(
         insert_query,
@@ -1431,7 +1630,13 @@ def store_reconciliation_summary(
             sum(match.get('invoice', {}).get('amount', 0) for match in result.matches),
             reference,
             reference_name,
-            'system'
+            'system',
+            bank_meta.get("owner_name"),
+            bank_meta.get("address"),
+            bank_meta.get("bank_name"),
+            bank_meta.get("account_number"),
+            bank_meta.get("sort_code"),
+            bank_meta.get("bic")
         )
     )
 
@@ -1450,8 +1655,8 @@ def store_reconciliation_summary(
             },
             "results": {
                 "matches": result.matches,
-                "only_in_invoices": result.only_in_invoices,
-                "only_in_bank": result.only_in_bank,
+                "only_in_invoices": self._enrich_items_with_ids(result.only_in_invoices, "invoice") if db_manager.db_type == "mysql" else result.only_in_invoices,
+                "only_in_bank": self._enrich_items_with_ids(result.only_in_bank, "bank") if db_manager.db_type == "mysql" else result.only_in_bank,
                 "summary": {
                     "total_matches": len(result.matches),
                     "total_unmatched_invoices": len(result.only_in_invoices),
@@ -2815,8 +3020,10 @@ def detect_primary_currency_with_mixed_support(
 
 
 def parse_transactions_from_lines(
-    lines: List[str], source: str
+    lines: List[str], source: str, bank_meta: Dict[str, Any] = None
 ) -> List[Transaction]:
+    if bank_meta is None:
+        bank_meta = {}
     """
     Parse transactions from OCR/PDF text lines with enhanced extraction.
     
@@ -3049,6 +3256,12 @@ def parse_transactions_from_lines(
                 r"\binvoice\s*date\b\s*[:\-]?\s*(\d{1,2}\s+[A-Za-z]{3}\s+\d{4})\b",
                 r"\binvoice\s*date\b\s*[:\-]?\s*(\d{1,2}[/-]\d{1,2}[/-]\d{2,4})\b",
             ]),
+            "due_date": _find_first([
+                r"\bdue\s*date\b\s*[:\-]?\s*(\d{1,2}\s+[A-Za-z]{3}\s+\d{4})\b",
+                r"\bdue\s*date\b\s*[:\-]?\s*(\d{1,2}[/-]\d{1,2}[/-]\d{2,4})\b",
+                r"\bpayment\s*due\b\s*[:\-]?\s*(\d{1,2}\s+[A-Za-z]{3}\s+\d{4})\b",
+                r"\bpayment\s*due\b\s*[:\-]?\s*(\d{1,2}[/-]\d{1,2}[/-]\d{2,4})\b",
+            ]),
             "invoice_number": _find_first([
                 r"\binvoice\s*number\b\s*[:\-]?\s*([A-Za-z0-9][A-Za-z0-9\-/]{2,})\b",
                 r"\binvoice\s*(?:no\.?|#)\b\s*[:\-]?\s*([A-Za-z0-9][A-Za-z0-9\-/]{2,})\b",
@@ -3131,10 +3344,90 @@ def parse_transactions_from_lines(
                 totals["total_vat"] = amt
             elif "total zero rated" in lower:
                 totals["total_zero_rated"] = amt
-            elif "total gbp" in lower or "grand total" in lower or "amount due" in lower or "invoice total" in lower:
+            elif (
+                "total gbp" in lower
+                or "grand total" in lower
+                or "amount due" in lower
+                or "invoice total" in lower
+                or "total payable" in lower
+                or "balance due" in lower
+                or ("total" in lower and "subtotal" not in lower and "vat" not in lower)
+            ):
                 totals["total"] = amt
 
         extracted["totals"] = totals
+
+        if totals.get("total") is None:
+            total_label_re = re.compile(
+                r"\b(?:total\s*gbp|grand\s*total|invoice\s*total|total\s*payable|balance\s*due|amount\s*due|total\s*due)\b",
+                re.IGNORECASE,
+            )
+            for i, raw in enumerate(invoice_lines):
+                line = (raw or "").strip()
+                if not line:
+                    continue
+                low = line.lower()
+                if "subtotal" in low or "total vat" in low or "vat" in low:
+                    continue
+                if not total_label_re.search(line) and not ("total" in low and "subtotal" not in low and "vat" not in low):
+                    continue
+                if re.search(r"\d", line):
+                    continue
+                for j in range(i + 1, min(i + 5, len(invoice_lines))):
+                    nxt = (invoice_lines[j] or "").strip()
+                    if not nxt:
+                        continue
+                    nums = re.findall(r"[-+]?\d[\d,]*\.?\d*", nxt)
+                    if not nums:
+                        continue
+                    got = _parse_money(nums[-1])
+                    if got is not None:
+                        totals["total"] = got
+                        break
+                if totals.get("total") is not None:
+                    break
+
+        amount_due = None
+        for line in invoice_lines:
+            if not line:
+                continue
+            lower = line.lower()
+            if "amount due" not in lower and "total due" not in lower:
+                continue
+            nums = re.findall(r"[-+]?\d[\d,]*\.?\d*", line)
+            if not nums:
+                continue
+            got = _parse_money(nums[-1])
+            if got is not None:
+                amount_due = got
+                break
+
+        if amount_due is None:
+            due_label_re = re.compile(r"\b(?:amount\s*due|total\s*due|balance\s*due)\b", re.IGNORECASE)
+            for i, raw in enumerate(invoice_lines):
+                line = (raw or "").strip()
+                if not line:
+                    continue
+                if not due_label_re.search(line):
+                    continue
+                if re.search(r"\d", line):
+                    continue
+                for j in range(i + 1, min(i + 5, len(invoice_lines))):
+                    nxt = (invoice_lines[j] or "").strip()
+                    if not nxt:
+                        continue
+                    nums = re.findall(r"[-+]?\d[\d,]*\.?\d*", nxt)
+                    if not nums:
+                        continue
+                    got = _parse_money(nums[-1])
+                    if got is not None:
+                        amount_due = got
+                        break
+                if amount_due is not None:
+                    break
+
+        if amount_due is not None:
+            extracted["amount_due"] = amount_due
         if currency:
             extracted["currency"] = currency
 
@@ -3168,6 +3461,8 @@ def parse_transactions_from_lines(
         extracted["line_items"] = items
 
         # Normalize some strings
+        if extracted.get("due_date"):
+            extracted["due_date"] = str(extracted["due_date"]).strip()
         if extracted.get("reference"):
             extracted["reference"] = str(extracted["reference"]).strip()
         if extracted.get("invoice_number"):
@@ -3239,90 +3534,81 @@ def parse_transactions_from_lines(
                 invoice_date = date_match.group(1)
                 break
 
-        best_total = None
-        best_total_weight = -1
-        best_total_line = None
-        for line in lines:
-            lower = line.lower()
-            weight = 0
-            # Avoid VAT-only totals or informational totals winning over payable total
-            if "total vat" in lower or ("vat" in lower and re.search(r"\btotal\b", lower)):
-                weight = 1
-            elif "total zero rated" in lower or "zero rated" in lower and re.search(r"\btotal\b", lower):
-                weight = 1
-            elif "subtotal" in lower:
-                weight = 1
-            if "invoice total" in lower:
-                weight = 4
-            elif "amount due" in lower or "total due" in lower:
-                weight = 4
-            elif "grand total" in lower:
-                weight = 4
-            elif "total gbp" in lower or "total gdp" in lower:
-                weight = 4
-            elif re.search(r"\btotal\b", lower):
-                weight = 2
-            if weight == 0:
-                continue
-
-            amounts: List[float] = []
-            if detected_currency and detected_currency in line:
-                cur_re = re.compile(rf"{re.escape(detected_currency)}\s*([0-9,]+\.?[0-9]*)")
-                for a in cur_re.findall(line):
-                    try:
-                        amounts.append(float(a.replace(",", "")))
-                    except ValueError:
-                        continue
-            if not amounts:
-                for ns in re.findall(r"[-+]?\d[\d,]*\.?\d*", line):
-                    try:
-                        val = float(ns.replace(",", ""))
-                    except ValueError:
-                        continue
-                    if 1900 <= val <= 2100 and ns.isdigit():
-                        continue
-                    if val >= MIN_TRANSACTION_AMOUNT:
-                        amounts.append(val)
-
-            if not amounts:
-                continue
-            candidate_total = max(amounts)
-            if weight > best_total_weight or (weight == best_total_weight and (best_total is None or candidate_total > best_total)):
-                best_total_weight = weight
-                best_total = candidate_total
-                best_total_line = line.strip()
-
-        if best_total is not None:
-            ref_id = _extract_reference_id(all_text)
-            structured_fields = _extract_invoice_structured_fields(lines, detected_currency)
-            # Prefer explicit header fields if available
+        # STRICT invoice handling:
+        # 1 invoice section -> 1 canonical transaction amount.
+        # Prefer Amount Due, otherwise TOTAL GBP/Grand Total.
+        structured_fields = _extract_invoice_structured_fields(lines, detected_currency)
+        try:
             header_invoice_no = structured_fields.get("invoice_number")
-            header_invoice_date = structured_fields.get("invoice_date")
-            header_ref = structured_fields.get("reference")
             if header_invoice_no and not invoice_number:
                 invoice_number = str(header_invoice_no).strip().upper()
+        except Exception:
+            pass
+        try:
+            header_invoice_date = structured_fields.get("invoice_date")
             if header_invoice_date and not invoice_date:
                 invoice_date = str(header_invoice_date).strip()
-            if header_ref and not ref_id:
-                ref_id = str(header_ref).strip()[:255]
+        except Exception:
+            pass
 
-            tx = Transaction(
-                    source=source,
-                    description=best_total_line or "Total",
-                    amount=float(best_total),
-                    date=invoice_date,
-                    vendor_name=vendor_name,
-                    invoice_number=invoice_number,
-                    currency=detected_currency,
-                    reference_id=ref_id,
-                    direction=None,
-                    document_subtype=document_subtype,
-                )
+        ref_id = _extract_reference_id(all_text)
+        header_ref = structured_fields.get("reference")
+        if header_ref and not ref_id:
+            ref_id = str(header_ref).strip()[:255]
+
+        canonical_amount = None
+        try:
+            canonical_amount = structured_fields.get("amount_due")
+        except Exception:
+            canonical_amount = None
+        if canonical_amount is None:
             try:
-                setattr(tx, "extracted_fields", structured_fields)
+                totals = structured_fields.get("totals") or {}
+                canonical_amount = totals.get("total")
             except Exception:
-                pass
-            return [tx]
+                canonical_amount = None
+
+        if canonical_amount is None:
+            # If we cannot find Amount Due / TOTAL, do NOT fall back to line-by-line parsing.
+            # That fallback produces garbage unmatched rows (VAT/address/etc.).
+            return []
+
+        if invoice_number:
+            desc = f"Invoice {invoice_number}"
+        else:
+            desc = "Invoice"
+        if invoice_date:
+            desc = f"{desc} | Invoice Date: {invoice_date}"
+        if structured_fields.get("due_date"):
+            desc = f"{desc} | Due Date: {structured_fields.get('due_date')}"
+        if vendor_name:
+            desc = f"{desc} | Vendor: {vendor_name}"
+
+        tx = Transaction(
+            source=source,
+            description=desc,
+            amount=float(canonical_amount),
+            date=invoice_date,
+            vendor_name=vendor_name,
+            invoice_number=invoice_number,
+            currency=detected_currency,
+            reference_id=ref_id,
+            direction=None,
+            document_subtype=document_subtype,
+        )
+
+        # Extract bank details from invoice if present
+        bank_details = _extract_bank_details("\n".join(lines))
+        tx.account_number = bank_details.get("account_number")
+        tx.sort_code = bank_details.get("sort_code")
+        tx.iban = bank_details.get("iban")
+        tx.bic = bank_details.get("bic")
+
+        try:
+            setattr(tx, "extracted_fields", structured_fields)
+        except Exception:
+            pass
+        return [tx]
 
     # Date pattern like "29 Feb 2024" or "29 Feb 2025"
     date_prefix_re = re.compile(r"^\s*(\d{1,2}\s+[A-Za-z]{3}\s+\d{4})\b")
@@ -3360,7 +3646,15 @@ def parse_transactions_from_lines(
         extracted_balance = None
         
         # For bank statements, try to extract balance from the amounts
-        if source == "bank" and detected_currency and detected_currency in raw_line and date_prefix_re.match(raw_line):
+        date_match = (
+            date_prefix_re.match(raw_line) or 
+            date_dd_mm_yyyy_pattern.search(raw_line) or 
+            date_pattern_start.match(raw_line)
+        )
+        
+        has_money = (detected_currency and detected_currency in raw_line) or re.search(r'\d+\.\d{2}', raw_line)
+
+        if source == "bank" and has_money and date_match:
             cur_re = re.compile(rf"{re.escape(detected_currency)}\s*([0-9,]+\.?[0-9]*)")
             money_vals: List[float] = []
             for a in cur_re.findall(raw_line):
@@ -3614,6 +3908,10 @@ def parse_transactions_from_lines(
                 direction=direction,
                 document_subtype=document_subtype,
                 balance=extracted_balance,
+                account_number=bank_meta.get("account_number") if source == "bank" else None,
+                sort_code=bank_meta.get("sort_code") if source == "bank" else None,
+                iban=bank_meta.get("iban") if source == "bank" else None,
+                bic=bank_meta.get("bic") if source == "bank" else None
             )
         )
 
@@ -4263,9 +4561,19 @@ def _compute_match_features(inv: Transaction, bank: Transaction, primary_currenc
     
     # Vendor name matching
     vendor_sim = _vendor_name_similarity(inv.vendor_name, bank.vendor_name)
-    
+
+    bank_invoice_number = bank.invoice_number
+    if (not bank_invoice_number) and bank.description:
+        m = re.search(
+            r"\b(?:inv(?:oice)?\s*(?:no\.?|number|#)?|inv)\s*[:\-#]?\s*([A-Za-z0-9][A-Za-z0-9\-/]{2,})\b",
+            bank.description,
+            re.IGNORECASE,
+        )
+        if m:
+            bank_invoice_number = m.group(1).strip()
+
     # Invoice number matching
-    inv_num_match = _invoice_number_match(inv.invoice_number, bank.invoice_number)
+    inv_num_match = _invoice_number_match(inv.invoice_number, bank_invoice_number)
 
     ref_match = 0.0
     if inv.reference_id and bank.reference_id:
@@ -4275,6 +4583,16 @@ def _compute_match_features(inv: Transaction, bank: Transaction, primary_currenc
     amount_match_exact = 1.0 if amount_diff < 0.01 else 0.0
     amount_match_close = 1.0 if amount_diff < abs(inv_amount) * 0.01 else 0.0  # Within 1%
     amount_ratio = min(abs(inv_amount), abs(bank_amount)) / max(abs(inv_amount), abs(bank_amount)) if max(abs(inv_amount), abs(bank_amount)) > 0 else 0.0
+
+    # Bank account matching
+    account_match = 0.0
+    if inv.account_number and bank.account_number:
+        if inv.account_number == bank.account_number:
+            account_match = 1.0
+            if inv.sort_code and bank.sort_code and inv.sort_code == bank.sort_code:
+                account_match = 1.2  # Bonus for both matching
+    elif inv.iban and bank.iban and inv.iban == bank.iban:
+        account_match = 1.0
 
     return {
         "amount_diff": amount_diff,
@@ -4286,7 +4604,9 @@ def _compute_match_features(inv: Transaction, bank: Transaction, primary_currenc
         "vendor_similarity": vendor_sim,
         "invoice_number_match": inv_num_match,
         "reference_id_match": ref_match,
+        "account_match": account_match,
     }
+
 
 
 def _rule_based_match_score(features: Dict[str, float | int | None]) -> float:
@@ -4305,8 +4625,20 @@ def _rule_based_match_score(features: Dict[str, float | int | None]) -> float:
     vendor_sim = float(features.get("vendor_similarity", 0.0) or 0.0)
     inv_num_match = float(features.get("invoice_number_match", 0.0) or 0.0)
     ref_match = float(features.get("reference_id_match", 0.0) or 0.0)
+    account_match = float(features.get("account_match", 0.0) or 0.0)
 
     score = 0.0
+
+    # Component 0: Account Match (CRITICAL - 40% weight if matches)
+    if account_match >= 1.0:
+        score += 0.40
+        # If account matches, even weaker signals become much stronger
+        if amount_match_exact > 0.5:
+            score += 0.30  # Account + exact amount = almost 100%
+        elif amount_match_close > 0.5:
+            score += 0.20
+        if vendor_sim > 0.5:
+            score += 0.15
 
     # Component 1: Invoice Number Match (HIGHEST PRIORITY - 25% weight)
     # If invoice numbers match, it's almost certainly a match
@@ -4784,16 +5116,8 @@ def reconcile_transactions(
             except Exception:
                 continue
 
-            # Amount-only exact match: treat as a valid candidate regardless of vendor/date similarity.
-            # This ensures same-amount invoice+bank rows can reconcile even when descriptions differ.
-            all_candidates.append((inv_idx, bank_idx, 1.0))
-            candidates_found += 1
-            continue
-            
-            # Compute features only for amount-matched pairs (with currency conversion support)
             features = _compute_match_features(inv, bank, primary_currency)
 
-            # Prefer ML model if loaded, else rule-based score
             ml_score = _ml_match_score(features)
             if ml_score is not None:
                 score = ml_score
@@ -4801,6 +5125,12 @@ def reconcile_transactions(
             else:
                 score = _rule_based_match_score(features)
                 threshold = RULE_THRESHOLD
+
+            # Amount is the only guaranteed common field between invoice and bank.
+            # If amount matches exactly, always keep this pair as a candidate and let
+            # tie-breakers (invoice number/date/vendor/description) decide the best match.
+            if float(features.get("amount_match_exact", 0.0) or 0.0) > 0.5:
+                score = max(score, threshold)
 
             # Store candidate if above threshold
             if score >= threshold:
@@ -4877,7 +5207,29 @@ def reconcile_transactions(
     print("Identifying unmatched transactions...")
     for inv_idx, inv in enumerate(invoice_txs):
         if inv_idx not in matched_invoice_indices:
-            only_in_invoices.append(asdict(inv))
+            inv_dict = asdict(inv)
+            extracted = inv_dict.get("extracted_fields")
+            if isinstance(extracted, dict):
+                invoice_date_val = extracted.get("invoice_date")
+                due_date_val = extracted.get("due_date")
+                amount_due_val = extracted.get("amount_due")
+                totals_obj = extracted.get("totals") if isinstance(extracted.get("totals"), dict) else {}
+                total_gbp_val = totals_obj.get("total")
+                line_items_val = extracted.get("line_items")
+
+                if inv_dict.get("date") is None:
+                    if due_date_val:
+                        inv_dict["date"] = due_date_val
+                    elif invoice_date_val:
+                        inv_dict["date"] = invoice_date_val
+
+                inv_dict["invoice_date"] = invoice_date_val
+                inv_dict["due_date"] = due_date_val
+                inv_dict["amount_due"] = amount_due_val
+                inv_dict["total_gbp"] = total_gbp_val
+                inv_dict["line_items"] = line_items_val
+
+            only_in_invoices.append(inv_dict)
 
     # STEP 5: Find unmatched bank transactions
     for bank_idx, bank in enumerate(bank_txs):
@@ -4947,7 +5299,19 @@ def api_reconcile():
 
         if not invoice_files or not bank_files:
             return (
-                jsonify({"error": "Please upload at least one 'invoice' and one 'bank' file."}),
+                jsonify(
+                    {
+                        "error": "Please upload at least one 'invoice' and one 'bank' file.",
+                        "details": {
+                            "received_form_fields": list(request.form.keys()),
+                            "received_file_fields": list(request.files.keys()),
+                            "invoice_files_count": len(invoice_files),
+                            "bank_files_count": len(bank_files),
+                            "invoice_filenames": [f.filename for f in invoice_files if getattr(f, 'filename', None)],
+                            "bank_filenames": [f.filename for f in bank_files if getattr(f, 'filename', None)],
+                        },
+                    }
+                ),
                 400,
             )
 
@@ -5229,18 +5593,23 @@ def api_reconcile():
                     bank_lines = [f"{tx.date or ''} {tx.description} {tx.amount}" for tx in bank_txs]
                 elif bank_name_lower.endswith(".pdf"):
                     bank_lines = pdf_to_lines(bank_bytes)
-                    bank_txs = parse_transactions_from_lines(bank_lines, source="bank")
+                    # Extract bank metadata (owner, bank name, account details) BEFORE parsing
+                    bank_meta = _extract_bank_metadata(bank_lines)
+                    bank_txs = parse_transactions_from_lines(bank_lines, source="bank", bank_meta=bank_meta)
                 else:
                     # Image file
                     bank_lines = ocr_image_to_lines(bank_bytes)
-                    bank_txs = parse_transactions_from_lines(bank_lines, source="bank")
+                    # Extract bank metadata (owner, bank name, account details) BEFORE parsing
+                    bank_meta = _extract_bank_metadata(bank_lines)
+                    bank_txs = parse_transactions_from_lines(bank_lines, source="bank", bank_meta=bank_meta)
 
-                # Attach bank statement owner/company name (header) to each transaction
-                bank_owner = _extract_bank_owner_name(bank_lines)
-                if bank_owner:
+                if not 'all_bank_metadata' in locals():
+                    all_bank_metadata = bank_meta
+                
+                if bank_meta.get("owner_name"):
                     for tx in bank_txs:
                         if tx.source == "bank":
-                            tx.owner_name = bank_owner
+                            tx.owner_name = bank_meta["owner_name"]
 
                 # Collect currencies from bank transactions
                 bank_currencies_in_file = []
@@ -5396,6 +5765,9 @@ def api_reconcile():
         # Update progress: Reconciliation complete
         set_progress(progress_id, "processing", 0.9, "Reconciliation complete, saving results...")
         
+        # Add bank metadata to result for storage
+        setattr(result, "bank_metadata", all_bank_metadata if 'all_bank_metadata' in locals() else {})
+        
         # Log reconciliation completion with structured logging
         logger.info(
             "Reconciliation completed successfully",
@@ -5507,6 +5879,7 @@ def api_reconcile():
                     "processing_time_seconds": round(processing_time, 2),
                     "processing_time_formatted": processing_time_formatted,
                     "progress_id": progress_id,  # Return progress_id for tracking
+                    "bank_metadata": getattr(result, "bank_metadata", {})
                 },
             }
         )
@@ -7371,7 +7744,7 @@ def api_create_manual_match(reconciliation_id: int):
                     bank_currency, bank_reference_id, bank_direction, bank_document_subtype, bank_balance,
                     match_score, is_manual_match
                 )
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """
             
             cur.execute(insert_query, (
@@ -7394,9 +7767,9 @@ def api_create_manual_match(reconciliation_id: int):
                 bank_data.get("direction"),
                 bank_data.get("document_subtype", ""),
                 bank_data.get("balance"),
-                1.0,  # Manual matches get score of 1.0
-                1,    # is_manual_match = 1
-                    ))
+                1.0,  # Match score
+                1     # is_manual_match
+            ))
             match_id = cur.lastrowid
             
             # Invalidate cache for this reconciliation's matches

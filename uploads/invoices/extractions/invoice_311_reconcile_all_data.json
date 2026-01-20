@@ -1,76 +1,39 @@
 {
   "parent_invoice_id": 311,
   "parent_info": {
-    "file_name": "001 EXP QE APR24 (1).pdf#page=6",
-    "file_hash": "reconcile_invoice_1767889903_2187",
-    "upload_timestamp": "2026-01-08 22:01:43",
+    "file_name": "001 EXP QE APR24.pdf#page=26",
+    "file_hash": "reconcile_invoice_1768288803_1565",
+    "upload_timestamp": "2026-01-13 12:50:03",
     "source": "reconciliation_endpoint"
   },
   "all_extracted_records": [
     {
       "record_id": 1,
-      "invoice_number": "INV-0116",
-      "invoice_date": null,
-      "vendor_name": "HSD CAPITAL",
-      "total_amount": 1360.08,
-      "description": "Amount Due 1,360.08",
-      "currency": null,
-      "file_name": "001 EXP QE APR24 (1).pdf#page=6",
+      "invoice_number": "OICE",
+      "invoice_date": "01/02/2024",
+      "vendor_name": "the amount, date or frequency of your Direct Debit Value Retail Management",
+      "total_amount": 720.0,
+      "description": "Total GBP 720.00",
+      "currency": "£",
+      "file_name": "001 EXP QE APR24.pdf#page=26",
       "extracted_fields": {
-        "invoice_date": null,
-        "invoice_number": "INV-0116",
+        "invoice_date": "01/02/2024",
+        "invoice_number": "UA01INV202400292",
         "reference": null,
         "vat_number": null,
         "totals": {
-          "total": 1360.08
-        },
-        "line_items": [],
-        "source_text_contains_tax_invoice": false
-      }
-    },
-    {
-      "record_id": 2,
-      "invoice_number": "0116",
-      "invoice_date": null,
-      "vendor_name": "400992020FLOOZIE",
-      "total_amount": 1360.08,
-      "description": "TOTAL GBP 1,360.08",
-      "currency": "£",
-      "file_name": "001 EXP QE APR24 (1).pdf#page=6",
-      "extracted_fields": {
-        "invoice_date": null,
-        "invoice_number": "INV-0116",
-        "reference": "April 2024 Royalty",
-        "vat_number": "400992020FLOOZIE",
-        "totals": {
-          "subtotal": 1133.4,
-          "total": 1360.08
+          "total": 720.0
         },
         "currency": "£",
-        "line_items": [
-          {
-            "description": "April 2024 Royalty Fees 6%",
-            "quantity": 1.0,
-            "unit_price": 850.05,
-            "vat": "20%",
-            "amount_gbp": 850.05
-          },
-          {
-            "description": "April 2024 Marketing Fees 2%",
-            "quantity": 1.0,
-            "unit_price": 283.35,
-            "vat": "20%",
-            "amount_gbp": 283.35
-          }
-        ],
-        "source_text_contains_tax_invoice": true
+        "line_items": [],
+        "source_text_contains_tax_invoice": false
       }
     }
   ],
   "extraction_metadata": {
-    "total_records": 2,
+    "total_records": 1,
     "extraction_confidence": 0.85,
-    "processed_at": "2026-01-08 22:01:43",
+    "processed_at": "2026-01-13 12:50:03",
     "source": "reconciliation_endpoint"
   }
 }

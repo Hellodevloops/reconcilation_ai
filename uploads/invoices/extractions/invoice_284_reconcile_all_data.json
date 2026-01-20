@@ -1,27 +1,69 @@
 {
   "parent_invoice_id": 284,
   "parent_info": {
-    "file_name": "001 EXP QE APR24.pdf#page=24",
-    "file_hash": "reconcile_invoice_1767873130_353",
-    "upload_timestamp": "2026-01-08 17:22:10",
+    "file_name": "001 EXP QE APR24 (1).pdf#page=5",
+    "file_hash": "reconcile_invoice_1768288545_9850",
+    "upload_timestamp": "2026-01-13 12:45:45",
     "source": "reconciliation_endpoint"
   },
   "all_extracted_records": [
     {
       "record_id": 1,
-      "invoice_number": "IS",
-      "invoice_date": "16/04/2024",
-      "vendor_name": "the amount, date or frequency of your Direct Debit Value Retail Management",
-      "total_amount": 5560.91,
-      "description": "Total GBP 5,560.91",
+      "invoice_number": "INV-0114",
+      "invoice_date": null,
+      "vendor_name": "HSD CAPITAL",
+      "total_amount": 2911.54,
+      "description": "Amount Due 2,911.54",
+      "currency": null,
+      "file_name": "001 EXP QE APR24 (1).pdf#page=5",
+      "extracted_fields": {
+        "invoice_date": null,
+        "invoice_number": "INV-0114",
+        "reference": null,
+        "vat_number": null,
+        "totals": {
+          "total": 2911.54
+        },
+        "line_items": [],
+        "source_text_contains_tax_invoice": false
+      }
+    },
+    {
+      "record_id": 2,
+      "invoice_number": "0114",
+      "invoice_date": null,
+      "vendor_name": "400992020FLOOZIE",
+      "total_amount": 2911.54,
+      "description": "TOTAL GBP 2,911.54",
       "currency": "£",
-      "file_name": "001 EXP QE APR24.pdf#page=24"
+      "file_name": "001 EXP QE APR24 (1).pdf#page=5",
+      "extracted_fields": {
+        "invoice_date": null,
+        "invoice_number": "INV-0114",
+        "reference": "March 2024 Royalty",
+        "vat_number": "400992020FLOOZIE",
+        "totals": {
+          "subtotal": 2426.29,
+          "total": 2911.54
+        },
+        "currency": "£",
+        "line_items": [
+          {
+            "description": "March 2024 Marketing Fees 2%",
+            "quantity": 1.0,
+            "unit_price": 606.57,
+            "vat": "20%",
+            "amount_gbp": 606.57
+          }
+        ],
+        "source_text_contains_tax_invoice": true
+      }
     }
   ],
   "extraction_metadata": {
-    "total_records": 1,
+    "total_records": 2,
     "extraction_confidence": 0.85,
-    "processed_at": "2026-01-08 17:22:10",
+    "processed_at": "2026-01-13 12:45:45",
     "source": "reconciliation_endpoint"
   }
 }

@@ -1,0 +1,30 @@
+{
+  "parent_file_name": "POLEBROOK.pdf",
+  "original_filename": "POLEBROOK.pdf",
+  "page_no": 2,
+  "section_no": 1,
+  "lines": [
+    "2This email and any attachments may be confidential and may contain legally privileged information solely for the use",
+    "of the intended recipient. If you have received this email by error, please notify the sender immediately and delete",
+    "this message and any attachment from your system without producing, distributing or retaining copies hereof. Thank",
+    "you for your cooperation and understanding.",
+    "We will, as part of our communication and interaction with you, collect and process personal data about you. You can",
+    "read more about our collection and processing of your personal data and your rights as a data subject in our cookies",
+    "and privacy notification https://www.carlsbergmarstons.co.uk/privacy-notification/  and",
+    "https://www.carlsbergmarstons.co.uk/cookie-notification/  ."
+  ],
+  "extracted_fields": null,
+  "transactions": [
+    {
+      "source": "invoice",
+      "description": "2This email and any attachments may be confidential and may contain legally privileged information solely for the use",
+      "amount": 2.0,
+      "date": null,
+      "vendor_name": null,
+      "invoice_number": null,
+      "currency": null,
+      "file_name": "POLEBROOK.pdf#page=2",
+      "extracted_fields": null
+    }
+  ]
+}

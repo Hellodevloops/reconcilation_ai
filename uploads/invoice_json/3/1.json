@@ -49,11 +49,13 @@
   ],
   "extracted_fields": {
     "invoice_date": null,
+    "due_date": null,
     "invoice_number": "INV-0111",
     "reference": "Cookies\nVATNumber\n400992020FLOOZIELTD\nTheRedHouse",
     "vat_number": "400992020FLOOZIELTD",
     "totals": {
-      "subtotal": 3899.0
+      "subtotal": 3899.0,
+      "total": 3901.2
     },
     "currency": "£",
     "line_items": [
@@ -70,8 +72,8 @@
   "transactions": [
     {
       "source": "invoice",
-      "description": "TOTAL VAT 20% 2.20",
-      "amount": 20.0,
+      "description": "Invoice 0111",
+      "amount": 3901.2,
       "date": null,
       "vendor_name": null,
       "invoice_number": "0111",
@@ -79,11 +81,13 @@
       "file_name": "Invoice INV-0111.pdf#page=1",
       "extracted_fields": {
         "invoice_date": null,
+        "due_date": null,
         "invoice_number": "INV-0111",
         "reference": "Cookies\nVATNumber\n400992020FLOOZIELTD\nTheRedHouse",
         "vat_number": "400992020FLOOZIELTD",
         "totals": {
-          "subtotal": 3899.0
+          "subtotal": 3899.0,
+          "total": 3901.2
         },
         "currency": "£",
         "line_items": [

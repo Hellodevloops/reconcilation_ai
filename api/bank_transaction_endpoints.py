@@ -66,6 +66,24 @@ def _normalize_date_yyyy_mm_dd(raw: str | None) -> str | None:
     return None
 
 
+    return None
+
+
+def _normalize_date_dd_mmm_yyyy(raw: str | None) -> str | None:
+    if not raw:
+        return None
+    txt = str(raw).strip()
+    if not txt:
+        return None
+    txt = re.sub(r"\s+", " ", txt)
+    for fmt in ["%d %b %Y", "%d %B %Y"]:
+        try:
+            return datetime.strptime(txt, fmt).date().isoformat()
+        except Exception:
+            continue
+    return None
+
+
 def _to_number(val):
     """Convert value to number safely"""
     try:
@@ -101,11 +119,102 @@ def _get_next_bank_upload_index_for_hash(base_file_hash: str) -> int:
     return 1
 
 
+    return transactions
+
+
+def _parse_tide_transaction_lines(lines: list[str]) -> dict:
+    """Specialized parser for Tide bank statements"""
+    transactions: dict = {}
+    seq = 0
+
+    for raw_line in lines:
+        line = re.sub(r"\s+", " ", raw_line).strip()
+        if not line:
+            continue
+
+        # Tide Date format: 28 Apr 2024
+        dm = re.match(r"^(\d{1,2}\s+[A-Za-z]{3}\s+\d{4})\s+(.*)$", line)
+        if not dm:
+            continue
+
+        tx_date = _normalize_date_dd_mmm_yyyy(dm.group(1))
+        rest = dm.group(2).strip()
+
+        # Extract all money values in the line (e.g. PaidOut, PaidIn, Balance)
+        money_vals = re.findall(r"(\d{1,3}(?:,\d{3})*\.\d{2})", rest)
+        if not money_vals:
+            continue
+        nums = [_to_number(v) for v in money_vals]
+        nums = [n for n in nums if n is not None]
+        if not nums:
+            continue
+
+        # Logic for Columns: [Details] [Paid Out] [Paid In] [Balance]
+        # Balance is typically the last number
+        balance = nums[-1] if len(nums) >= 1 else None
+        paid_in = None
+        paid_out = None
+
+        if len(nums) >= 3:
+            paid_in = nums[-3]
+            paid_out = nums[-2]
+        elif len(nums) == 2:
+            # Can't always disambiguate; infer from text hints
+            hint = rest.lower()
+            if "debit" in hint or "paid out" in hint or "out" in hint:
+                paid_out = nums[-2]
+            else:
+                paid_in = nums[-2]
+
+        tx_dir = None
+        amount = None
+        if paid_in is not None and paid_in != 0:
+            tx_dir = "credit"
+            amount = abs(paid_in)
+        elif paid_out is not None and paid_out != 0:
+            tx_dir = "debit"
+            amount = abs(paid_out)
+
+        # Remove numbers to get description/type
+        rest_wo_money = re.sub(r"\d{1,3}(?:,\d{3})*\.\d{2}", " ", rest).strip()
+        rest_wo_money = re.sub(r"\s+", " ", rest_wo_money)
+
+        tx_type = None
+        details = rest_wo_money
+        
+        # Heuristics for Tide transaction types
+        for candidate in ["Domestic Transfer", "Direct Debit", "Card Transaction"]:
+            if rest_wo_money.lower().startswith(candidate.lower()):
+                tx_type = candidate.strip()
+                details = rest_wo_money[len(candidate):].strip(" -")
+                break
+
+        if not tx_type:
+            parts = rest_wo_money.split(" ")
+            if len(parts) >= 2:
+                # Guess first 2 words are type
+                tx_type = " ".join(parts[:2])
+                details = " ".join(parts[2:]).strip()
+
+        seq += 1
+        transactions[str(seq)] = {
+            "transaction_date": tx_date,
+            "description": details[:255] if details else None,
+            "amount": amount,
+            "type": tx_dir,
+            "balance": balance,
+            "transaction_type": tx_type
+        }
+
+        if seq >= 75000:
+            break
+
+    return transactions
+
+
 def _extract_bank_transactions_from_pdf(file_path: str) -> dict:
     """Extract bank transactions from PDF using OCR"""
     from PyPDF2 import PdfReader
-    from PIL import Image
-    import pytesseract
     
     transactions = {}
     
@@ -123,10 +232,15 @@ def _extract_bank_transactions_from_pdf(file_path: str) -> dict:
         except Exception:
             text = ""
         
-        # Parse transactions from text
         lines = [line.strip() for line in text.split('\n') if line.strip()]
+
+        # Try Tide parser first if it looks like Tide (DD Mon YYYY at start)
+        tide_tx = _parse_tide_transaction_lines(lines)
+        if tide_tx and len(tide_tx) > 0:
+            return tide_tx
+
+        # Fallback to generic parser
         seq = 0
-        
         for line in lines:
             # Pattern to detect bank transactions
             date_match = re.search(r'(\d{1,2}[-/]\d{1,2}[-/]\d{2,4})', line)

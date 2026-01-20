@@ -1,37 +1,39 @@
 {
   "parent_invoice_id": 291,
   "parent_info": {
-    "file_name": "001 EXP QE APR24.pdf#page=7",
-    "file_hash": "reconcile_invoice_1767874218_6567",
-    "upload_timestamp": "2026-01-08 17:40:18",
+    "file_name": "001 EXP QE APR24 (1).pdf#page=21",
+    "file_hash": "reconcile_invoice_1768288545_270",
+    "upload_timestamp": "2026-01-13 12:45:45",
     "source": "reconciliation_endpoint"
   },
   "all_extracted_records": [
     {
       "record_id": 1,
-      "invoice_number": "INV-0108",
-      "invoice_date": null,
-      "vendor_name": "HSD CAPITAL",
-      "total_amount": 2737.19,
-      "description": "Amount Due 2,737.19",
-      "currency": null,
-      "file_name": "001 EXP QE APR24.pdf#page=7"
-    },
-    {
-      "record_id": 2,
-      "invoice_number": "WD23",
-      "invoice_date": null,
-      "vendor_name": "400992020FLOOZIE",
-      "total_amount": 2737.19,
-      "description": "TOTAL GBP 2,737.19",
+      "invoice_number": "OICE",
+      "invoice_date": "07/03/2024",
+      "vendor_name": "the amount, date or frequency of your Direct Debit Value Retail Management",
+      "total_amount": 6036.83,
+      "description": "Total GBP 6,036.83",
       "currency": "£",
-      "file_name": "001 EXP QE APR24.pdf#page=7"
+      "file_name": "001 EXP QE APR24 (1).pdf#page=21",
+      "extracted_fields": {
+        "invoice_date": "07/03/2024",
+        "invoice_number": "UA01INV202400366",
+        "reference": null,
+        "vat_number": null,
+        "totals": {
+          "total": 6036.83
+        },
+        "currency": "£",
+        "line_items": [],
+        "source_text_contains_tax_invoice": false
+      }
     }
   ],
   "extraction_metadata": {
-    "total_records": 2,
+    "total_records": 1,
     "extraction_confidence": 0.85,
-    "processed_at": "2026-01-08 17:40:18",
+    "processed_at": "2026-01-13 12:45:45",
     "source": "reconciliation_endpoint"
   }
 }

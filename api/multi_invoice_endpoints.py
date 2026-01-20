@@ -142,6 +142,12 @@ def _extract_invoices_structured(file_path: str, file_ext: str, original_filenam
                         "total_vat_rate": _to_number(getattr(inv, "total_vat_rate", None)),
                         "total_zero_rated": _to_number(getattr(inv, "total_zero_rated", None)),
                         "total_gbp": _to_number(getattr(inv, "total_gbp", None)),
+                        "bank_name": getattr(inv, "bank_name", None),
+                        "account_number": getattr(inv, "account_number", None),
+                        "sort_code": getattr(inv, "sort_code", None),
+                        "iban": getattr(inv, "iban", None),
+                        "bic": getattr(inv, "bic", None),
+                        "account_name": getattr(inv, "account_name", None),
                         "description": None,
                         "items": {},
                         "page_no": page_num,
@@ -323,6 +329,12 @@ def _extract_invoice_structured(file_path: str, file_ext: str) -> dict:
         "total_vat_rate": extracted_total_vat_rate,
         "total_zero_rated": extracted_total_zero_rated,
         "total_gbp": extracted_total_gbp,
+        "bank_name": getattr(inv, "bank_name", None),
+        "account_number": getattr(inv, "account_number", None),
+        "sort_code": getattr(inv, "sort_code", None),
+        "iban": getattr(inv, "iban", None),
+        "bic": getattr(inv, "bic", None),
+        "account_name": getattr(inv, "account_name", None),
         "description": extracted_description,
         "items": items,
     }
@@ -468,22 +480,16 @@ def register_multi_invoice_routes(app: Flask):
                     reference,
                     vendor_name,
                     vat_number,
-                    total_amount,
-                    tax_amount,
-                    total_vat_rate,
-                    total_zero_rated,
-                    total_gbp,
-                    net_amount,
-                    due_date,
-                    description,
-                    line_items,
-                    extracted_data,
-                    confidence_score,
-                    status,
                     invoice_file_path,
-                    invoice_file_hash
+                    invoice_file_hash,
+                    bank_name,
+                    account_name,
+                    account_number,
+                    sort_code,
+                    iban,
+                    bic
                 )
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             """
 
             try:
@@ -550,6 +556,12 @@ def register_multi_invoice_routes(app: Flask):
                             "completed",
                             file_path,
                             inv_hash_unique,
+                            upload_obj.get("bank_name"),
+                            upload_obj.get("account_name"),
+                            upload_obj.get("account_number"),
+                            upload_obj.get("sort_code"),
+                            upload_obj.get("iban"),
+                            upload_obj.get("bic")
                         ),
                     )
                     invoice_ids.append(int(invoice_id))

@@ -1,0 +1,120 @@
+{
+  "parent_file_name": "POLEBROOK.pdf",
+  "original_filename": "POLEBROOK.pdf",
+  "page_no": 1,
+  "section_no": 1,
+  "lines": [
+    "1From: Shirley, Anica <Anica.Shirley@carlsbergmarstons.co.uk>",
+    "Sent: 13 March 2024 21:19",
+    "To: Beetroot New; info@thekingsarmspolebrook.co.uk",
+    "Subject: Polebrook Arms Northants Ltd -  2125168",
+    "Importance: High",
+    "Hi Keith,",
+    "Can you conﬁrm that payment of the below overdue invoice from the 08.03.2024 has been paid please?",
+    "Kind Regards,",
+    "Anica Shirley",
+    "Credit Controller- West Yorkshire",
+    "Telephone: 08448 711922",
+    "anica.shirley@carlsbergmarstons.co.uk",
+    "Carlsberg Marston’s Brewing Company Ltd",
+    "Brookfield Court, Selby Rd, Garforth, Leeds LS25 1NB",
+    "www.carlsbergmarstons.co.uk",
+    "Any questions: Anica Shirley - anica.shirley@carlsbergmarstons.co.uk",
+    "This is an email from a member of the ‘Carlsberg Marston's Group’ which for these purposes comprises Carlsberg",
+    "Marston's Brewing Company Limited (reg. no. 00078439), CMBC Supply Limited (reg. no. 08626420) and Carlsberg",
+    "Marston’s Limited (reg. no. 12577732) each of Marston's House, Brewery Road, Wolverhampton, England, WV1 4JT",
+    "and each limited companies registered in England and Wales (the member of the Carlsberg Marston’s Group that",
+    "sends you this email is referred to as 'we', 'us', or 'our')."
+  ],
+  "extracted_fields": null,
+  "transactions": [
+    {
+      "source": "invoice",
+      "description": "1From: Shirley, Anica <Anica.Shirley@carlsbergmarstons.co.uk>",
+      "amount": 1.0,
+      "date": null,
+      "vendor_name": "as",
+      "invoice_number": "FROM",
+      "currency": null,
+      "file_name": "POLEBROOK.pdf#page=1",
+      "extracted_fields": null
+    },
+    {
+      "source": "invoice",
+      "description": "Sent: 13 March 2024 21:19",
+      "amount": 19.0,
+      "date": null,
+      "vendor_name": "as",
+      "invoice_number": "FROM",
+      "currency": null,
+      "file_name": "POLEBROOK.pdf#page=1",
+      "extracted_fields": null
+    },
+    {
+      "source": "invoice",
+      "description": "Subject: Polebrook Arms Northants Ltd -  2125168",
+      "amount": 2125168.0,
+      "date": null,
+      "vendor_name": "as",
+      "invoice_number": "FROM",
+      "currency": null,
+      "file_name": "POLEBROOK.pdf#page=1",
+      "extracted_fields": null
+    },
+    {
+      "source": "invoice",
+      "description": "Can you conﬁrm that payment of the below overdue invoice from the 08.03.2024 has been paid please?",
+      "amount": 8.03,
+      "date": null,
+      "vendor_name": "as",
+      "invoice_number": "INVOICE",
+      "currency": null,
+      "file_name": "POLEBROOK.pdf#page=1",
+      "extracted_fields": null
+    },
+    {
+      "source": "invoice",
+      "description": "Telephone: 08448 711922",
+      "amount": 711922.0,
+      "date": null,
+      "vendor_name": "as",
+      "invoice_number": "FROM",
+      "currency": null,
+      "file_name": "POLEBROOK.pdf#page=1",
+      "extracted_fields": null
+    },
+    {
+      "source": "invoice",
+      "description": "Brookfield Court, Selby Rd, Garforth, Leeds LS25 1NB",
+      "amount": 1.0,
+      "date": null,
+      "vendor_name": "as",
+      "invoice_number": "FROM",
+      "currency": null,
+      "file_name": "POLEBROOK.pdf#page=1",
+      "extracted_fields": null
+    },
+    {
+      "source": "invoice",
+      "description": "Marston's Brewing Company Limited (reg. no. 00078439), CMBC Supply Limited (reg. no. 08626420) and Carlsberg",
+      "amount": 8626420.0,
+      "date": null,
+      "vendor_name": "as",
+      "invoice_number": "FROM",
+      "currency": null,
+      "file_name": "POLEBROOK.pdf#page=1",
+      "extracted_fields": null
+    },
+    {
+      "source": "invoice",
+      "description": "Marston’s Limited (reg. no. 12577732) each of Marston's House, Brewery Road, Wolverhampton, England, WV1 4JT",
+      "amount": 4.0,
+      "date": null,
+      "vendor_name": "as",
+      "invoice_number": "FROM",
+      "currency": null,
+      "file_name": "POLEBROOK.pdf#page=1",
+      "extracted_fields": null
+    }
+  ]
+}

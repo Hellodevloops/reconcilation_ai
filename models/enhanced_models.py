@@ -35,6 +35,13 @@ class ExtractedInvoice:
     customer_name: Optional[str] = None
     customer_address: Optional[str] = None
     customer_tax_id: Optional[str] = None
+    bank_name: Optional[str] = None
+    account_name: Optional[str] = None
+    account_number: Optional[str] = None
+    sort_code: Optional[str] = None
+    iban: Optional[str] = None
+    bic: Optional[str] = None
+    bank_address: Optional[str] = None
     subtotal: Optional[float] = None
     tax_total: Optional[float] = None
     total_vat_rate: Optional[float] = None

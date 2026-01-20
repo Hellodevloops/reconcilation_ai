@@ -340,6 +340,15 @@ class MultiInvoiceProcessor:
         
         # Extract currency
         invoice.currency = self._extract_currency(text)
+
+        # Extract banking details
+        bank_details = self._extract_bank_details(text)
+        invoice.bank_name = bank_details.get('bank_name')
+        invoice.account_number = bank_details.get('account_number')
+        invoice.sort_code = bank_details.get('sort_code')
+        invoice.iban = bank_details.get('iban')
+        invoice.bic = bank_details.get('bic')
+        invoice.account_name = bank_details.get('account_name')
         
         # Extract line items (simplified)
         invoice.line_items = self._extract_line_items(text)
@@ -512,6 +521,84 @@ class MultiInvoiceProcessor:
                 except Exception:
                     return None
         return None
+
+    def _extract_bank_details(self, text: str) -> Dict[str, Optional[str]]:
+        """Extract bank account and payment details"""
+        import re
+        details = {
+            'bank_name': None,
+            'account_number': None,
+            'sort_code': None,
+            'iban': None,
+            'bic': None,
+            'account_name': None
+        }
+        
+        if not text:
+            return details
+            
+        # Normalize text for better matching
+        t = re.sub(r'\s+', ' ', text)
+        
+        # Account Number (generic and specific labels)
+        acc_patterns = [
+            r'\bAccount\s*(?:Number|No\.?|#)\b\s*[:\-]?\s*(\d{8,12})',
+            r'\bAcc\s*(?:No\.?|Number)\b\s*[:\-]?\s*(\d{8,12})',
+            r'\bA/C\s*(?:No\.?|Number)\b\s*[:\-]?\s*(\d{8,12})',
+            # Fallback for just 8-digit numbers near "Account"
+            r'Account\s+(\d{8})\b'
+        ]
+        for pat in acc_patterns:
+            m = re.search(pat, t, re.IGNORECASE)
+            if m:
+                details['account_number'] = m.group(1).strip()
+                break
+                
+        # Sort Code (XX-XX-XX or XXXXXX)
+        sort_patterns = [
+            r'\bSort\s+Code\b\s*[:\-]?\s*(\d{2}[-\s]\d{2}[-\s]\d{2})',
+            r'\bSort\s+Code\b\s*[:\-]?\s*(\d{6})',
+            r'\bSC\b\s*[:\-]?\s*(\d{2}[-\s]\d{2}[-\s]\d{2})'
+        ]
+        for pat in sort_patterns:
+            m = re.search(pat, t, re.IGNORECASE)
+            if m:
+                details['sort_code'] = m.group(1).strip().replace(' ', '-')
+                break
+                
+        # IBAN
+        iban_pat = r'\bIBAN\b\s*[:\-]?\s*([A-Z]{2}\d{2}[A-Z0-9\s]{12,30})'
+        m = re.search(iban_pat, t, re.IGNORECASE)
+        if m:
+            details['iban'] = re.sub(r'\s+', '', m.group(1)).strip()
+            
+        # BIC / SWIFT
+        bic_pat = r'\b(?:BIC|SWIFT)\b\s*[:\-]?\s*([A-Z0-9]{8,11})'
+        m = re.search(bic_pat, t, re.IGNORECASE)
+        if m:
+            details['bic'] = m.group(1).strip()
+            
+        # Bank Name
+        # Look for common bank names or labels
+        bank_names = ['Revolut', 'Barclays', 'HSBC', 'NatWest', 'Santander', 'Lloyds', 'Monzo', 'Starling']
+        for name in bank_names:
+            if re.search(rf'\b{name}\b', t, re.IGNORECASE):
+                details['bank_name'] = name
+                break
+        
+        if not details['bank_name']:
+            bank_label_pat = r'\bBank\s+Name\b\s*[:\-]?\s*([A-Z][A-Za-z\s]+?)(?:\s{2,}|\n|,|$)'
+            m = re.search(bank_label_pat, t, re.IGNORECASE)
+            if m:
+                details['bank_name'] = m.group(1).strip()
+                
+        # Account Name
+        acc_name_pat = r'\bAccount\s+Name\b\s*[:\-]?\s*([A-Z][A-Za-z\s]+?)(?:\s{2,}|\n|,|$)'
+        m = re.search(acc_name_pat, t, re.IGNORECASE)
+        if m:
+            details['account_name'] = m.group(1).strip()
+            
+        return details
     
     def _extract_date(self, text: str, labels: List[str]) -> Optional[str]:
         """Extract date using various patterns"""

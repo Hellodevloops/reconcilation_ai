@@ -19,12 +19,14 @@
   ],
   "extracted_fields": {
     "invoice_date": null,
+    "due_date": "14 Feb 2024",
     "invoice_number": "INV-0101",
     "reference": null,
     "vat_number": null,
     "totals": {
       "total": 3708.67
     },
+    "amount_due": 3708.67,
     "line_items": [],
     "source_text_contains_tax_invoice": false
   },
@@ -40,12 +42,14 @@
       "file_name": "001 EXP QE APR24.pdf#page=1",
       "extracted_fields": {
         "invoice_date": null,
+        "due_date": "14 Feb 2024",
         "invoice_number": "INV-0101",
         "reference": null,
         "vat_number": null,
         "totals": {
           "total": 3708.67
         },
+        "amount_due": 3708.67,
         "line_items": [],
         "source_text_contains_tax_invoice": false
       }
