@@ -12,7 +12,7 @@ The main application file is `app.py`.
 
 Make sure you have **Python 3.10+** installed.
 
-From this folder (`python_ocr_reconcile`), run:
+From this folder (`reconcilation_ai`), run:
 
 ```bash
 pip install -r requirements.txt
@@ -25,7 +25,7 @@ You also need **Tesseract OCR** installed on your system:
 
 ### 2. Run the Python server
 
-From `python_ocr_reconcile`:
+From `reconcilation_ai`:
 
 ```bash
 python app.py
