@@ -30,6 +30,7 @@ except Exception:
 from flask import Flask, request, jsonify, send_from_directory, Response
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+from api.manual_entry_endpoint import manual_entry_bp
 from PIL import Image, ImageOps, ImageFilter, ImageEnhance
 import pymysql
 import pytesseract
@@ -335,6 +336,9 @@ BANK_ALLOWED_MIMETYPES = INVOICE_ALLOWED_MIMETYPES.union(
 
 
 app = Flask(__name__, static_folder="static", static_url_path="/static")
+
+# Register blueprints
+app.register_blueprint(manual_entry_bp)
 
 # === Security Configuration ===
 # CORS configuration (Cross-Origin Resource Sharing)
@@ -778,7 +782,10 @@ def init_db() -> None:
     """Initialize database tables"""
     try:
         # Create database and tables using migration script
-        from migrations.mysql_migration import create_tables
+        if db_manager.db_type == "mysql":
+            from migrations.mysql_migration import create_tables
+        else:
+            from migrations.sqlite_migration import create_tables
         create_tables()
         logger.info("Database initialized successfully")
     except Exception as e:
@@ -6412,6 +6419,75 @@ def api_get_reconciliation_json(reconciliation_id: int):
                 )
 
         rec["raw_json"] = raw_obj
+        
+        # Include manual entries in the results
+        if raw_obj and isinstance(raw_obj, dict) and "results" in raw_obj:
+            try:
+                # Fetch manual entries for this reconciliation
+                with db_manager.get_connection() as conn:
+                    cur = conn.cursor()
+                    
+                    # Get manual invoice entries
+                    cur.execute("""
+                        SELECT id, description, amount, date, invoice_number, vendor_name, currency, created_at
+                        FROM manual_invoice_entries 
+                        WHERE reconciliation_id = ?
+                        ORDER BY created_at DESC
+                    """, (reconciliation_id,))
+                    manual_invoices = [
+                        {
+                            "id": row[0],
+                            "description": row[1],
+                            "amount": row[2],
+                            "date": row[3],
+                            "invoice_number": row[4],
+                            "vendor_name": row[5],
+                            "currency": row[6],
+                            "created_at": row[7],
+                            "is_manual": True
+                        }
+                        for row in cur.fetchall()
+                    ]
+                    
+                    # Get manual bank entries
+                    cur.execute("""
+                        SELECT id, description, amount, date, reference_id, currency, created_at
+                        FROM manual_bank_entries 
+                        WHERE reconciliation_id = ?
+                        ORDER BY created_at DESC
+                    """, (reconciliation_id,))
+                    manual_banks = [
+                        {
+                            "id": row[0],
+                            "description": row[1],
+                            "amount": row[2],
+                            "date": row[3],
+                            "reference_id": row[4],
+                            "currency": row[5],
+                            "created_at": row[6],
+                            "is_manual": True
+                        }
+                        for row in cur.fetchall()
+                    ]
+                    
+                    # Merge manual entries into unmatched lists
+                    results = raw_obj.get("results", {})
+                    unmatched_invoices = results.get("unmatched_invoices", [])
+                    unmatched_transactions = results.get("unmatched_transactions", [])
+                    
+                    # Add manual entries to the beginning of unmatched lists
+                    results["unmatched_invoices"] = manual_invoices + unmatched_invoices
+                    results["unmatched_transactions"] = manual_banks + unmatched_transactions
+                    
+                    # Update raw_json with merged data
+                    rec["raw_json"] = raw_obj
+                    
+            except Exception as e:
+                logger.warning(
+                    "Failed to include manual entries in reconciliation results",
+                    context={"reconciliation_id": reconciliation_id},
+                    error=e,
+                )
 
         return jsonify({
             "success": True,
@@ -7660,5 +7736,48 @@ if __name__ == "__main__":
     #   FLASK_DEBUG=0  -> debug mode OFF (recommended for production)
     debug_flag = os.environ.get("FLASK_DEBUG", "1") == "1"
 
-    app.run(host="0.0.0.0", port=5001, debug=debug_flag)
+    # Port should be controlled via environment:
+    #   PORT=5001 (default)
+    # Some environments block binding to certain ports (WinError 10013).
+    # If binding fails, try a small set of fallback ports.
+    try:
+        base_port = int(os.environ.get("PORT", "5001"))
+    except Exception:
+        base_port = 5001
+
+    candidate_ports = [base_port]
+    for p in (5002, 5003, 5050, 8000, 8080):
+        if p not in candidate_ports:
+            candidate_ports.append(p)
+
+    # Probe ports first. This avoids Flask's debug reloader interfering with our
+    # fallback logic and gives a clearer error when a port is blocked.
+    import socket
+
+    def _can_bind(host: str, port: int) -> bool:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        try:
+            s.bind((host, port))
+            return True
+        except OSError:
+            return False
+        finally:
+            try:
+                s.close()
+            except Exception:
+                pass
+
+    host = "127.0.0.1"
+    chosen_port = None
+    for port in candidate_ports:
+        if _can_bind(host, port):
+            chosen_port = port
+            break
+
+    if chosen_port is None:
+        raise OSError(f"No available port found in {candidate_ports}")
+
+    print(f"\nStarting server on http://{host}:{chosen_port} (debug={debug_flag})\n")
+    # Disable reloader so we don't lose control of exceptions / process flow.
+    app.run(host=host, port=chosen_port, debug=debug_flag, use_reloader=False)
 

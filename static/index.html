@@ -6,20 +6,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
+      :root {
+        --bg: #f5f6f8;
+        --surface: rgba(255, 255, 255, 0.80);
+        --surface-solid: #ffffff;
+        --text: #111827;
+        --muted: #6b7280;
+        --border: rgba(17, 24, 39, 0.10);
+        --primary: #714b67;
+        --primary-2: #875a7b;
+        --shadow: 0 22px 55px rgba(17, 24, 39, 0.10);
+        --shadow-soft: 0 10px 22px rgba(17, 24, 39, 0.08);
+        --card-pad: 16px;
+        --card-pad-lg: 20px;
+        --radius-xl: 22px;
+        --radius-lg: 16px;
+        --radius-md: 12px;
+        --space-1: 6px;
+        --space-2: 10px;
+        --space-3: 14px;
+        --space-4: 18px;
+        --space-5: 22px;
+        --space-6: 28px;
+        --space-7: 40px;
+      }
+
       * {
         box-sizing: border-box;
+      }
+
+      :focus-visible {
+        outline: 3px solid rgba(113, 75, 103, 0.35);
+        outline-offset: 2px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+          scroll-behavior: auto !important;
+        }
       }
       
       body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         margin: 0;
         padding: 0;
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #ffffff 100%);
+        background:
+          radial-gradient(980px 420px at 16% 10%, rgba(113, 75, 103, 0.08), transparent 62%),
+          radial-gradient(860px 380px at 86% 20%, rgba(135, 90, 123, 0.06), transparent 60%),
+          radial-gradient(980px 420px at 52% 96%, rgba(148, 163, 184, 0.10), transparent 62%),
+          var(--bg);
         min-height: 100vh;
-        padding: 20px;
-        color: #1e3a5f;
+        padding: 20px 16px 48px;
+        color: var(--text);
         position: relative;
         overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
       
       body::before {
@@ -30,31 +74,67 @@
         right: 0;
         bottom: 0;
         background: 
-          radial-gradient(circle at 20% 50%, rgba(37, 99, 235, 0.05) 0%, transparent 50%),
-          radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.03) 0%, transparent 50%);
+          radial-gradient(circle at 18% 38%, rgba(255, 255, 255, 0.48) 0%, transparent 56%),
+          radial-gradient(circle at 80% 78%, rgba(255, 255, 255, 0.30) 0%, transparent 56%);
         pointer-events: none;
         z-index: 0;
       }
       
       .container {
-        max-width: 1400px;
+        max-width: 1200px;
         margin: 0 auto;
         position: relative;
         z-index: 1;
       }
+
+      #recon-form {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--space-5);
+      }
+
+      @media (min-width: 980px) {
+        #recon-form {
+          grid-template-columns: 1fr 1fr;
+          align-items: start;
+        }
+
+        #recon-form > .upload-section {
+          margin-bottom: 0;
+        }
+
+        #recon-form > .upload-hint,
+        #recon-form > .submit-section {
+          grid-column: 1 / -1;
+        }
+      }
+
+      @media (max-width: 640px) {
+        body {
+          padding: 14px 12px 34px;
+        }
+
+        .container {
+          max-width: 100%;
+        }
+      }
       
       .header {
         text-align: center;
-        margin-bottom: 50px;
-        color: #1e3a5f;
+        margin-bottom: var(--space-6);
+        color: var(--text);
         position: relative;
+      }
+
+      .header {
+        margin-bottom: var(--space-5);
       }
       
       .header h1 {
-        font-size: 3rem;
+        font-size: 2.25rem;
         font-weight: 800;
-        margin: 0 0 15px 0;
-        background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
+        margin: 0 0 10px 0;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-2) 55%, #a06b95 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -62,66 +142,75 @@
       }
       
       .header .subtitle {
-        font-size: 1.2rem;
+        font-size: 1.02rem;
         opacity: 0.85;
-        font-weight: 400;
-        color: #475569;
-        margin-bottom: 15px;
+        font-weight: 500;
+        color: var(--muted);
+        margin-bottom: 10px;
       }
       
       .badge {
         display: inline-block;
-        background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(59, 130, 246, 0.08) 100%);
-        padding: 8px 20px;
+        background: rgba(113, 75, 103, 0.08);
+        padding: 9px 14px;
         border-radius: 25px;
-        font-size: 0.875rem;
-        margin-top: 10px;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(37, 99, 235, 0.3);
-        color: #2563eb;
+        border: 1px solid rgba(113, 75, 103, 0.16);
+        color: var(--primary);
+        font-size: 0.9rem;
         font-weight: 600;
-        letter-spacing: 0.5px;
+        backdrop-filter: blur(10px);
+        font-weight: 600;
+        letter-spacing: 0.2px;
       }
       
       .main-card {
-        background: #ffffff;
-        border-radius: 24px;
-        padding: 50px;
-        box-shadow: 
-          0 4px 20px rgba(37, 99, 235, 0.1),
-          0 0 0 1px rgba(37, 99, 235, 0.1);
-        margin-bottom: 40px;
-        border: 1px solid rgba(37, 99, 235, 0.15);
+        background: var(--surface-solid);
+        border-radius: var(--radius-xl);
+        padding: var(--card-pad-lg);
+        box-shadow: var(--shadow);
+        margin-bottom: var(--space-6);
+        border: 1px solid var(--border);
+      }
+
+      @media (max-width: 968px) {
+        .header h1 {
+          font-size: 1.85rem;
+        }
+
+        .main-card {
+          padding: var(--card-pad);
+        }
       }
       
       .section-title {
-        font-size: 1.125rem;
-        font-weight: 700;
-        color: #1e40af;
-        margin-bottom: 18px;
+        font-size: 1.02rem;
+        font-weight: 850;
+        color: var(--text);
+        letter-spacing: -0.2px;
+        margin-bottom: 16px;
         display: flex;
-        align-items: center;
-        gap: 12px;
-        letter-spacing: 0.3px;
+        align-items: baseline;
+        gap: 10px;
+        line-height: 1.25;
       }
       
       .section-title i {
-        color: #2563eb;
-        font-size: 1.3rem;
+        color: var(--primary-2);
+        font-size: 1.1rem;
       }
       
       .upload-section {
-        margin-bottom: 35px;
+        margin-bottom: var(--space-5);
       }
       
       .drop-zone {
-        border: 2px dashed rgba(37, 99, 235, 0.3);
-        border-radius: 16px;
-        padding: 50px 30px;
-        text-align: center;
-        background: linear-gradient(135deg, rgba(37, 99, 235, 0.02) 0%, rgba(59, 130, 246, 0.05) 100%);
+        border: 1.5px dashed rgba(15, 23, 42, 0.22);
+        border-radius: var(--radius-lg);
+        padding: 28px 18px;
+        background: rgba(255, 255, 255, 0.85);
         cursor: pointer;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.25s ease;
+        text-align: center;
         position: relative;
         overflow: hidden;
       }
@@ -133,7 +222,7 @@
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
+        background: linear-gradient(90deg, transparent, rgba(113, 75, 103, 0.10), transparent);
         transition: left 0.6s;
       }
       
@@ -142,29 +231,25 @@
       }
       
       .drop-zone:hover {
-        border-color: rgba(37, 99, 235, 0.6);
-        background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(59, 130, 246, 0.05) 100%);
-        transform: translateY(-3px);
-        box-shadow: 
-          0 8px 25px rgba(37, 99, 235, 0.15),
-          0 0 0 1px rgba(37, 99, 235, 0.2);
+        border-color: rgba(113, 75, 103, 0.34);
+        background: rgba(255, 255, 255, 0.92);
+        transform: translateY(-1px);
+        box-shadow: 0 12px 26px rgba(2, 6, 23, 0.08);
       }
       
       .drop-zone.dragover {
-        border-color: #2563eb;
-        background: linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(59, 130, 246, 0.08) 100%);
-        box-shadow: 
-          0 0 0 4px rgba(37, 99, 235, 0.2),
-          0 12px 30px rgba(37, 99, 235, 0.2);
-        transform: scale(1.02);
+        border-color: var(--primary-2);
+        background: rgba(113, 75, 103, 0.10);
+        box-shadow: 0 0 0 4px rgba(113, 75, 103, 0.12);
+        transform: translateY(-1px);
       }
       
       .drop-zone-icon {
-        font-size: 4rem;
-        margin-bottom: 20px;
-        color: #2563eb;
-        opacity: 0.9;
-        transition: all 0.3s ease;
+        font-size: 2.6rem;
+        margin-bottom: 12px;
+        color: var(--primary-2);
+        opacity: 0.95;
+        transition: all 0.2s ease;
       }
       
       .drop-zone:hover .drop-zone-icon {
@@ -173,40 +258,39 @@
       }
       
       .drop-zone-text {
-        color: #1e40af;
-        font-size: 1.1rem;
-        font-weight: 600;
-        margin: 12px 0;
-        letter-spacing: 0.2px;
+        color: var(--text);
+        font-size: 0.98rem;
+        font-weight: 750;
+        margin: 8px 0 6px;
       }
       
       .drop-zone-hint {
         color: #64748b;
-        font-size: 0.9rem;
-        margin-top: 10px;
+        font-size: 0.86rem;
+        margin-top: 4px;
       }
       
       .file-list {
-        margin-top: 20px;
+        margin-top: 14px;
         display: flex;
         flex-wrap: wrap;
-        gap: 12px;
+        gap: 10px;
       }
       
       .file-item {
-        background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-        color: #1e3a5f;
-        padding: 14px 20px;
-        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.92);
+        color: var(--text);
+        padding: 10px 12px;
+        border-radius: 14px;
         display: flex;
         align-items: center;
-        gap: 14px;
-        font-size: 0.925rem;
+        gap: 10px;
+        font-size: 0.88rem;
         box-shadow: 
-          0 2px 8px rgba(37, 99, 235, 0.1),
-          0 0 0 1px rgba(37, 99, 235, 0.15);
+          0 2px 8px rgba(17, 24, 39, 0.08),
+          0 0 0 1px rgba(17, 24, 39, 0.10);
         animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        border: 1px solid rgba(37, 99, 235, 0.2);
+        border: 1px solid var(--border);
       }
       
       @keyframes slideIn {
@@ -221,8 +305,8 @@
       }
       
       .file-item-icon {
-        font-size: 1.3rem;
-        color: #2563eb;
+        font-size: 1.05rem;
+        color: var(--primary-2);
       }
       
       .file-item-name {
@@ -233,6 +317,12 @@
         max-width: 300px;
         font-weight: 500;
         color: #1e3a5f;
+      }
+
+      .file-item-name {
+        max-width: 260px;
+        font-weight: 650;
+        color: var(--text);
       }
       
       .file-item-remove {
@@ -250,6 +340,11 @@
         transition: all 0.2s;
         font-weight: bold;
       }
+
+      .file-item-remove {
+        width: 24px;
+        height: 24px;
+      }
       
       .file-item-remove:hover {
         background: rgba(220, 38, 38, 0.9);
@@ -260,36 +355,31 @@
       
       .submit-section {
         text-align: center;
-        margin-top: 40px;
+        margin-top: var(--space-4);
       }
       
       .submit-btn {
-        background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+        background: linear-gradient(135deg, var(--primary-2) 0%, var(--primary) 100%);
         color: #ffffff;
         border: none;
-        padding: 18px 56px;
-        border-radius: 14px;
-        font-size: 1.15rem;
-        font-weight: 700;
+        padding: 12px 22px;
+        border-radius: 12px;
+        font-size: 0.95rem;
+        font-weight: 600;
         cursor: pointer;
-        box-shadow: 
-          0 4px 15px rgba(37, 99, 235, 0.3),
-          0 0 0 1px rgba(37, 99, 235, 0.2);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 12px 26px rgba(113, 75, 103, 0.22);
+        transition: all 0.2s ease;
         display: inline-flex;
         align-items: center;
+        justify-content: center;
         gap: 12px;
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-        font-size: 1rem;
+        letter-spacing: 0.2px;
       }
       
       .submit-btn:hover:not(:disabled) {
-        transform: translateY(-3px);
-        box-shadow: 
-          0 8px 25px rgba(37, 99, 235, 0.4),
-          0 0 0 1px rgba(37, 99, 235, 0.3);
-        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 14px 32px rgba(113, 75, 103, 0.24);
+        background: linear-gradient(135deg, #956689 0%, var(--primary) 100%);
       }
       
       .submit-btn:active:not(:disabled) {
@@ -303,13 +393,68 @@
       }
       
       .btn-delete, .btn-view {
-        padding: 6px 10px;
+        width: 34px;
+        height: 34px;
+        padding: 0;
         border: 1px solid #d1d5db;
-        border-radius: 6px;
+        border-radius: 8px;
         cursor: pointer;
         font-size: 0.85rem;
         transition: all 0.2s ease;
         background: #ffffff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .match-actions {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+      }
+
+      .matches-table th.actions-col,
+      .matches-table td.actions-col {
+        width: 96px;
+        text-align: center;
+      }
+
+      .matches-table thead th,
+      .unmatched-table thead th {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background: #ffffff;
+      }
+
+      .matches-table th.actions-col,
+      .matches-table td.actions-col {
+        position: sticky;
+        right: 0;
+        z-index: 3;
+        background: #ffffff;
+        box-shadow: -10px 0 14px rgba(15, 23, 42, 0.06);
+      }
+
+      .delta-cell {
+        font-weight: 800;
+        font-size: 0.85rem;
+        white-space: nowrap;
+      }
+
+      .delta-ok {
+        color: #059669;
+      }
+
+      .delta-warn {
+        color: #b45309;
+      }
+
+      .delta-bad {
+        color: #dc2626;
       }
       
       .btn-delete {
@@ -323,13 +468,13 @@
       }
       
       .btn-view {
-        color: #2563eb;
-        border-color: #bfdbfe;
+        color: var(--primary);
+        border-color: rgba(113, 75, 103, 0.22);
       }
       
       .btn-view:hover {
-        background: #eff6ff;
-        border-color: #2563eb;
+        background: rgba(113, 75, 103, 0.08);
+        border-color: rgba(113, 75, 103, 0.35);
       }
       
       .status {
@@ -359,10 +504,10 @@
       }
       
       .status.processing {
-        background: rgba(59, 130, 246, 0.15);
-        color: #60a5fa;
-        border-color: rgba(59, 130, 246, 0.3);
-        border-left: 4px solid #3b82f6;
+        background: rgba(113, 75, 103, 0.12);
+        color: var(--primary);
+        border-color: rgba(113, 75, 103, 0.22);
+        border-left: 4px solid var(--primary-2);
       }
       
       .progress-container {
@@ -377,7 +522,7 @@
       .progress-bar-wrapper {
         width: 100%;
         height: 8px;
-        background: rgba(37, 99, 235, 0.1);
+        background: rgba(113, 75, 103, 0.10);
         border-radius: 10px;
         overflow: hidden;
         margin-bottom: 8px;
@@ -385,7 +530,7 @@
       
       .progress-bar {
         height: 100%;
-        background: linear-gradient(90deg, #2563eb 0%, #3b82f6 50%, #2563eb 100%);
+        background: linear-gradient(90deg, var(--primary-2) 0%, #a06b95 50%, var(--primary-2) 100%);
         background-size: 200% 100%;
         border-radius: 10px;
         transition: width 0.3s ease;
@@ -416,17 +561,17 @@
         min-width: 200px;
         padding: 10px 15px;
         background: #ffffff;
-        border: 1px solid rgba(37, 99, 235, 0.2);
-        border-radius: 8px;
-        color: #1e3a5f;
         font-size: 0.9rem;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        color: var(--text);
       }
       
       .search-input:focus {
         outline: none;
-        border-color: #2563eb;
+        border-color: rgba(113, 75, 103, 0.55);
         background: #ffffff;
-        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        box-shadow: 0 0 0 3px rgba(113, 75, 103, 0.12);
       }
       
       .search-input::placeholder {
@@ -450,15 +595,22 @@
       .results-grid {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 30px;
-        margin-top: 40px;
+        gap: 16px;
+        margin-top: 16px;
+      }
+
+      @media (min-width: 968px) {
+        .results-grid {
+          grid-template-columns: 1.15fr 0.85fr;
+          align-items: start;
+        }
       }
       
       .results-secondary {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 30px;
-        margin-top: 30px;
+        gap: 16px;
+        margin-top: 16px;
       }
       
       @media (min-width: 968px) {
@@ -467,41 +619,39 @@
         }
       }
       
-      @media (max-width: 968px) {
-        .header h1 {
-          font-size: 2.2rem;
-        }
-        
-        .main-card {
-          padding: 30px 20px;
-        }
-      }
-      
       .result-card {
-        background: #ffffff;
-        border-radius: 20px;
-        padding: 35px;
-        box-shadow: 
-          0 4px 20px rgba(37, 99, 235, 0.1),
-          0 0 0 1px rgba(37, 99, 235, 0.1);
-        border: 1px solid rgba(37, 99, 235, 0.15);
+        background: var(--surface-solid);
+        border-radius: var(--radius-xl);
+        padding: var(--card-pad);
+        box-shadow: var(--shadow-soft);
+        border: 1px solid var(--border);
       }
       
       .result-card h2 {
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: #1e40af;
-        margin: 0 0 25px 0;
+        font-size: 1.05rem;
+        font-weight: 850;
+        color: var(--text);
+        margin: 0 0 14px 0;
         display: flex;
-        align-items: center;
+        align-items: baseline;
         gap: 12px;
-        padding-bottom: 18px;
-        border-bottom: 2px solid rgba(37, 99, 235, 0.2);
-        letter-spacing: 0.3px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border);
+        letter-spacing: -0.2px;
+        line-height: 1.25;
       }
       
       .result-card h2 i {
-        color: #2563eb;
+        color: var(--primary-2);
+      }
+      
+      .result-card--full {
+        grid-column: 1 / -1;
+        min-height: 300px;
+      }
+      
+      .result-card--full #summary {
+        min-height: 240px;
       }
       
       .json-output {
@@ -519,9 +669,9 @@
       }
       
       .json-toggle {
-        background: rgba(37, 99, 235, 0.1);
-        border: 1px solid rgba(37, 99, 235, 0.3);
-        color: #2563eb;
+        background: rgba(113, 75, 103, 0.10);
+        border: 1px solid rgba(113, 75, 103, 0.24);
+        color: var(--primary);
         padding: 10px 20px;
         border-radius: 8px;
         cursor: pointer;
@@ -535,8 +685,8 @@
       }
       
       .json-toggle:hover {
-        background: rgba(37, 99, 235, 0.15);
-        border-color: rgba(37, 99, 235, 0.5);
+        background: rgba(113, 75, 103, 0.14);
+        border-color: rgba(113, 75, 103, 0.40);
       }
       
       .json-container {
@@ -550,18 +700,34 @@
       .summary-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 18px;
-        margin-bottom: 30px;
+        gap: 14px;
+        margin-bottom: 18px;
       }
-      
+
+      @media (min-width: 968px) {
+        .summary-grid {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 14px;
+          margin-bottom: 18px;
+        }
+      }
       .summary-item {
         background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(59, 130, 246, 0.08) 100%);
-        padding: 24px;
+        padding: var(--card-pad);
         border-radius: 14px;
-        border-left: 4px solid #2563eb;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         border: 1px solid rgba(37, 99, 235, 0.15);
-        border-left: 4px solid #2563eb;
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.08);
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+        border-left: 4px solid var(--primary-2);
+      }
+
+      .summary-item {
+        border: 1px solid var(--border);
+        border-left: 0;
+        background: rgba(248, 250, 252, 0.95);
+        box-shadow: 0 12px 26px rgba(2, 6, 23, 0.06);
       }
       
       .summary-item:hover {
@@ -571,14 +737,27 @@
           0 0 0 1px rgba(37, 99, 235, 0.2);
         background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(59, 130, 246, 0.12) 100%);
       }
+
+      .summary-item:hover {
+        box-shadow:
+          0 10px 22px rgba(17, 24, 39, 0.10),
+          0 0 0 1px rgba(113, 75, 103, 0.12);
+        background: rgba(255, 255, 255, 0.98);
+      }
       
       .summary-label {
         font-size: 0.8rem;
         color: #64748b;
         font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 0.8px;
         margin-bottom: 10px;
+      }
+
+      .summary-label {
+        font-size: 0.72rem;
+        letter-spacing: 0.6px;
+        margin-bottom: 8px;
       }
       
       .summary-value {
@@ -587,85 +766,343 @@
         color: #1e40af;
         letter-spacing: -0.5px;
       }
-      
-      .summary-value.highlight {
-        color: #2563eb;
+
+      .summary-value {
+        font-size: 1.4rem;
+        font-weight: 850;
+        color: var(--text);
       }
-      
+
+      .summary-value.highlight {
+        color: var(--primary);
+      }
+
+      .side-panels {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-top: 16px;
+        margin-bottom: 16px;
+      }
+
+      @media (min-width: 968px) {
+        .side-panels {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .side-panel {
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-soft);
+        padding: var(--card-pad);
+      }
+
+      .side-panel-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .side-panel-title {
+        font-weight: 850;
+        color: var(--text);
+        letter-spacing: -0.2px;
+        font-size: 0.95rem;
+      }
+
+      .side-panel-sub {
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+
+      .segbar {
+        width: 100%;
+        height: 10px;
+        border-radius: 999px;
+        background: rgba(17, 24, 39, 0.08);
+        overflow: hidden;
+        display: flex;
+      }
+
+      .segbar > span {
+        height: 100%;
+        display: block;
+      }
+
+      .segbar .seg-not {
+        background: rgba(17, 24, 39, 0.30);
+      }
+
+      .segbar .seg-match {
+        background: var(--primary-2);
+      }
+
+      .segbar .seg-exc {
+        background: #dc2626;
+      }
+
+      .segbar-scale {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin-top: 8px;
+      }
+
+      .segbar-scale span {
+        font-variant-numeric: tabular-nums;
+      }
+
+      .segbar-legend {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 0.78rem;
+      }
+
+      .segbar-legend span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .segbar-legend .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        display: inline-block;
+        margin-right: 8px;
+      }
+
+      .segbar-legend .dot-not {
+        background: rgba(17, 24, 39, 0.30);
+      }
+
+      .segbar-legend .dot-match {
+        background: var(--primary-2);
+      }
+
+      .segbar-legend .dot-exc {
+        background: #dc2626;
+      }
+
+      .data-area {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-top: 16px;
+      }
+
+      .data-area.single-view {
+        grid-template-columns: 1fr !important;
+      }
+
+      @media (min-width: 968px) {
+        .data-area {
+          grid-template-columns: 1fr 1fr;
+          align-items: start;
+        }
+
+        .data-area > .results-section--full {
+          grid-column: 1 / -1;
+        }
+      }
+
+      .results-section {
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-soft);
+        padding: var(--card-pad);
+        overflow-x: auto;
+      }
+
+      .results-filter {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 12px;
+        margin-bottom: 12px;
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        box-shadow: var(--shadow-soft);
+        position: sticky;
+        top: 86px;
+        z-index: 4;
+      }
+
+      .results-filter-right {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+        flex: 1;
+      }
+
+      .results-search {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        min-width: 280px;
+        max-width: 440px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(113, 75, 103, 0.18);
+        border-radius: 12px;
+      }
+
+      .results-search i {
+        color: rgba(113, 75, 103, 0.85);
+        font-size: 0.9rem;
+      }
+
+      .results-search input {
+        border: none;
+        outline: none;
+        width: 100%;
+        font-size: 0.9rem;
+        color: #0f172a;
+        background: transparent;
+      }
+
+      .results-search input::placeholder {
+        color: #94a3b8;
+      }
+
+      .results-filter-tabs {
+        display: inline-flex;
+        gap: 6px;
+        padding: 4px;
+        background: rgba(113, 75, 103, 0.06);
+        border: 1px solid rgba(113, 75, 103, 0.12);
+        border-radius: 12px;
+      }
+
+      .results-filter-btn {
+        border: 1px solid transparent;
+        background: transparent;
+        color: #334155;
+        font-weight: 700;
+        font-size: 0.82rem;
+        padding: 8px 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+        white-space: nowrap;
+      }
+
+      .results-filter-btn:hover {
+        background: rgba(113, 75, 103, 0.08);
+        border-color: rgba(113, 75, 103, 0.18);
+      }
+
+      .results-filter-btn.active {
+        background: rgba(113, 75, 103, 0.16);
+        border-color: rgba(113, 75, 103, 0.28);
+        color: var(--primary);
+      }
+
+      .results-section-title {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        padding-bottom: 12px;
+        margin-bottom: 14px;
+        border-bottom: 1px solid var(--border);
+        font-weight: 850;
+        color: var(--text);
+        letter-spacing: -0.2px;
+        line-height: 1.25;
+      }
+
+      .results-section-title i {
+        color: var(--primary-2);
+      }
+
+      .results-section .matches-table,
+      .results-section .unmatched-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        overflow: hidden;
+        border-radius: 14px;
+        min-width: 720px;
+      }
+
+      .matches-table th,
+      .unmatched-table th {
+        padding: 10px 12px;
+        text-align: left;
+        font-weight: 750;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #334155;
+        border-bottom: 1px solid rgba(15, 23, 42, 0.10);
+        white-space: nowrap;
+      }
+
+      .matches-table td,
+      .unmatched-table td {
+        padding: 10px 12px;
+        border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+        color: #0f172a;
+        font-size: 0.87rem;
+        line-height: 1.35;
+        vertical-align: middle;
+      }
+
+      .matches-table tbody tr:hover,
+      .unmatched-table tbody tr:hover {
+        background: rgba(113, 75, 103, 0.05);
+      }
+
+      .matches-table tbody tr:last-child td,
+      .unmatched-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      .results-section .matches-table thead th,
+      .results-section .unmatched-table thead th {
+        position: sticky;
+        top: 0;
+        background: #f8fafc;
+        z-index: 1;
+      }
+
+      .results-section > table,
+      .results-section > div {
+        min-width: 0;
+      }
+
       .summary-value.success {
         color: #22c55e;
       }
-      
+
       .summary-value.warning {
         color: #f59e0b;
       }
       
-      .results-section {
-        margin-top: 30px;
-      }
-      
-      .results-section-title {
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: #1e40af;
-        margin-bottom: 20px;
-        padding-bottom: 12px;
-        border-bottom: 2px solid rgba(37, 99, 235, 0.2);
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      
-      .results-section-title i {
-        color: #2563eb;
-        font-size: 1.2rem;
-      }
-      
-      .matches-table, .unmatched-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 15px;
-        background: #ffffff;
-        border-radius: 12px;
-        overflow: hidden;
-        border: 1px solid rgba(37, 99, 235, 0.15);
-      }
-      
-      .matches-table thead, .unmatched-table thead {
-        background: rgba(37, 99, 235, 0.1);
-      }
-      
-      .matches-table th, .unmatched-table th {
-        padding: 16px;
-        text-align: left;
-        font-weight: 700;
-        font-size: 0.85rem;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        color: #1e40af;
-        border-bottom: 2px solid rgba(37, 99, 235, 0.3);
-      }
-      
-      .matches-table td, .unmatched-table td {
-        padding: 14px 16px;
-        border-bottom: 1px solid rgba(37, 99, 235, 0.1);
-        color: #1e3a5f;
-        font-size: 0.9rem;
-      }
-      
-      .matches-table tbody tr:hover, .unmatched-table tbody tr:hover {
-        background: rgba(37, 99, 235, 0.05);
-      }
-      
       .unmatched-row:hover {
-        background: rgba(37, 99, 235, 0.08) !important;
+        background: rgba(113, 75, 103, 0.08) !important;
         transform: translateX(2px);
         transition: all 0.2s ease;
       }
       
       .unmatched-row.selected {
-        background: rgba(37, 99, 235, 0.15) !important;
-        border-left: 4px solid #2563eb;
+        background: rgba(113, 75, 103, 0.14) !important;
+        border-left: 4px solid var(--primary-2);
       }
       
       .matches-table tbody tr:last-child td, .unmatched-table tbody tr:last-child td {
@@ -674,7 +1111,7 @@
       
       .amount-cell {
         font-weight: 700;
-        color: #2563eb;
+        color: var(--primary-2);
         font-family: 'Courier New', monospace;
       }
       
@@ -707,13 +1144,13 @@
         font-size: 3rem;
         margin-bottom: 15px;
         opacity: 0.3;
-        color: #2563eb;
+        color: var(--primary-2);
       }
       
       .section-toggle {
         background: transparent;
-        border: 1px solid rgba(37, 99, 235, 0.2);
-        color: #2563eb;
+        border: 1px solid rgba(113, 75, 103, 0.22);
+        color: var(--primary);
         padding: 8px 16px;
         border-radius: 8px;
         cursor: pointer;
@@ -727,9 +1164,9 @@
       }
       
       .section-toggle:hover {
-        background: rgba(37, 99, 235, 0.1);
-        border-color: rgba(37, 99, 235, 0.4);
-        color: #1e40af;
+        background: rgba(113, 75, 103, 0.10);
+        border-color: rgba(113, 75, 103, 0.35);
+        color: var(--primary);
       }
       
       .toggleable-section {
@@ -746,18 +1183,18 @@
       }
       
       .upload-hint {
-        background: rgba(37, 99, 235, 0.05);
+        background: rgba(113, 75, 103, 0.06);
         padding: 18px 20px;
         border-radius: 12px;
         margin-top: 25px;
         font-size: 0.9rem;
         color: #475569;
         line-height: 1.7;
-        border: 1px solid rgba(37, 99, 235, 0.15);
+        border: 1px solid rgba(113, 75, 103, 0.16);
       }
       
       .upload-hint strong {
-        color: #2563eb;
+        color: var(--primary);
         font-weight: 700;
       }
       
@@ -777,6 +1214,30 @@
       }
       
       ::-webkit-scrollbar-thumb:hover {
+        background: #64748b;
+      }
+      
+      /* Modal styles */
+      .modal-overlay {
+        scrollbar-width: thin;
+        scrollbar-color: #94a3b8 #f1f5f9;
+      }
+      
+      .modal-overlay::-webkit-scrollbar {
+        width: 8px;
+      }
+      
+      .modal-overlay::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 4px;
+      }
+      
+      .modal-overlay::-webkit-scrollbar-thumb {
+        background: #94a3b8;
+        border-radius: 4px;
+      }
+      
+      .modal-overlay::-webkit-scrollbar-thumb:hover {
         background: #64748b;
       }
     </style>
@@ -862,80 +1323,16 @@
       </div>
 
       <div class="results-grid">
-        <div class="result-card">
+        <div class="result-card result-card--full">
           <h2>
             <i class="fas fa-chart-line"></i>
             Reconciliation Summary
           </h2>
           <div id="summary">
             <div style="text-align: center; color: #64748b; padding: 50px;">
-              <i class="fas fa-chart-bar" style="font-size: 3.5rem; opacity: 0.2; margin-bottom: 20px; color: #2563eb;"></i>
+              <i class="fas fa-chart-bar" style="font-size: 3.5rem; opacity: 0.2; margin-bottom: 20px; color: var(--primary-2);"></i>
               <div style="font-size: 1rem; font-weight: 500;">Run reconciliation to see results</div>
             </div>
-          </div>
-        </div>
-        
-        <div class="result-card">
-          <h2>
-            <i class="fas fa-history"></i>
-            Reconciliation History
-          </h2>
-          <div id="history">
-            <div style="text-align: center; color: #64748b; padding: 24px 16px 8px 16px;">
-              <i class="fas fa-clock-rotate-left" style="font-size: 2.3rem; opacity: 0.25; margin-bottom: 10px; color: #2563eb;"></i>
-              <div style="font-size: 0.95rem; font-weight: 500; margin-bottom: 6px;">
-                Click the button to view reconciliation history
-              </div>
-              <div style="font-size: 0.8rem; opacity: 0.8; margin-bottom: 10px;">
-                Shows your past reconciliation runs with match counts & accuracy
-              </div>
-              <button
-                type="button"
-                id="history-load-btn"
-                class="submit-btn"
-                style="margin-top: 4px; padding: 8px 18px; font-size: 0.9rem;"
-              >
-                <i class="fas fa-clock-rotate-left"></i>
-                View Reconciliation History
-              </button>
-            </div>
-            <div id="history-search-container" style="display: none; margin-top: 15px; margin-bottom: 15px;">
-              <div class="search-filter-container">
-                <input
-                  type="text"
-                  id="history-search-input"
-                  class="search-input"
-                  placeholder="🔍 Search by invoice or bank file name..."
-                  onkeyup="filterHistoryTable()"
-                />
-                <input
-                  type="date"
-                  id="history-date-from"
-                  class="search-input"
-                  style="flex: 0 0 150px;"
-                  placeholder="From Date"
-                  onchange="filterHistoryTable()"
-                />
-                <input
-                  type="date"
-                  id="history-date-to"
-                  class="search-input"
-                  style="flex: 0 0 150px;"
-                  placeholder="To Date"
-                  onchange="filterHistoryTable()"
-                />
-                <button
-                  type="button"
-                  class="json-toggle"
-                  onclick="clearHistoryFilters()"
-                  style="padding: 10px 15px;"
-                  title="Clear all filters"
-                >
-                  <i class="fas fa-times"></i> Clear
-                </button>
-              </div>
-            </div>
-            <div id="history-table-container" style="margin-top: 12px;"></div>
           </div>
         </div>
       </div>
@@ -962,14 +1359,93 @@
       const statusEl = document.getElementById("status");
       const jsonOutput = document.getElementById("json-output");
       const summaryEl = document.getElementById("summary");
-      const historyEl = document.getElementById("history");
-      const historyBtn = document.getElementById("history-load-btn");
-      const historyTableEl = document.getElementById("history-table-container");
       const submitBtn = document.getElementById("submit-btn");
+
+      let currentResultsFilter = "matched";
+      let currentResultsSearch = "";
+
+      function applyResultsFilter() {
+        const filter = currentResultsFilter || "matched";
+        const filterBar = document.getElementById("results-filter");
+        if (filterBar) {
+          filterBar.querySelectorAll(".results-filter-btn").forEach((btn) => {
+            const btnFilter = btn.getAttribute("data-filter");
+            btn.classList.toggle("active", btnFilter === filter);
+          });
+        }
+
+        const dataArea = document.querySelector(".data-area");
+        if (dataArea) {
+          dataArea.classList.toggle("single-view", true);
+        }
+
+        const sections = document.querySelectorAll("[data-results-section]");
+        sections.forEach((el) => {
+          const type = el.getAttribute("data-results-section");
+          let show = true;
+
+          if (filter === "matched") {
+            show = type === "matched";
+          } else if (filter === "unmatched_invoices") {
+            show = type === "unmatched_invoices";
+          } else if (filter === "unmatched_bank") {
+            show = type === "unmatched_bank";
+          } else if (filter === "exceptions") {
+            show = type === "unmatched_invoices" || type === "unmatched_bank";
+          } else {
+            show = type === "matched";
+          }
+
+          el.style.display = show ? "" : "none";
+
+          if (dataArea) {
+            el.style.gridColumn = show ? "1 / -1" : "";
+          }
+        });
+
+        applyResultsSearch();
+      }
+
+      function applyResultsSearch() {
+        const q = (currentResultsSearch || "").trim().toLowerCase();
+        const filterVisibleTables = () => {
+          const visibleSections = Array.from(document.querySelectorAll("[data-results-section]"))
+            .filter((el) => el.style.display !== "none");
+
+          visibleSections.forEach((section) => {
+            const tables = section.querySelectorAll("table");
+            tables.forEach((table) => {
+              const rows = table.querySelectorAll("tbody tr");
+              rows.forEach((row) => {
+                if (!q) {
+                  row.style.display = "";
+                  return;
+                }
+                const text = (row.textContent || "").toLowerCase();
+                row.style.display = text.includes(q) ? "" : "none";
+              });
+            });
+          });
+        };
+
+        filterVisibleTables();
+      }
+
+      function setResultsSearch(value) {
+        currentResultsSearch = value || "";
+        applyResultsSearch();
+      }
+
+      function setResultsFilter(filter) {
+        currentResultsFilter = filter;
+        applyResultsFilter();
+
+        const searchInput = document.getElementById('results-search-input');
+        if (searchInput) {
+          searchInput.value = currentResultsSearch;
+        }
+      }
       
-      let historyData = [];
-      let historyCurrentPage = 1;
-      const historyPageSize = 10;
 
       // Prevent default drag behavior
       ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
@@ -1106,26 +1582,11 @@
           setupDragAndDrop("invoice-drop-zone", "invoice", "invoice-file-list", true);
           setupDragAndDrop("bank-drop-zone", "bank", "bank-file-list", true); // Enable multiple bank files
           
-           // History button click: load & show paginated history list on demand
-          if (historyBtn) {
-            historyBtn.addEventListener("click", () => {
-              loadReconciliationHistory(500).catch(err => {
-                console.error("Failed to load reconciliation history:", err);
-              });
-            });
-          }
         });
       } else {
         setupDragAndDrop("invoice-drop-zone", "invoice", "invoice-file-list", true);
         setupDragAndDrop("bank-drop-zone", "bank", "bank-file-list", false);
         
-        if (historyBtn) {
-          historyBtn.addEventListener("click", () => {
-            loadReconciliationHistory(500).catch(err => {
-              console.error("Failed to load reconciliation history:", err);
-            });
-          });
-        }
       }
 
       form.addEventListener("submit", async (e) => {
@@ -1452,14 +1913,6 @@
             `;
           }
           
-          // If user has already loaded history once, refresh it in the background
-          if (historyData && historyData.length > 0) {
-            try {
-              await loadReconciliationHistory();
-            } catch (err) {
-              console.error("Failed to refresh reconciliation history:", err);
-            }
-          }
           document.getElementById("results-secondary").style.display = "grid";
         } catch (err) {
           clearInterval(statusUpdateInterval);
@@ -1488,272 +1941,7 @@
         });
       }
       
-      function renderHistoryTablePage(page) {
-        if (!historyTableEl) return;
-        
-        if (!historyData || historyData.length === 0) {
-          historyTableEl.innerHTML = `
-            <div class="empty-state">
-              <i class="fas fa-circle-info"></i>
-              <div>No reconciliation history found yet.</div>
-            </div>
-          `;
-          return;
-        }
-        
-        const totalItems = historyData.length;
-        const totalPages = Math.max(1, Math.ceil(totalItems / historyPageSize));
-        const safePage = Math.min(Math.max(1, page), totalPages);
-        historyCurrentPage = safePage;
-        
-        const startIndex = (safePage - 1) * historyPageSize;
-        const endIndex = Math.min(startIndex + historyPageSize, totalItems);
-        const pageItems = historyData.slice(startIndex, endIndex);
-
-        const rowsHtml = pageItems.map(item => {
-          const createdAt = formatDate(item.created_at);
-          const matchCount = item.match_count ?? 0;
-          const onlyInv = item.only_in_invoices_count ?? 0;
-          const onlyBank = item.only_in_bank_count ?? 0;
-          const invRows = item.total_invoice_rows ?? (matchCount + onlyInv);
-          const bankRows = item.total_bank_rows ?? (matchCount + onlyBank);
-
-          const invAcc = invRows > 0 ? (matchCount / invRows * 100) : 0;
-          const bankAcc = bankRows > 0 ? (matchCount / bankRows * 100) : 0;
-
-          const invAccClass = invAcc >= 80 ? "success" : invAcc >= 50 ? "warning" : "";
-          const bankAccClass = bankAcc >= 80 ? "success" : bankAcc >= 50 ? "warning" : "";
-
-          return `
-            <tr data-reconciliation-id="${item.id}">
-              <td>#${item.id}</td>
-              <td title="${item.invoice_file || '-'}">${truncateText(item.invoice_file || '-', 28)}</td>
-              <td title="${item.bank_file || '-'}">${truncateText(item.bank_file || '-', 28)}</td>
-              <td>${createdAt}</td>
-              <td class="amount-cell">${matchCount}</td>
-              <td class="amount-cell">${onlyInv}</td>
-              <td class="amount-cell">${onlyBank}</td>
-              <td class="amount-cell ${invAccClass}">${invAcc.toFixed(1)}%</td>
-              <td class="amount-cell ${bankAccClass}">${bankAcc.toFixed(1)}%</td>
-              <td>
-                <button
-                  type="button"
-                  class="json-toggle"
-                  style="padding: 4px 10px; font-size: 0.75rem; background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.4); color: #f87171;"
-                  onclick="deleteReconciliation(${item.id}, event)"
-                  title="Delete this reconciliation"
-                >
-                  <i class="fas fa-trash"></i> Delete
-                </button>
-              </td>
-            </tr>
-          `;
-        }).join('');
-
-        historyTableEl.innerHTML = `
-          <div style="width: 100%; overflow-x: auto;">
-            <table class="matches-table">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Invoice File(s)</th>
-                  <th>Bank File</th>
-                  <th>Created At</th>
-                  <th>Matches</th>
-                  <th>Only In Invoices</th>
-                  <th>Only In Bank</th>
-                  <th>Invoice Accuracy</th>
-                  <th>Bank Accuracy</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${rowsHtml}
-              </tbody>
-            </table>
-          </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: 0.85rem; color: #475569;">
-            <div>
-              Showing <strong>${startIndex + 1}</strong>–<strong>${endIndex}</strong> of <strong>${totalItems}</strong> runs
-            </div>
-            <div style="display: flex; gap: 8px; align-items: center;">
-              <button
-                type="button"
-                class="json-toggle"
-                id="history-prev-page"
-                ${safePage === 1 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}
-              >
-                <i class="fas fa-chevron-left"></i>
-                <span>Prev</span>
-              </button>
-              <span>Page ${safePage} of ${totalPages}</span>
-              <button
-                type="button"
-                class="json-toggle"
-                id="history-next-page"
-                ${safePage === totalPages ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}
-              >
-                <span>Next</span>
-                <i class="fas fa-chevron-right"></i>
-              </button>
-            </div>
-          </div>
-        `;
-        
-        const prevBtn = document.getElementById("history-prev-page");
-        const nextBtn = document.getElementById("history-next-page");
-        
-        if (prevBtn) {
-          prevBtn.addEventListener("click", () => {
-            if (historyCurrentPage > 1) {
-              renderHistoryTablePage(historyCurrentPage - 1);
-            }
-          });
-        }
-        
-        if (nextBtn) {
-          nextBtn.addEventListener("click", () => {
-            const maxPages = Math.max(1, Math.ceil(historyData.length / historyPageSize));
-            if (historyCurrentPage < maxPages) {
-              renderHistoryTablePage(historyCurrentPage + 1);
-            }
-          });
-        }
-      }
-      
-      // Delete reconciliation function
-      async function deleteReconciliation(reconciliationId, event) {
-        event.stopPropagation();
-        
-        if (!confirm(`Are you sure you want to delete reconciliation #${reconciliationId}? This will also delete all associated matches. This action cannot be undone.`)) {
-          return;
-        }
-        
-        try {
-          const statusEl = document.getElementById("status");
-          if (statusEl) {
-            statusEl.textContent = `Deleting reconciliation #${reconciliationId}...`;
-            statusEl.className = "status processing show";
-          }
-          
-          const response = await fetch(`/api/reconciliations/${reconciliationId}`, {
-            method: 'DELETE'
-          });
-          
-          const result = await response.json();
-          
-          if (!response.ok) {
-            if (statusEl) {
-              statusEl.textContent = `Error: ${result.error || 'Unknown error'}`;
-              statusEl.className = "status error show";
-            }
-            alert(`Error deleting reconciliation: ${result.error || 'Unknown error'}`);
-            return;
-          }
-          
-          if (statusEl) {
-            statusEl.textContent = `✓ Reconciliation #${reconciliationId} deleted successfully!`;
-            statusEl.className = "status success show";
-            setTimeout(() => {
-              statusEl.className = "status success";
-            }, 3000);
-          }
-          
-          // Remove the row from UI immediately
-          const row = document.querySelector(`tr[data-reconciliation-id="${reconciliationId}"]`);
-          if (row) {
-            row.style.opacity = '0.5';
-            row.style.transition = 'opacity 0.3s';
-            setTimeout(() => {
-              row.remove();
-              // Reload history to refresh the table
-              loadReconciliationHistory();
-            }, 300);
-          } else {
-            // If row not found, just reload history
-            loadReconciliationHistory();
-          }
-        } catch (error) {
-          console.error('Error deleting reconciliation:', error);
-          const statusEl = document.getElementById("status");
-          if (statusEl) {
-            statusEl.textContent = "Error deleting reconciliation. Please try again.";
-            statusEl.className = "status error show";
-          }
-          alert('Error deleting reconciliation. Please try again.');
-        }
-      }
-      
-      async function loadReconciliationHistory(limit = 20, search = null, dateFrom = null, dateTo = null) {
-        if (!historyTableEl) return;
-        
-        try {
-          if (historyBtn) {
-            historyBtn.disabled = true;
-            historyBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span style="margin-left:6px;">Loading...</span>';
-          }
-          
-          // Build query parameters
-          let url = `/api/reconciliations?limit=${encodeURIComponent(limit)}`;
-          if (search) url += `&search=${encodeURIComponent(search)}`;
-          if (dateFrom) url += `&date_from=${encodeURIComponent(dateFrom)}`;
-          if (dateTo) url += `&date_to=${encodeURIComponent(dateTo)}`;
-          
-          const res = await fetch(url);
-          const data = await res.json();
-          
-          if (!res.ok) {
-            console.error("Failed to load reconciliation history:", data);
-            return;
-          }
-          
-          historyData = data.reconciliations || [];
-          
-          // Show search container if history is loaded
-          const searchContainer = document.getElementById("history-search-container");
-          if (searchContainer && historyData.length > 0) {
-            searchContainer.style.display = "block";
-          }
-          
-          renderHistoryTablePage(1);
-        } catch (err) {
-          console.error("Error loading reconciliation history:", err);
-        } finally {
-          if (historyBtn) {
-            historyBtn.disabled = false;
-            historyBtn.innerHTML = '<i class="fas fa-rotate"></i><span style="margin-left:6px;">Refresh History</span>';
-          }
-        }
-      }
-      
-      // Filter history table
-      function filterHistoryTable() {
-        const searchInput = document.getElementById("history-search-input");
-        const dateFromInput = document.getElementById("history-date-from");
-        const dateToInput = document.getElementById("history-date-to");
-        
-        const search = searchInput ? searchInput.value.trim() : null;
-        const dateFrom = dateFromInput ? dateFromInput.value : null;
-        const dateTo = dateToInput ? dateToInput.value : null;
-        
-        // Reload history with filters
-        loadReconciliationHistory(50, search || null, dateFrom || null, dateTo || null);
-      }
-      
-      // Clear history filters
-      function clearHistoryFilters() {
-        const searchInput = document.getElementById("history-search-input");
-        const dateFromInput = document.getElementById("history-date-from");
-        const dateToInput = document.getElementById("history-date-to");
-        
-        if (searchInput) searchInput.value = "";
-        if (dateFromInput) dateFromInput.value = "";
-        if (dateToInput) dateToInput.value = "";
-        
-        // Reload without filters
-        loadReconciliationHistory(50);
-      }
-      
+            
       function formatDate(dateStr) {
         if (!dateStr) return '-';
         try {
@@ -1841,16 +2029,22 @@
                   <th>Bank Date</th>
                   <th>Bank Description</th>
                   <th>Bank Amount</th>
+                  <th>Amount Δ</th>
                   <th>Balance</th>
                   <th>Credit/Debit</th>
                   <th>Match Score</th>
-                  <th>Actions</th>
+                  <th class="actions-col">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 ${matches.map((match, matchIndex) => {
                   const inv = match.invoice || {};
                   const bank = match.bank || {};
+                  const invAmt = Number(inv.amount) || 0;
+                  const bankAmt = Number(bank.amount) || 0;
+                  const delta = invAmt - bankAmt;
+                  const absDelta = Math.abs(delta);
+                  const deltaClass = absDelta <= 0.01 ? 'delta-ok' : (absDelta <= 1 ? 'delta-warn' : 'delta-bad');
                   const score = (match.match_score * 100).toFixed(1);
                   const isManual = match.is_manual_match || false;
                   // Use match_id from database (can be 0, which is valid)
@@ -1888,6 +2082,7 @@
                       <td style="font-size: 0.85rem; color: #64748b; font-weight: 600;">${formatDate(bank.date)}</td>
                       <td class="description-cell" title="${(bank.description || '').replace(/"/g, '&quot;')}">${truncateText(bank.description, 30)}</td>
                       <td class="amount-cell">${formatCurrency(bank.amount || 0)}</td>
+                      <td class="delta-cell ${deltaClass}">${formatCurrency(delta)}</td>
                       <td style="font-size: 0.85rem; color: #64748b; font-weight: 600;">${bankBalance}</td>
                       <td style="font-size: 0.85rem; color: ${bankDirection === 'credit' ? '#059669' : '#dc2626'}; font-weight: 600;">
                         <i class="fas fa-arrow-${bankDirection === 'credit' ? 'up' : 'down'}" style="margin-right: 4px;"></i>
@@ -1897,22 +2092,23 @@
                         <span class="match-score">${score}%</span>
                         ${isManual ? '<span style="margin-left: 6px; font-size: 0.7rem; color: #2563eb; font-weight: 600;" title="Manual Match">(Manual)</span>' : ''}
                       </td>
-                      <td>
-                        <button 
-                          class="btn-delete" 
-                          onclick="deleteMatch(${recon.id}, ${match.id || 'null'})"
-                          title="Delete match"
-                        >
-                          <i class="fas fa-trash"></i>
-                        </button>
-                        <button 
-                          class="btn-view" 
-                          onclick="viewInvoiceImage('${inv.file_path || ''}', '${inv.invoice_number || 'N/A'}')"
-                          title="View Invoice Image"
-                          style="margin-left: 5px;"
-                        >
-                          <i class="fas fa-eye"></i>
-                        </button>
+                      <td class="actions-col">
+                        <div class="match-actions">
+                          <button 
+                            class="btn-view" 
+                            onclick="viewInvoiceImage('${inv.file_path || ''}', '${inv.invoice_number || 'N/A'}')"
+                            title="View Invoice Image"
+                          >
+                            <i class="fas fa-eye"></i>
+                          </button>
+                          <button 
+                            class="btn-delete" 
+                            onclick="deleteMatch(${recon.id}, ${match.id || 'null'})"
+                            title="Delete match"
+                          >
+                            <i class="fas fa-trash"></i>
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   `;
@@ -2018,6 +2214,58 @@
 
         const totalInvoiceTxs = matches.length + onlyInv.length;
         const totalBankTxs = matches.length + onlyBank.length;
+
+        const totalTransactions = totalInvoiceTxs + totalBankTxs;
+
+        const overdueDays = 30;
+        const nowTs = Date.now();
+        const msPerDay = 24 * 60 * 60 * 1000;
+        const parseDateTs = (v) => {
+          if (!v) return null;
+          const d = new Date(v);
+          const t = d.getTime();
+          return Number.isFinite(t) ? t : null;
+        };
+
+        const overdueInvoices = onlyInv.filter((item) => {
+          const ts = parseDateTs(item.date);
+          if (!ts) return false;
+          return (nowTs - ts) > (overdueDays * msPerDay);
+        });
+
+        const overdueInvoiceCount = overdueInvoices.length;
+        const overdueInvoiceAmount = overdueInvoices.reduce((sum, item) => sum + (Number(item.amount) || 0), 0);
+
+        const totalInvoiceAmount = (
+          matches.reduce((sum, m) => sum + (Number((m.invoice || {}).amount) || 0), 0) +
+          onlyInv.reduce((sum, item) => sum + (Number(item.amount) || 0), 0)
+        );
+
+        const totalBankAmount = (
+          matches.reduce((sum, m) => sum + (Number((m.bank || {}).amount) || 0), 0) +
+          onlyBank.reduce((sum, item) => sum + (Number(item.amount) || 0), 0)
+        );
+
+        const unmatchedInvoiceAmount = onlyInv.reduce((sum, item) => sum + (Number(item.amount) || 0), 0);
+        const unmatchedBankAmount = onlyBank.reduce((sum, item) => sum + (Number(item.amount) || 0), 0);
+
+        const invNotProcessed = 0;
+        const bankNotProcessed = 0;
+        const invMatched = matches.length;
+        const invExceptions = onlyInv.length;
+        const bankMatched = matches.length;
+        const bankExceptions = onlyBank.length;
+
+        const invTotal = Math.max(1, totalInvoiceTxs);
+        const bankTotal = Math.max(1, totalBankTxs);
+
+        const invNotPct = Math.max(0, Math.min(100, (invNotProcessed / invTotal) * 100));
+        const invMatchPct = Math.max(0, Math.min(100, (invMatched / invTotal) * 100));
+        const invExcPct = Math.max(0, Math.min(100, (invExceptions / invTotal) * 100));
+
+        const bankNotPct = Math.max(0, Math.min(100, (bankNotProcessed / bankTotal) * 100));
+        const bankMatchPct = Math.max(0, Math.min(100, (bankMatched / bankTotal) * 100));
+        const bankExcPct = Math.max(0, Math.min(100, (bankExceptions / bankTotal) * 100));
         
         summaryEl.innerHTML = `
           <div class="summary-grid">
@@ -2032,10 +2280,44 @@
             <div class="summary-item">
               <div class="summary-label">Only in Invoices</div>
               <div class="summary-value">${onlyInv.length}</div>
+              <div style="font-size: 0.75rem; color: #64748b; margin-top: 5px;">
+                ${formatCurrency(unmatchedInvoiceAmount)}
+              </div>
             </div>
             <div class="summary-item">
               <div class="summary-label">Only in Bank</div>
               <div class="summary-value">${onlyBank.length}</div>
+              <div style="font-size: 0.75rem; color: #64748b; margin-top: 5px;">
+                ${formatCurrency(unmatchedBankAmount)}
+              </div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-label">Total Invoice Tx</div>
+              <div class="summary-value">${totalInvoiceTxs}</div>
+              <div style="font-size: 0.75rem; color: #64748b; margin-top: 5px;">
+                ${formatCurrency(totalInvoiceAmount)}
+              </div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-label">Total Bank Tx</div>
+              <div class="summary-value">${totalBankTxs}</div>
+              <div style="font-size: 0.75rem; color: #64748b; margin-top: 5px;">
+                ${formatCurrency(totalBankAmount)}
+              </div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-label">Total Transactions</div>
+              <div class="summary-value">${totalTransactions}</div>
+              <div style="font-size: 0.75rem; color: #64748b; margin-top: 5px;">
+                ${formatCurrency(totalInvoiceAmount)} · ${formatCurrency(totalBankAmount)}
+              </div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-label">Overdue Invoices (${overdueDays}d+)</div>
+              <div class="summary-value ${overdueInvoiceCount > 0 ? 'warning' : ''}">${overdueInvoiceCount}</div>
+              <div style="font-size: 0.75rem; color: #64748b; margin-top: 5px;">
+                ${formatCurrency(overdueInvoiceAmount)}
+              </div>
             </div>
             <div class="summary-item">
               <div class="summary-label">Invoice Accuracy</div>
@@ -2051,143 +2333,180 @@
                 ${matches.length} of ${totalBankTxs} matched
               </div>
             </div>
-            ${preEstTime || estimatedTime || processingTime ? `
-            <div class="summary-item" style="grid-column: 1 / -1; border-top: 2px solid rgba(37, 99, 235, 0.3); padding-top: 20px; margin-top: 10px;">
-              ${preEstTime ? `
-              <div class="summary-label">
-                <i class="fas fa-hourglass-start" style="margin-right: 6px;"></i>
-                Pre-Processing Estimate (Based on File Sizes)
-              </div>
-              <div class="summary-value" style="color: #2563eb; font-size: 1.6rem; margin-bottom: 8px;">${preEstTime}</div>
-              <div style="font-size: 0.75rem; color: #64748b; margin-top: 5px; margin-bottom: 12px;">
-                Estimated before processing started (${preEstTx.invoice || '?'} invoices, ${preEstTx.bank || '?'} bank transactions estimated)
-                ${preEstParsing ? ` | Parsing: ${preEstParsing.toFixed(1)}s` : ''}
-                ${preEstRecon ? ` | Reconciliation: ${preEstRecon.toFixed(1)}s` : ''}
-              </div>
-              ` : ''}
-              ${estimatedTime ? `
-              <div class="summary-label">
-                <i class="fas fa-clock" style="margin-right: 6px;"></i>
-                Post-Parsing Estimate (After Reading Files)
-              </div>
-              <div class="summary-value" style="color: #2563eb; font-size: 1.6rem; margin-bottom: 8px;">${estimatedTime}</div>
-              <div style="font-size: 0.75rem; color: #64748b; margin-top: 5px; margin-bottom: ${processingTime ? '12px' : '0'};">
-                More accurate estimate after parsing files (based on actual transaction counts)
-              </div>
-              ` : ''}
-              ${processingTime ? `
-              <div class="summary-label">
-                <i class="fas fa-check-circle" style="margin-right: 6px;"></i>
-                Actual Processing Time
-              </div>
-              <div class="summary-value highlight" style="font-size: 2rem;">${processingTime}</div>
-              <div style="font-size: 0.75rem; color: #64748b; margin-top: 5px;">
-                Actual time taken to process and reconcile all transactions
-                ${(() => {
-                  let comparison = '';
-                  if (preEstTime && recon.processing_time_seconds && preEstimate.total_estimated_time) {
-                    const preEst = preEstimate.total_estimated_time;
-                    const act = recon.processing_time_seconds;
-                    const diff = ((act - preEst) / preEst * 100).toFixed(0);
-                    if (Math.abs(diff) > 5) {
-                      comparison = ` | ${diff > 0 ? '+' : ''}${diff}% ${diff > 0 ? 'slower' : 'faster'} than pre-estimate`;
-                    } else {
-                      comparison = ' | Very close to pre-estimate!';
-                    }
-                  } else if (estimatedTime && recon.estimated_time_seconds && recon.processing_time_seconds) {
-                    const est = recon.estimated_time_seconds;
-                    const act = recon.processing_time_seconds;
-                    const diff = ((act - est) / est * 100).toFixed(0);
-                    if (Math.abs(diff) > 5) {
-                      comparison = ` | ${diff > 0 ? '+' : ''}${diff}% ${diff > 0 ? 'slower' : 'faster'} than post-estimate`;
-                    } else {
-                      comparison = ' | Very close to estimate!';
-                    }
-                  }
-                  return comparison;
-                })()}
-              </div>
-              ` : ''}
-            </div>
-            ` : ''}
           </div>
-          
-          ${matches.length > 0 ? `
-            <div class="results-section">
-              <div class="results-section-title" style="display: flex; justify-content: space-between; align-items: center;">
-                <div style="display: flex; align-items: center; gap: 10px;">
-                  <i class="fas fa-check-circle"></i>
-                  Matched Transactions (${matches.length})
-                </div>
-                <div style="display: flex; gap: 8px;">
-                  <button
-                    type="button"
-                    class="json-toggle"
-                    id="export-matches-csv-btn"
-                    style="margin: 0; background: rgba(34, 197, 94, 0.2); border-color: rgba(34, 197, 94, 0.4); color: #4ade80;"
-                    onclick="exportMatches('csv', ${reconId})"
-                    title="Export matches to CSV"
-                  >
-                    <i class="fas fa-file-csv"></i>
-                    <span>CSV</span>
-                  </button>
-                  <button
-                    type="button"
-                    class="json-toggle"
-                    id="export-matches-excel-btn"
-                    style="margin: 0; background: rgba(34, 197, 94, 0.2); border-color: rgba(34, 197, 94, 0.4); color: #4ade80;"
-                    onclick="exportMatches('xlsx', ${reconId})"
-                    title="Export matches to Excel"
-                  >
-                    <i class="fas fa-file-excel"></i>
-                    <span>Excel</span>
-                  </button>
-                  <button
-                    type="button"
-                    class="json-toggle"
-                    id="export-matches-pdf-btn"
-                    style="margin: 0; background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.4); color: #f87171;"
-                    onclick="exportMatches('pdf', ${reconId})"
-                    title="Export matches to PDF"
-                  >
-                    <i class="fas fa-file-pdf"></i>
-                    <span>PDF</span>
-                  </button>
+
+          <div class="side-panels">
+            <div class="side-panel">
+              <div class="side-panel-head">
+                <div>
+                  <div class="side-panel-title">Side A: Bank Data Source</div>
+                  <div class="side-panel-sub">Total items: ${invTotal}</div>
                 </div>
               </div>
-              ${matchesTableHTML}
+              <div class="segbar" role="img" aria-label="Bank data source progress">
+                <span class="seg-not" style="width: ${invNotPct.toFixed(2)}%"></span>
+                <span class="seg-match" style="width: ${invMatchPct.toFixed(2)}%"></span>
+                <span class="seg-exc" style="width: ${invExcPct.toFixed(2)}%"></span>
+              </div>
+              <div class="segbar-scale">
+                <span>0</span>
+                <span>${invTotal}</span>
+              </div>
+              <div class="segbar-legend">
+                <span><span class="dot dot-not"></span>Not processed (${invNotProcessed})</span>
+                <span><span class="dot dot-match"></span>Matched (${invMatched})</span>
+                <span><span class="dot dot-exc"></span>Exceptions (${invExceptions})</span>
+              </div>
             </div>
-          ` : ''}
-          
-          ${onlyInv.length > 0 ? `
-            <div class="results-section">
-              <div class="results-section-title">
-                <i class="fas fa-exclamation-triangle"></i>
-                Unmatched Invoices (${onlyInv.length})
+
+            <div class="side-panel">
+              <div class="side-panel-head">
+                <div>
+                  <div class="side-panel-title">Side B: Ledger</div>
+                  <div class="side-panel-sub">Total items: ${bankTotal}</div>
+                </div>
               </div>
-              <div style="margin-bottom: 15px; font-size: 0.9rem; color: #475569; padding: 12px; background: rgba(37, 99, 235, 0.1); border-radius: 8px; border-left: 4px solid #2563eb;">
-                <i class="fas fa-info-circle" style="margin-right: 6px; color: #2563eb;"></i>
-                <strong style="color: #2563eb;">Manual Matching Options:</strong><br>
-                • <strong>Match Existing:</strong> Match with existing unmatched bank transactions<br>
-                • <strong>Upload Bank Doc:</strong> Upload a bank statement document to extract and match transactions
+              <div class="segbar" role="img" aria-label="Ledger progress">
+                <span class="seg-not" style="width: ${bankNotPct.toFixed(2)}%"></span>
+                <span class="seg-match" style="width: ${bankMatchPct.toFixed(2)}%"></span>
+                <span class="seg-exc" style="width: ${bankExcPct.toFixed(2)}%"></span>
               </div>
-              ${unmatchedInvHTML}
+              <div class="segbar-scale">
+                <span>0</span>
+                <span>${bankTotal}</span>
+              </div>
+              <div class="segbar-legend">
+                <span><span class="dot dot-not"></span>Not processed (${bankNotProcessed})</span>
+                <span><span class="dot dot-match"></span>Matched (${bankMatched})</span>
+                <span><span class="dot dot-exc"></span>Exceptions (${bankExceptions})</span>
+              </div>
             </div>
-          ` : ''}
-          
-          ${onlyBank.length > 0 ? `
-            <div class="results-section">
-              <div class="results-section-title">
-                <i class="fas fa-exclamation-triangle"></i>
-                Unmatched Bank Transactions (${onlyBank.length})
+          </div>
+
+          ${(matches.length > 0 || onlyInv.length > 0 || onlyBank.length > 0) ? `
+            <div class="data-area">
+              <div class="results-filter" id="results-filter">
+                <div class="results-filter-tabs" role="tablist" aria-label="Results filter">
+                  <button type="button" class="results-filter-btn" data-filter="matched" onclick="setResultsFilter('matched')">Matched (${matches.length})</button>
+                  <button type="button" class="results-filter-btn" data-filter="unmatched_invoices" onclick="setResultsFilter('unmatched_invoices')">Unmatched Invoices (${onlyInv.length})</button>
+                  <button type="button" class="results-filter-btn" data-filter="unmatched_bank" onclick="setResultsFilter('unmatched_bank')">Unmatched Bank (${onlyBank.length})</button>
+                  <button type="button" class="results-filter-btn" data-filter="exceptions" onclick="setResultsFilter('exceptions')">Exceptions (${onlyInv.length + onlyBank.length})</button>
+                </div>
+                <div class="results-filter-right">
+                  <div class="results-search" role="search">
+                    <i class="fas fa-search"></i>
+                    <input id="results-search-input" type="text" placeholder="Search transactions…" oninput="setResultsSearch(this.value)" />
+                  </div>
+                </div>
               </div>
-              <div style="margin-bottom: 15px; font-size: 0.9rem; color: #475569; padding: 12px; background: rgba(37, 99, 235, 0.1); border-radius: 8px; border-left: 4px solid #2563eb;">
-                <i class="fas fa-info-circle" style="margin-right: 6px; color: #2563eb;"></i>
-                <strong style="color: #2563eb;">Manual Matching Options:</strong><br>
-                • <strong>Match Existing:</strong> Match with existing unmatched invoices<br>
-                • <strong>Upload Invoice Doc:</strong> Upload an invoice document to extract and match transactions
-              </div>
-              ${unmatchedBankHTML}
+              ${matches.length > 0 ? `
+                <div class="results-section results-section--full" data-results-section="matched">
+                  <div class="results-section-title" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                      <i class="fas fa-check-circle"></i>
+                      Matched Transactions (${matches.length})
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                      <button
+                        type="button"
+                        class="json-toggle"
+                        id="export-matches-csv-btn"
+                        style="margin: 0; background: rgba(34, 197, 94, 0.2); border-color: rgba(34, 197, 94, 0.4); color: #4ade80;"
+                        onclick="exportMatches('csv', ${reconId})"
+                        title="Export matches to CSV"
+                      >
+                        <i class="fas fa-file-csv"></i>
+                        <span>CSV</span>
+                      </button>
+                      <button
+                        type="button"
+                        class="json-toggle"
+                        id="export-matches-excel-btn"
+                        style="margin: 0; background: rgba(34, 197, 94, 0.2); border-color: rgba(34, 197, 94, 0.4); color: #4ade80;"
+                        onclick="exportMatches('xlsx', ${reconId})"
+                        title="Export matches to Excel"
+                      >
+                        <i class="fas fa-file-excel"></i>
+                        <span>Excel</span>
+                      </button>
+                      <button
+                        type="button"
+                        class="json-toggle"
+                        id="export-matches-pdf-btn"
+                        style="margin: 0; background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.4); color: #f87171;"
+                        onclick="exportMatches('pdf', ${reconId})"
+                        title="Export matches to PDF"
+                      >
+                        <i class="fas fa-file-pdf"></i>
+                        <span>PDF</span>
+                      </button>
+                    </div>
+                  </div>
+                  ${matchesTableHTML}
+                </div>
+              ` : ''}
+
+              ${onlyInv.length > 0 ? `
+                <div class="results-section" data-results-section="unmatched_invoices">
+                  <div class="results-section-title">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                      <i class="fas fa-exclamation-triangle"></i>
+                      Unmatched Invoices (${onlyInv.length})
+                    </div>
+                  </div>
+                  <div style="margin-bottom: 15px; font-size: 0.9rem; color: #475569; padding: 12px; background: rgba(113, 75, 103, 0.1); border-radius: 8px; border-left: 4px solid var(--primary);">
+                    <i class="fas fa-info-circle" style="margin-right: 6px; color: var(--primary);"></i>
+                    <strong style="color: var(--primary);">Manual Matching Options:</strong><br>
+                    • <strong>Match Existing:</strong> Match with existing unmatched bank transactions<br>
+                    • <strong>Upload Bank Doc:</strong> Upload a bank statement document to extract and match transactions<br>
+                    • <strong>Add Manual Entry:</strong> Create a new invoice entry manually
+                  </div>
+                  <div style="margin-bottom: 15px; display: flex; gap: 10px;">
+                    <button
+                      type="button"
+                      class="submit-btn"
+                      style="padding: 8px 16px; font-size: 0.85rem; background: var(--primary); border-color: var(--primary);"
+                      onclick="showManualEntryModal('invoice', ${reconId})"
+                      title="Add a new invoice entry manually"
+                    >
+                      <i class="fas fa-plus"></i>
+                      Add Manual Invoice Entry
+                    </button>
+                  </div>
+                  ${unmatchedInvHTML}
+                </div>
+              ` : ''}
+
+              ${onlyBank.length > 0 ? `
+                <div class="results-section" data-results-section="unmatched_bank">
+                  <div class="results-section-title">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                      <i class="fas fa-exclamation-triangle"></i>
+                      Unmatched Bank Transactions (${onlyBank.length})
+                    </div>
+                  </div>
+                  <div style="margin-bottom: 15px; font-size: 0.9rem; color: #475569; padding: 12px; background: rgba(113, 75, 103, 0.1); border-radius: 8px; border-left: 4px solid var(--primary);">
+                    <i class="fas fa-info-circle" style="margin-right: 6px; color: var(--primary);"></i>
+                    <strong style="color: var(--primary);">Manual Matching Options:</strong><br>
+                    • <strong>Match Existing:</strong> Match with existing unmatched invoices<br>
+                    • <strong>Upload Invoice Doc:</strong> Upload an invoice document to extract and match transactions<br>
+                    • <strong>Add Manual Entry:</strong> Create a new bank transaction entry manually
+                  </div>
+                  <div style="margin-bottom: 15px; display: flex; gap: 10px;">
+                    <button
+                      type="button"
+                      class="submit-btn"
+                      style="padding: 8px 16px; font-size: 0.85rem; background: var(--primary); border-color: var(--primary);"
+                      onclick="showManualEntryModal('bank', ${reconId})"
+                      title="Add a new bank transaction entry manually"
+                    >
+                      <i class="fas fa-plus"></i>
+                      Add Manual Bank Entry
+                    </button>
+                  </div>
+                  ${unmatchedBankHTML}
+                </div>
+              ` : ''}
             </div>
           ` : ''}
           
@@ -2198,6 +2517,34 @@
             </div>
           ` : ''}
         `;
+
+        // Choose a sensible default tab if the current one would show nothing.
+        // Priority: matched -> unmatched invoices -> unmatched bank -> exceptions
+        if (currentResultsFilter === "matched" && matches.length === 0) {
+          currentResultsFilter = onlyInv.length > 0
+            ? "unmatched_invoices"
+            : (onlyBank.length > 0 ? "unmatched_bank" : "exceptions");
+        }
+
+        if (currentResultsFilter === "unmatched_invoices" && onlyInv.length === 0) {
+          currentResultsFilter = matches.length > 0
+            ? "matched"
+            : (onlyBank.length > 0 ? "unmatched_bank" : "exceptions");
+        }
+
+        if (currentResultsFilter === "unmatched_bank" && onlyBank.length === 0) {
+          currentResultsFilter = matches.length > 0
+            ? "matched"
+            : (onlyInv.length > 0 ? "unmatched_invoices" : "exceptions");
+        }
+
+        if (currentResultsFilter === "exceptions" && (onlyInv.length + onlyBank.length) === 0) {
+          currentResultsFilter = matches.length > 0
+            ? "matched"
+            : (onlyInv.length > 0 ? "unmatched_invoices" : (onlyBank.length > 0 ? "unmatched_bank" : "matched"));
+        }
+
+        applyResultsFilter();
       }
       
       // JSON toggle functionality
@@ -3536,6 +3883,250 @@
         } catch (error) {
           console.error('Error deleting match:', error);
           alert('Error deleting match');
+        }
+      }
+      
+      // Manual Entry Functions
+      function showManualEntryModal(type, reconciliationId) {
+        const modalTitle = type === 'invoice' ? 'Add Manual Invoice Entry' : 'Add Manual Bank Transaction Entry';
+        const modalContent = `
+          <div id="manual-entry-modal" class="modal-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; box-sizing: border-box;">
+            <div class="modal-content" style="background: white; border-radius: 12px; padding: 24px; max-width: 500px; width: 100%; max-height: calc(100vh - 40px); overflow-y: auto; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); margin: auto; position: relative;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="margin: 0; color: var(--text); font-size: 1.2rem; font-weight: 700;">
+                  <i class="fas fa-${type === 'invoice' ? 'file-invoice' : 'university'}" style="margin-right: 8px; color: var(--primary);"></i>
+                  ${modalTitle}
+                </h3>
+                <button type="button" onclick="closeManualEntryModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #64748b; padding: 0; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 6px;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='none'">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+              
+              <form id="manual-entry-form" onsubmit="submitManualEntry(event, '${type}', ${reconciliationId})">
+                <div style="margin-bottom: 16px;">
+                  <label style="display: block; margin-bottom: 6px; font-weight: 600; color: var(--text); font-size: 0.9rem;">
+                    Description <span style="color: #ef4444;">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="description"
+                    required
+                    style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.9rem; transition: border-color 0.2s;"
+                    placeholder="Enter description"
+                    onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border)'"
+                  />
+                </div>
+                
+                <div style="margin-bottom: 16px;">
+                  <label style="display: block; margin-bottom: 6px; font-weight: 600; color: var(--text); font-size: 0.9rem;">
+                    Amount <span style="color: #ef4444;">*</span>
+                  </label>
+                  <input
+                    type="number"
+                    name="amount"
+                    step="0.01"
+                    required
+                    style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.9rem; transition: border-color 0.2s;"
+                    placeholder="0.00"
+                    onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border)'"
+                  />
+                </div>
+                
+                <div style="margin-bottom: 16px;">
+                  <label style="display: block; margin-bottom: 6px; font-weight: 600; color: var(--text); font-size: 0.9rem;">
+                    Date <span style="color: #ef4444;">*</span>
+                  </label>
+                  <input
+                    type="date"
+                    name="date"
+                    required
+                    style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.9rem; transition: border-color 0.2s;"
+                    onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border)'"
+                  />
+                </div>
+                
+                ${type === 'invoice' ? `
+                  <div style="margin-bottom: 16px;">
+                    <label style="display: block; margin-bottom: 6px; font-weight: 600; color: var(--text); font-size: 0.9rem;">
+                      Invoice Number
+                    </label>
+                    <input
+                      type="text"
+                      name="invoice_number"
+                      style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.9rem; transition: border-color 0.2s;"
+                      placeholder="INV-001"
+                      onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border)'"
+                    />
+                  </div>
+                  
+                  <div style="margin-bottom: 16px;">
+                    <label style="display: block; margin-bottom: 6px; font-weight: 600; color: var(--text); font-size: 0.9rem;">
+                      Vendor Name
+                    </label>
+                    <input
+                      type="text"
+                      name="vendor_name"
+                      style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.9rem; transition: border-color 0.2s;"
+                      placeholder="Vendor Ltd"
+                      onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border)'"
+                    />
+                  </div>
+                ` : `
+                  <div style="margin-bottom: 16px;">
+                    <label style="display: block; margin-bottom: 6px; font-weight: 600; color: var(--text); font-size: 0.9rem;">
+                      Reference ID
+                    </label>
+                    <input
+                      type="text"
+                      name="reference_id"
+                      style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.9rem; transition: border-color 0.2s;"
+                      placeholder="REF-001"
+                      onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border)'"
+                    />
+                  </div>
+                `}
+                
+                <div style="margin-bottom: 20px;">
+                  <label style="display: block; margin-bottom: 6px; font-weight: 600; color: var(--text); font-size: 0.9rem;">
+                    Currency
+                  </label>
+                  <select
+                    name="currency"
+                    style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.9rem; transition: border-color 0.2s;"
+                    onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border)'"
+                  >
+                    <option value="GBP">GBP (£)</option>
+                    <option value="USD">USD ($)</option>
+                    <option value="EUR">EUR (€)</option>
+                  </select>
+                </div>
+                
+                <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border);">
+                  <button
+                    type="button"
+                    onclick="closeManualEntryModal()"
+                    style="padding: 10px 20px; border: 1px solid var(--border); background: white; color: var(--text); border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.2s;"
+                    onmouseover="this.style.background='#f8fafc'"
+                    onmouseout="this.style.background='white'"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    class="submit-btn"
+                    style="padding: 10px 20px; border: 1px solid var(--primary); background: var(--primary); color: white; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.2s;"
+                    onmouseover="this.style.background='var(--primary-hover)'"
+                    onmouseout="this.style.background='var(--primary)'"
+                  >
+                    <i class="fas fa-plus"></i>
+                    Add Entry
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        `;
+        
+        // Add modal to body
+        document.body.insertAdjacentHTML('beforeend', modalContent);
+        
+        // Set today's date as default
+        const dateInput = document.querySelector('#manual-entry-form input[name="date"]');
+        if (dateInput) {
+          dateInput.value = new Date().toISOString().split('T')[0];
+        }
+      }
+      
+      function closeManualEntryModal() {
+        const modal = document.getElementById('manual-entry-modal');
+        if (modal) {
+          modal.remove();
+        }
+      }
+      
+      async function submitManualEntry(event, type, reconciliationId) {
+        event.preventDefault();
+        
+        const form = event.target;
+        const formData = new FormData(form);
+        
+        const data = {
+          type: type,
+          description: formData.get('description').trim(),
+          amount: parseFloat(formData.get('amount')),
+          date: formData.get('date'),
+          currency: formData.get('currency')
+        };
+        
+        if (type === 'invoice') {
+          data.invoice_number = formData.get('invoice_number')?.trim() || '';
+          data.vendor_name = formData.get('vendor_name')?.trim() || '';
+        } else {
+          data.reference_id = formData.get('reference_id')?.trim() || '';
+        }
+        
+        try {
+          const statusEl = document.getElementById("status");
+          if (statusEl) {
+            statusEl.textContent = `Creating manual ${type} entry...`;
+            statusEl.className = "status processing show";
+          }
+          
+          const response = await fetch(`/api/reconciliations/${reconciliationId}/manual-entry`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          });
+          
+          const result = await response.json();
+          
+          if (!response.ok) {
+            if (statusEl) {
+              statusEl.textContent = `Error: ${result.error || 'Unknown error'}`;
+              statusEl.className = "status error show";
+            }
+            alert(`Error creating manual entry: ${result.error || 'Unknown error'}`);
+            return;
+          }
+          
+          if (statusEl) {
+            statusEl.textContent = `✓ Manual ${type} entry created successfully! Refreshing results...`;
+            statusEl.className = "status success show";
+            setTimeout(() => {
+              statusEl.className = "status success";
+            }, 3000);
+          }
+          
+          // Close modal
+          closeManualEntryModal();
+          
+          // Refresh reconciliation results to show the new entry
+          if (currentReconciliationData) {
+            // Reload the reconciliation data
+            try {
+              const refreshResponse = await fetch(`/api/reconciliation/${reconciliationId}`);
+              const refreshData = await refreshResponse.json();
+              if (refreshResponse.ok) {
+                currentReconciliationData = refreshData;
+                renderSummary(currentReconciliationData);
+              }
+            } catch (err) {
+              console.error('Error refreshing reconciliation data:', err);
+              // Fallback: reload the page
+              window.location.reload();
+            }
+          }
+          
+        } catch (error) {
+          console.error('Error creating manual entry:', error);
+          const statusEl = document.getElementById("status");
+          if (statusEl) {
+            statusEl.textContent = "Error creating manual entry. Please try again.";
+            statusEl.className = "status error show";
+          }
+          alert('Error creating manual entry. Please try again.');
         }
       }
       

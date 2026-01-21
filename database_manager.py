@@ -77,8 +77,8 @@ class DatabaseManager:
     
     def __init__(self):
         self.db_type = DB_TYPE
-        if self.db_type != "mysql":
-            raise RuntimeError("SQLite is not supported in this setup. Set DB_TYPE=mysql in .env")
+        if self.db_type not in {"mysql", "sqlite"}:
+            raise RuntimeError(f"Unsupported DB_TYPE '{self.db_type}'. Use DB_TYPE=mysql or DB_TYPE=sqlite")
         self.connection_params = self._get_connection_params()
     
     def _get_connection_params(self) -> Dict[str, Any]:
@@ -118,6 +118,11 @@ class DatabaseManager:
         except Exception as e:
             if conn:
                 conn.rollback()
+            if self.db_type == "mysql" and isinstance(e, pymysql.err.OperationalError) and e.args and e.args[0] == 2003:
+                raise RuntimeError(
+                    "Can't connect to MySQL server. Ensure MySQL is running and reachable using MYSQL_HOST/MYSQL_PORT in .env, "
+                    "or set DB_TYPE=sqlite to use the local SQLite fallback."
+                ) from e
             logger.error(f"Database connection error: {e}")
             raise
         finally:
